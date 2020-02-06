@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/itemMatch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp">
+
+    <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_margin_16dp"
+            android:layout_marginRight="@dimen/layout_margin_16dp"
+            android:layout_marginTop="@dimen/card_margin_y">
+
+        <TextView
+                android:id="@+id/tv_date_match"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="dd/MM/YYYY"
+                android:textColor="@color/colorTextExtraLight"/>
+
+        <TextView
+                android:id="@+id/tv_home_team"
+                android:textSize="15sp"
+                android:textColor="@color/colorTextLight"
+                android:gravity="end"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/score_layout"
+                android:layout_toLeftOf="@id/score_layout"
+                android:text="@string/team_a"
+                tools:ignore="RelativeOverlap" />
+
+        <LinearLayout
+                android:id="@+id/score_layout"
+                android:clickable="false"
+                android:background="@drawable/layout_rounded_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/tv_date_match"
+                android:layout_margin="@dimen/layout_margin_16dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+            <TextView
+                    android:id="@+id/tv_teamHome_score"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorTextDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/card_margin_y"
+                    android:layout_marginRight="@dimen/card_margin_y"/>
+
+            <TextView
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorTextLight"
+                    android:fontFamily="sans-serif-thin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/strip"
+                    android:layout_gravity="center_horizontal"
+                    tools:ignore="UnusedAttribute" />
+
+            <TextView
+                    android:id="@+id/tv_teamAway_score"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/tv_away_team"
+                android:textSize="15sp"
+                android:textColor="@color/colorTextLight"
+                android:layout_centerVertical="true"
+                android:gravity="start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/score_layout"
+                android:layout_toEndOf="@id/score_layout"
+                android:text="@string/team_b"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
