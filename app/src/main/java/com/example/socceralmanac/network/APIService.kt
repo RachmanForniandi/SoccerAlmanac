@@ -3,10 +3,9 @@ package com.example.socceralmanac.network
 import com.example.socceralmanac.models.detail_league.RootDetailLeague
 import com.example.socceralmanac.models.detail_match.RootDetailMatch
 import com.example.socceralmanac.models.league_soccer.ResponseAllSoccerLeague
+import com.example.socceralmanac.models.league_soccer.ResponseAllSoccerLeagueNew
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
 import io.reactivex.Observable
-import retrofit2.Call
-import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.Query
 

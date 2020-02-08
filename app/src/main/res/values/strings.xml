@@ -4,7 +4,7 @@
     <string name="shots">Shots</string>
     <string name="team_a">Team A</string>
     <string name="team_b">Team B</string>
-    <string name="lineups">Lineups</string>
+    <string name="team_lineups">Team Lineups</string>
     <string name="defense">Defense</string>
     <string name="goalskeeper">Goal Keeper</string>
     <string name="forward">Forward</string>

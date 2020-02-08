@@ -8,11 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.socceralmanac.R
+import com.example.socceralmanac.adapters.MatchAdapter
 import com.example.socceralmanac.models.league_soccer.CountrysItem
 import com.example.socceralmanac.models.league_soccer.ResponseAllSoccerLeague
+import com.example.socceralmanac.models.league_soccer.ResponseAllSoccerLeagueNew
+import com.example.socceralmanac.models.match_time.EventsTime
+import com.example.socceralmanac.models.match_time.ResponseTimeMatch
+import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import kotlinx.android.synthetic.main.last_match_fragment.*
+import org.jetbrains.anko.support.v4.startActivity
 
 class LastMatchFragment : Fragment() {
 
@@ -23,6 +30,9 @@ class LastMatchFragment : Fragment() {
     private lateinit var viewModel: LastMatchViewModel
     private lateinit var data: CountrysItem
     private var content: ArrayList<String>?=null
+    private var selectedItem:String= ""
+    private var selectedItemId:String = ""
+    var idLeague = ArrayList<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,18 +46,23 @@ class LastMatchFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(LastMatchViewModel::class.java)
         // TODO: Use the ViewModel
         viewModel.forNameOfLeagueLast("Soccer")
+        viewModel.forPreviousMatchOfLeague(selectedItemId)
         content = ArrayList<String>()
         leagueObserver()
     }
 
     private fun leagueObserver() {
-        viewModel.responseNameLeague.observe(this, Observer { showNameLeague(it) })
+        viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
+        viewModel.responsePreviousMatch.observe(viewLifecycleOwner, Observer { showListOfPreviousMatch(it) })
     }
+
+
 
     private fun showNameLeague(it: ResponseAllSoccerLeague?) {
         for (i in it?.countrys?.indices ?: ArrayList<String>()){
             //content?.add(it?.countrys?.get(i as Int)?.idLeague.toString()+"-"+it?.countrys?.get(i as Int)?.strLeague.toString())
             content?.add(it?.countrys?.get(i as Int)?.strLeague.toString())
+            idLeague.add(it?.countrys?.get(i as Int)?.idLeague.toString())
         }
 
         val spinnerLast = ArrayAdapter(context,android.R.layout.simple_spinner_dropdown_item,content)
@@ -56,12 +71,29 @@ class LastMatchFragment : Fragment() {
 
         spinner_last.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent?.getItemAtPosition(position).toString()
 
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedItem = parent?.getItemAtPosition(position).toString()
+                selectedItemId = idLeague[position]
+                Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
+                //showListOfPreviousMatch(selectedItemId)
             }
         }
     }
+
+    private fun showListOfPreviousMatch(it: ResponseTimeMatch?) {
+
+        listOfLastMatch.adapter = MatchAdapter(it?.events,object :MatchAdapter.onClickItem{
+            override fun matchClick(item: EventsTime?) {
+                startActivity<MatchDetailActivity>(
+                    "idEvent" to item?.idEvent
+                )
+            }
+
+        })
+    }
+
+
 
 
 }
