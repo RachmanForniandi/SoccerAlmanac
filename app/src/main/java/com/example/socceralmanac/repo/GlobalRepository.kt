@@ -1,8 +1,7 @@
 package com.example.socceralmanac.repo
 
 import com.example.socceralmanac.models.detail_match.RootDetailMatch
-import com.example.socceralmanac.models.league_soccer.ResponseAllSoccerLeague
-import com.example.socceralmanac.models.league_soccer.ResponseAllSoccerLeagueNew
+import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
 import com.example.socceralmanac.network.NetworkConfig
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,9 +13,8 @@ class GlobalRepository {
     private var api = NetworkConfig.callApiService()
     private var compositeDisposable = CompositeDisposable()
 
-    fun leagueSoccerName(s: String, responseHandler:(ResponseAllSoccerLeague)->Unit,
+    fun leagueSoccerName(s: String, responseHandler:(ResponseAllLeague)->Unit,
                          errorHandler: (Throwable)->Unit){
-
 
         compositeDisposable.add(
             api.getSoccerLeagueName(s)
@@ -28,7 +26,6 @@ class GlobalRepository {
                     errorHandler(it)
                 })
         )
-
     }
 
     fun getMatchEventLastName(idLeague: String,responseHandler:(ResponseTimeMatch)->Unit,

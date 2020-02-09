@@ -1,6 +1,5 @@
 package com.example.socceralmanac.models.league_soccer
 
-
 import com.google.gson.annotations.SerializedName
 
 data class LeaguesItem(

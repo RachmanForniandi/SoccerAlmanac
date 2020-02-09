@@ -2,8 +2,7 @@ package com.example.socceralmanac.ui.nextmatch
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.socceralmanac.models.league_soccer.ResponseAllSoccerLeague
-import com.example.socceralmanac.models.league_soccer.ResponseAllSoccerLeagueNew
+import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
 import com.example.socceralmanac.repo.GlobalRepository
 
@@ -11,7 +10,7 @@ class NextMatchViewModel : ViewModel() {
     var repo = GlobalRepository()
     var apiError = MutableLiveData<Throwable>()
     var isLoading = MutableLiveData<Boolean>()
-    var responseNameLeague = MutableLiveData<ResponseAllSoccerLeague>()
+    var responseNameLeague = MutableLiveData<ResponseAllLeague>()
     var responseNextMatch = MutableLiveData<ResponseTimeMatch>()
 
     fun forNameOfLeagueNext(s:String){
@@ -24,8 +23,8 @@ class NextMatchViewModel : ViewModel() {
         })
     }
 
-    fun forNextMatchOfLeague(id:String){
-        repo.getMatchEventNextName(id,{
+    fun forNextMatchOfLeague(idLeague:String){
+        repo.getMatchEventNextName(idLeague,{
             responseNextMatch.value =it
             isLoading.value = false
         },{
