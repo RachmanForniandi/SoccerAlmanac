@@ -16,6 +16,8 @@ import com.example.socceralmanac.adapters.MatchAdapter
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
+import com.example.socceralmanac.utility.hide
+import com.example.socceralmanac.utility.show
 import kotlinx.android.synthetic.main.last_match_fragment.*
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -50,9 +52,17 @@ class LastMatchFragment : Fragment() {
 
     private fun leagueObserver() {
         viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingLastMatch(it) })
         viewModel.responsePreviousMatch.observe(viewLifecycleOwner, Observer { showListOfPreviousMatch(it) })
     }
 
+    private fun showLoadingLastMatch(it: Boolean?) {
+        if (it?:false){
+            pgLast.show()
+        }else{
+            pgLast.hide()
+        }
+    }
 
 
     private fun showNameLeague(it: ResponseAllLeague?) {

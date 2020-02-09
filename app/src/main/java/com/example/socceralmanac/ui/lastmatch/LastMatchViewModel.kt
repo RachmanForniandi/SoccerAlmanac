@@ -13,28 +13,26 @@ class LastMatchViewModel : ViewModel() {
     var responseNameLeague = MutableLiveData<ResponseAllLeague>()
     var responsePreviousMatch = MutableLiveData<ResponseTimeMatch>()
 
+    //utk nama liga di spinner
     fun forNameOfLeagueLast(s:String){
         repo.leagueSoccerName(s,{
             responseNameLeague.value =it
             isLoading.value = false
         },{
-            apiError.value = it;
+            apiError.value = it
             isLoading.value = false
         })
     }
 
+    //utk list match previous
     fun forPreviousMatchOfLeague(idLeague:String){
         repo.getMatchEventLastName(idLeague,{
             responsePreviousMatch.value =it
             isLoading.value = false
         },{
-            apiError.value = it;
+            apiError.value = it
             isLoading.value = false
         })
     }
-
-
-
-
 
 }

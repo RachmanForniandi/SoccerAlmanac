@@ -16,7 +16,6 @@ class GlobalRepository {
     fun leagueSoccerName(s: String, responseHandler:(ResponseAllLeague)->Unit,
                          errorHandler: (Throwable)->Unit){
 
-
         compositeDisposable.add(
             api.getSoccerLeagueName(s)
                 .subscribeOn(Schedulers.io())
@@ -27,7 +26,6 @@ class GlobalRepository {
                     errorHandler(it)
                 })
         )
-
     }
 
     fun getMatchEventLastName(idLeague: String,responseHandler:(ResponseTimeMatch)->Unit,
