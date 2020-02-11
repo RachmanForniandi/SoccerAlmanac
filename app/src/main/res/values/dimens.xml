@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="layout_margin_16dp">16dp</dimen>
-    <dimen name="card_margin_horizontal">12dp</dimen>
-    <dimen name="card_margin_vertical">8dp</dimen>
-    <dimen name="card_margin_vertical_2">4dp</dimen>
-    <dimen name="card_margin_horizontal_2">6dp</dimen>
+    <dimen name="margin_vertical">12dp</dimen>
+    <dimen name="margin_horizontal">8dp</dimen>
+    <dimen name="margin_vertical_2">6dp</dimen>
 </resources>

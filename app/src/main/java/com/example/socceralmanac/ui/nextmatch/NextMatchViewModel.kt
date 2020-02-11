@@ -12,6 +12,8 @@ class NextMatchViewModel : ViewModel() {
     var isLoading = MutableLiveData<Boolean>()
     var responseNameLeague = MutableLiveData<ResponseAllLeague>()
     var responseNextMatch = MutableLiveData<ResponseTimeMatch>()
+    val param = HashMap<String, Any>()
+
 
     fun forNameOfLeagueNext(s:String){
         repo.leagueSoccerName(s,{
@@ -24,7 +26,9 @@ class NextMatchViewModel : ViewModel() {
     }
 
     fun forNextMatchOfLeague(idLeague:String){
-        repo.getMatchEventNextName(idLeague,{
+        isLoading.value = true
+        param.put("id", idLeague)
+        repo.getMatchEventNextName(param,{
             responseNextMatch.value =it
             isLoading.value = false
         },{

@@ -2,6 +2,7 @@ package com.example.socceralmanac.ui.lastmatch
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -46,8 +47,15 @@ class LastMatchFragment : Fragment() {
         // TODO: Use the ViewModel
         viewModel.forNameOfLeagueLast("Soccer")
         viewModel.forPreviousMatchOfLeague(selectedItemId)
+
         content = ArrayList<String>()
         leagueObserver()
+        swipeRefreshLastMatch.setOnRefreshListener {
+            val handler = Handler()
+            handler.postDelayed(Runnable {
+                swipeRefreshLastMatch.isRefreshing = false
+            }, 3000)
+        }
     }
 
     private fun leagueObserver() {
@@ -83,7 +91,8 @@ class LastMatchFragment : Fragment() {
                 selectedItem = parent?.getItemAtPosition(position).toString()
                 selectedItemId = idLeague[position]
                 Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
-                //showListOfPreviousMatch(selectedItemId)
+
+                viewModel.forPreviousMatchOfLeague(selectedItemId)
             }
         }
     }

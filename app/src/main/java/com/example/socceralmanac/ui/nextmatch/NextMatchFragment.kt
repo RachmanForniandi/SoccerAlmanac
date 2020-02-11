@@ -2,6 +2,7 @@ package com.example.socceralmanac.ui.nextmatch
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,8 @@ import com.example.socceralmanac.adapters.MatchAdapter
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
+import com.example.socceralmanac.utility.hide
+import com.example.socceralmanac.utility.show
 import kotlinx.android.synthetic.main.last_match_fragment.*
 import kotlinx.android.synthetic.main.next_match_fragment.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -45,15 +48,30 @@ class NextMatchFragment : Fragment() {
         viewModel.forNameOfLeagueNext("Soccer")
         viewModel.forNextMatchOfLeague(selectedItemId)
         content = ArrayList<String>()
+
         leagueObserverForNext()
+
+        swipeRefreshNextMatch.setOnRefreshListener {
+            val handler = Handler()
+            handler.postDelayed(Runnable {
+                swipeRefreshNextMatch.isRefreshing = false
+            }, 3000)
+        }
     }
 
     private fun leagueObserverForNext() {
         viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingNextMatch(it) })
         viewModel.responseNextMatch.observe(viewLifecycleOwner, Observer {showListOfNextMatch(it)})
     }
 
-
+    private fun showLoadingNextMatch(it: Boolean?) {
+        if (it?:false){
+            pgNext.show()
+        }else{
+            pgNext.hide()
+        }
+    }
 
 
     private fun showNameLeague(it: ResponseAllLeague?) {
@@ -71,6 +89,7 @@ class NextMatchFragment : Fragment() {
                 selectedItem = parent?.getItemAtPosition(position).toString()
                 selectedItemId = idLeague[position]
                 Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
+                viewModel.forNextMatchOfLeague(selectedItemId)
                 //Toast.makeText( activity,"Kode: $selectedItemId, Desc: $selectedItem", Toast.LENGTH_SHORT).show()
                 //showListOfNextMatch(selectedItemId)
             }
@@ -81,7 +100,7 @@ class NextMatchFragment : Fragment() {
 
     }*/
     private fun showListOfNextMatch(it: ResponseTimeMatch?) {
-        listOfLastMatch.adapter = MatchAdapter(it?.events,object : MatchAdapter.onClickItem{
+        listOfNextMatch.adapter = MatchAdapter(it?.events,object : MatchAdapter.onClickItem{
             override fun matchClick(item: EventsTime?) {
                 startActivity<MatchDetailActivity>(
                     "idEvent" to item?.idEvent
