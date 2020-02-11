@@ -47,8 +47,9 @@
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/listOfLastMatch"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_height="wrap_content" />
+                    tools:listitem="@layout/item_match" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
