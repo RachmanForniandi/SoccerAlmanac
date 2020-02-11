@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_margin_16dp"
             android:layout_marginRight="@dimen/layout_margin_16dp"
-            android:layout_marginTop="@dimen/card_margin_y">
+            android:layout_marginTop="@dimen/margin_vertical">
 
         <TextView
                 android:id="@+id/tv_date_match"
@@ -58,14 +58,13 @@
                     android:textColor="@color/colorTextDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/card_margin_y"
-                    android:layout_marginRight="@dimen/card_margin_y"/>
+                    android:layout_marginLeft="@dimen/margin_horizontal"
+                    android:layout_marginRight="@dimen/margin_horizontal"/>
 
             <TextView
                     android:textSize="21sp"
                     android:textStyle="bold"
-                    android:textColor="@color/colorTextLight"
-                    android:fontFamily="sans-serif-thin"
+                    android:textColor="@color/colorTextDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/strip"
@@ -76,10 +75,11 @@
                     android:id="@+id/tv_teamAway_score"
                     android:textSize="21sp"
                     android:textStyle="bold"
+                    android:textColor="@color/colorTextDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginLeft="@dimen/margin_horizontal"
+                    android:layout_marginRight="@dimen/margin_horizontal"/>
         </LinearLayout>
 
         <TextView

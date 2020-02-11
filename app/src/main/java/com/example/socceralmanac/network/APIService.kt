@@ -7,6 +7,7 @@ import com.example.socceralmanac.models.match_time.ResponseTimeMatch
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface APIService {
 
@@ -18,10 +19,10 @@ interface APIService {
     fun getDetailLeague(@Query("idLeague")id:String?):Observable<RootDetailLeague>
 
     @GET("eventspastleague.php")
-    fun getPreviousMatch(@Query("idLeague")id:String?):Observable<ResponseTimeMatch>
+    fun getPreviousMatch(@QueryMap option: HashMap<String, Any>):Observable<ResponseTimeMatch>
 
     @GET("eventsnextleague.php")
-    fun getNextMatch(@Query("idLeague")id:String?):Observable<ResponseTimeMatch>
+    fun getNextMatch(@QueryMap option: HashMap<String, Any>):Observable<ResponseTimeMatch>
 
     @GET("lookupevent.php")
     fun getDetailMatch(@Query("idEvent")id:String?):Observable<RootDetailMatch>

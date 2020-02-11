@@ -28,12 +28,12 @@ class MainActivity : AppCompatActivity() {
 
     class TabAdapter(sfm: FragmentManager, behavior: Int) : FragmentStatePagerAdapter(sfm,behavior) {
 
-        private val tabName : Array<String> = arrayOf("Next Match", "Last Match")
+        private val tabName : Array<String> = arrayOf("Last Match","Next Match" )
 
         override fun getItem(position: Int): Fragment = when(position) {
-            0 -> NextMatchFragment()
-            1 -> LastMatchFragment()
-            else -> NextMatchFragment()
+            0 -> LastMatchFragment()
+            1 -> NextMatchFragment()
+            else -> LastMatchFragment()
 
         }
         override fun getCount(): Int =2

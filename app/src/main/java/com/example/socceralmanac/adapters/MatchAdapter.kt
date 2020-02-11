@@ -32,7 +32,7 @@ class MatchAdapter (val data: List<EventsTime?>?,val clicked: onClickItem): Recy
 
         holder.dateTime.text = "$formatDateEvent | $formatTimeEvent"
         holder.homeTeam.text = item?.strHomeTeam
-        holder.awayTeam.text = item?.strHomeTeam
+        holder.awayTeam.text = item?.strAwayTeam
         holder.scoreHomeTeam.text = item?.intHomeScore?.let { it } as CharSequence? ?: "?"
         holder.scoreAwayTeam.text = item?.intAwayScore?.let { it } as CharSequence? ?: "?"
 

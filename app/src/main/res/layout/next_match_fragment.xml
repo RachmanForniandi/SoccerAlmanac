@@ -33,11 +33,11 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"/>
             </androidx.cardview.widget.CardView>
-            <TextView
+            <!--<TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="textNext"/>
+                    android:text="textNext"/>-->
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/swipeRefreshNextMatch"
@@ -48,7 +48,7 @@
                         android:id="@+id/listOfNextMatch"
                         android:layout_width="match_parent"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        android:layout_height="match_parent" />
+                        android:layout_height="wrap_content" />
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
