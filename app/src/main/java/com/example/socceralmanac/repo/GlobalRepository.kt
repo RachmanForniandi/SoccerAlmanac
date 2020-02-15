@@ -2,6 +2,7 @@ package com.example.socceralmanac.repo
 
 import com.example.socceralmanac.models.detail_match.RootDetailMatch
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
+import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
 import com.example.socceralmanac.network.NetworkConfig
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -63,6 +64,21 @@ class GlobalRepository {
 
         compositeDisposable.add(
             api.getDetailMatch(idEvent)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    responseHandler(it)
+                },{
+                    errorHandler(it)
+                })
+        )
+    }
+
+
+    fun getBadgeLogoTeam(idTeam:HashMap<String, Any>,responseHandler: (ResponseLookUpTeam) -> Unit,
+                         errorHandler: (Throwable)->Unit){
+        compositeDisposable.add(
+            api.getLogoTeam(idTeam)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

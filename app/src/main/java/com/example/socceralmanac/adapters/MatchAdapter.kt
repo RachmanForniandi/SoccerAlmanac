@@ -10,6 +10,7 @@ import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.utility.getStringDate
 import com.example.socceralmanac.utility.getStringTime
 import kotlinx.android.synthetic.main.item_match.view.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class MatchAdapter (val data: List<EventsTime?>?,val clicked: onClickItem): RecyclerView.Adapter<MatchAdapter.MatchHolder>(){
 
@@ -35,6 +36,10 @@ class MatchAdapter (val data: List<EventsTime?>?,val clicked: onClickItem): Recy
         holder.awayTeam.text = item?.strAwayTeam
         holder.scoreHomeTeam.text = item?.intHomeScore?.let { it } as CharSequence? ?: "?"
         holder.scoreAwayTeam.text = item?.intAwayScore?.let { it } as CharSequence? ?: "?"
+
+        holder.itemView.onClick {
+            clicked.matchClick(item)
+        }
 
     }
 

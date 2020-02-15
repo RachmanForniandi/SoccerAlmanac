@@ -11,7 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.example.socceralmanac.MatchDetailActivity
+import com.example.socceralmanac.ui.detailmatch.MatchDetailActivity
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
@@ -19,7 +19,6 @@ import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
-import kotlinx.android.synthetic.main.last_match_fragment.*
 import kotlinx.android.synthetic.main.next_match_fragment.*
 import org.jetbrains.anko.support.v4.startActivity
 

@@ -12,8 +12,8 @@
     <string name="substitutes">Substitutes</string>
     <string name="_0_0">0 – 0</string>
     <string name="strip">–</string>
-    <string name="badge_home">badge_home</string>
-    <string name="badge_away">badge_away</string>
+    <string name="imgTeamHome">badge_home</string>
+    <string name="imgTeamAway">badge_away</string>
     <string name="last_match">Last Match</string>
     <string name="next_match">Next Match</string>
     <string name="favorites">Favorites</string>
@@ -42,5 +42,7 @@
     <string name="search_team_hint">Search Teams</string>
     <string name="teams_search">Team Search</string>
     <string name="match_search">Match Search</string>
+    <string name="yellow_card">Yellow Card</string>
+    <string name="red_card">Red Card</string>
 
 </resources>

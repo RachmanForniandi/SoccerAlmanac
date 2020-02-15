@@ -1,4 +1,4 @@
-package com.example.socceralmanac
+package com.example.socceralmanac.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-import androidx.viewpager.widget.PagerAdapter
+import com.example.socceralmanac.R
 import com.example.socceralmanac.ui.lastmatch.LastMatchFragment
 import com.example.socceralmanac.ui.nextmatch.NextMatchFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,7 +20,10 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.elevation = 0.0f
 
-        val adapter = TabAdapter(supportFragmentManager,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
+        val adapter = TabAdapter(
+            supportFragmentManager,
+            BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+        )
         viewPagerMain.adapter = adapter
 
         tabLayoutMain.setupWithViewPager(viewPagerMain)
