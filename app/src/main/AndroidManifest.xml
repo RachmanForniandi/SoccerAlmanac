@@ -11,7 +11,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.detailmatch.MatchDetailActivity">
+        <activity android:name=".ui.detailMatch.MatchDetailActivity">
         </activity>
         <activity android:name=".ui.searchmatch.SearchMatchActivity">
         </activity>
@@ -26,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

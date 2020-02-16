@@ -6,7 +6,7 @@
         android:id="@+id/container_detail_match"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.detailmatch.MatchDetailActivity">
+        tools:context=".ui.detailMatch.MatchDetailActivity">
     <!--<com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"

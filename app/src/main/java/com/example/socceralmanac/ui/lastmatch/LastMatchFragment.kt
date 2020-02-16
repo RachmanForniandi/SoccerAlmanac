@@ -11,12 +11,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.example.socceralmanac.ui.detailmatch.MatchDetailActivity
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
+import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
 import kotlinx.android.synthetic.main.last_match_fragment.*
@@ -107,7 +107,11 @@ class LastMatchFragment : Fragment() {
             override fun matchClick(item: EventsTime?) {
                 startActivity<MatchDetailActivity>(
                     "detailMatch" to item
-                    /*"idEvent" to item?.idEvent,
+                    /*"idEvent" to item?.idEvent,*/
+                    /*"dateEvent" to item?.dateEvent,
+                    "strTime" to item?.strTime,
+                    "strHomeTeam" to item?.strHomeTeam,
+                    "strAwayTeam" to item?.strAwayTeam,
                     "idHomeTeam" to item?.idHomeTeam,
                     "idAwayTeam" to item?.idAwayTeam,
                     "intHomeScore" to item?.intHomeScore,

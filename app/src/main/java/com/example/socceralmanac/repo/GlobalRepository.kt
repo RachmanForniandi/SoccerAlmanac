@@ -1,5 +1,6 @@
 package com.example.socceralmanac.repo
 
+import android.util.Log
 import com.example.socceralmanac.models.detail_match.RootDetailMatch
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
@@ -59,7 +60,7 @@ class GlobalRepository {
         )
     }
 
-    fun getDetailMatchEvent(idEvent: String,responseHandler:(RootDetailMatch)->Unit,
+    /*fun getDetailMatchEvent(idEvent: String,responseHandler:(RootDetailMatch)->Unit,
                               errorHandler: (Throwable)->Unit){
 
         compositeDisposable.add(
@@ -72,7 +73,7 @@ class GlobalRepository {
                     errorHandler(it)
                 })
         )
-    }
+    }*/
 
 
     fun getBadgeLogoTeam(idTeam:HashMap<String, Any>,responseHandler: (ResponseLookUpTeam) -> Unit,
