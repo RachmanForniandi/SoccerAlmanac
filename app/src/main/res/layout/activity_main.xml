@@ -9,11 +9,28 @@
         android:background="@color/colorBackgroundHome"
         tools:context=".ui.main.MainActivity">
 
-
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="textMain"/>
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary">
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:id="@+id/ivSearch"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_search" />
+
+        </FrameLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayoutMain"

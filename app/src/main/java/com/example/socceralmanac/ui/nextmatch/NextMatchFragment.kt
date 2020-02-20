@@ -86,8 +86,11 @@ class NextMatchFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedItem = parent?.getItemAtPosition(position).toString()
+                if (selectedItem.equals("--Select Name of League--")){
+                    selectedItemId=""
+                }
                 selectedItemId = idLeague[position]
-                Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
+                //Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
                 viewModel.forNextMatchOfLeague(selectedItemId)
                 //Toast.makeText( activity,"Kode: $selectedItemId, Desc: $selectedItem", Toast.LENGTH_SHORT).show()
                 //showListOfNextMatch(selectedItemId)
@@ -95,14 +98,11 @@ class NextMatchFragment : Fragment() {
         }
     }
 
-    /*private fun showListOfNextMatch(selectedItemId: String) {
-
-    }*/
     private fun showListOfNextMatch(it: ResponseTimeMatch?) {
         listOfNextMatch.adapter = MatchAdapter(it?.events,object : MatchAdapter.onClickItem{
             override fun matchClick(item: EventsTime?) {
                 startActivity<MatchDetailActivity>(
-                    "idEvent" to item?.idEvent
+                    "detailMatch" to item
                 )
             }
 

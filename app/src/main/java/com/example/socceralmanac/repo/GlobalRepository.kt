@@ -5,6 +5,7 @@ import com.example.socceralmanac.models.detail_match.RootDetailMatch
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
+import com.example.socceralmanac.models.search.ResponseSearch
 import com.example.socceralmanac.network.NetworkConfig
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -80,6 +81,20 @@ class GlobalRepository {
                          errorHandler: (Throwable)->Unit){
         compositeDisposable.add(
             api.getLogoTeam(idTeam)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    responseHandler(it)
+                },{
+                    errorHandler(it)
+                })
+        )
+    }
+
+    fun getSearchOfTeamMatch(q:HashMap<String, Any>,responseHandler: (ResponseTimeMatch) -> Unit,
+                             errorHandler: (Throwable)->Unit){
+        compositeDisposable.add(
+            api.getSearchEvents(q)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

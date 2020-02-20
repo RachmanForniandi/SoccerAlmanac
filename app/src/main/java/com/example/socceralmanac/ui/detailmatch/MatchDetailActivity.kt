@@ -2,6 +2,7 @@ package com.example.socceralmanac.ui.detailMatch
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toolbar
 import com.example.socceralmanac.R
 
 class MatchDetailActivity : AppCompatActivity() {
@@ -9,6 +10,8 @@ class MatchDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.match_detail_activity)
+
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.match_detail)
 
@@ -19,5 +22,6 @@ class MatchDetailActivity : AppCompatActivity() {
                 .commitNow()
         }
     }
+
 
 }

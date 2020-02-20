@@ -90,7 +90,7 @@ class LastMatchFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedItem = parent?.getItemAtPosition(position).toString()
                 selectedItemId = idLeague[position]
-                Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
+                //Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
 
                 viewModel.forPreviousMatchOfLeague(selectedItemId)
             }
