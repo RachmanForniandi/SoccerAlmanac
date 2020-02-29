@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".ui.searchmatch.SearchMatchFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarSearch"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#FFF">
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-        <AutoCompleteTextView
+        <androidx.appcompat.widget.Toolbar
                 android:id="@+id/acSearch"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:hint="Cari disini.."
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/white"
+                android:padding="12dp"
+                android:layout_marginLeft="@dimen/layout_margin_16dp"
+                android:layout_marginRight="@dimen/layout_margin_16dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Light"/>
 
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
+            android:id="@+id/borderResultSearchTeam"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@id/appBarSearch">
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/searchListMatchOfTeam"
@@ -46,5 +50,28 @@
                 android:visibility="gone" />
 
     </FrameLayout>
+    <ImageView
+            android:id="@+id/img_background_search"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_search"
+            android:contentDescription="@string/app_name" />
 
-</LinearLayout>
+    <TextView
+            android:id="@+id/txt_error_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_background_search"
+            android:layout_marginLeft="@dimen/layout_margin_16dp"
+            android:layout_marginRight="@dimen/layout_margin_16dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorTextExtraLight"
+            android:visibility="visible"
+            android:gravity="center"/>
+
+
+
+</RelativeLayout>

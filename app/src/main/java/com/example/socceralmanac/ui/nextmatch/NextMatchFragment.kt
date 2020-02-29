@@ -21,6 +21,7 @@ import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
 import kotlinx.android.synthetic.main.next_match_fragment.*
 import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 
 class NextMatchFragment : Fragment() {
 
@@ -62,6 +63,11 @@ class NextMatchFragment : Fragment() {
         viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingNextMatch(it) })
         viewModel.responseNextMatch.observe(viewLifecycleOwner, Observer {showListOfNextMatch(it)})
+        viewModel.apiError.observe(viewLifecycleOwner, Observer { showErrorMatch(it) })
+    }
+
+    private fun showErrorMatch(it: Throwable?) {
+        toast(it?.message ?: "")
     }
 
     private fun showLoadingNextMatch(it: Boolean?) {

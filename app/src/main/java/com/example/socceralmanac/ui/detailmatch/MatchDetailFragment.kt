@@ -19,6 +19,7 @@ import com.example.socceralmanac.utility.getStringTime
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
 import kotlinx.android.synthetic.main.match_detail_fragment.*
+import org.jetbrains.anko.support.v4.toast
 
 class MatchDetailFragment : Fragment() {
 
@@ -103,12 +104,17 @@ class MatchDetailFragment : Fragment() {
 
     private fun detailMatchObserver(){
         viewModelDetail.isLoading.observe(viewLifecycleOwner, Observer{showLoadingDetailMatch(it)})
+        viewModelDetail.apiError.observe(viewLifecycleOwner, Observer { showErrorTeamBadge(it) })
         //viewModelDetail.responseAwayBadge.observe(viewLifecycleOwner, Observer{showBadgeTeam(homeBadge, awayBadge)} )
+    }
+
+    private fun showErrorTeamBadge(it: Throwable?) {
+        toast(it?.message ?: "")
     }
 
     fun getResultBadge(){
         viewModelDetail.resultHomeBadge().observe(viewLifecycleOwner, Observer {
-            t ->
+                t ->
             t?.let{
                 //Toast.makeText(activity, "aa: $it", Toast.LENGTH_SHORT).show()
                 parseLookupTeamHomeResponse(it)
@@ -132,7 +138,6 @@ class MatchDetailFragment : Fragment() {
             .placeholder(R.drawable.soccer_badge)
             .error(R.drawable.soccer_badge)
             .into(imgTeamHome)
-
         //viewModelDetail.accessBadgeAway(idTeamAway)
         Glide.with(imgTeamAway)
             .load(awayBadge[0].strTeamBadge)
@@ -142,7 +147,6 @@ class MatchDetailFragment : Fragment() {
     }*/
 
     /*private fun showBadgeHomeTeam(it: ResponseLookUpTeam?) {
-
     }*/
 
     private fun showLoadingDetailMatch(it: Boolean?) {

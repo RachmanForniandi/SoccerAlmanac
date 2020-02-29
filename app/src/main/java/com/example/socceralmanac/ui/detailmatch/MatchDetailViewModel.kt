@@ -1,9 +1,8 @@
 package com.example.socceralmanac.ui.detailMatch
 
-import android.app.Activity
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.socceralmanac.models.detail_match.RootDetailMatch
 import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
 import com.example.socceralmanac.repo.GlobalRepository
 
