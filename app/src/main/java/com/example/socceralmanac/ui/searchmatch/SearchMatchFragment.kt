@@ -87,18 +87,18 @@ class SearchMatchFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_search, menu)
-        //val searchManager = getSystemService(activity.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.action_search_view)?.actionView as androidx.appcompat.widget.SearchView
-
         searchView.queryHint =getString(R.string.search_your_team)
+
         searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener,
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 queryKeywordTeam = query.toString()
+                menu.findItem(R.id.action_search_view).collapseActionView()
+                searchView.setQuery(queryKeywordTeam,true)
                 viewModel.lookForTheMatch(queryKeywordTeam)
                 return true
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 queryKeywordTeam = newText.toString()
                 if (queryKeywordTeam.isEmpty()){
@@ -113,8 +113,6 @@ class SearchMatchFragment : Fragment() {
         })
         menu.findItem(R.id.action_search_view)?.expandActionView()
         return super.onCreateOptionsMenu(menu, inflater)
-
-
     }
 
     private fun showResponseSearch(it: ResponseTimeMatch?) {
