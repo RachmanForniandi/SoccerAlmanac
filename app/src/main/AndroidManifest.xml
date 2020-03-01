@@ -11,11 +11,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.searchmatch.SearchMatchActivity">
-        </activity>
-        <activity android:name=".ui.lastmatch.LastMatchActivity">
-        </activity>
-        <activity android:name=".ui.nextmatch.NextMatchActivity">
+        <activity android:name=".ui.searchmatch.SearchMatchActivity"
+                  android:parentActivityName=".ui.main.MainActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
@@ -23,6 +21,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.lastmatch.LastMatchActivity">
+        </activity>
+        <activity android:name=".ui.nextmatch.NextMatchActivity">
         </activity>
         <activity android:name=".ui.detailMatch.MatchDetailActivity"
                   android:parentActivityName=".ui.main.MainActivity">

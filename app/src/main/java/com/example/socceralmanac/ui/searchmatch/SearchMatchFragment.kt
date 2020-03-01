@@ -86,8 +86,9 @@ class SearchMatchFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search, menu)
         //val searchManager = getSystemService(activity.SEARCH_SERVICE) as SearchManager
-        val searchView = menu.findItem(R.id.action_search_view)?.actionView as SearchView
+        val searchView = menu.findItem(R.id.action_search_view)?.actionView as androidx.appcompat.widget.SearchView
 
         searchView.queryHint =getString(R.string.search_your_team)
         searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener,

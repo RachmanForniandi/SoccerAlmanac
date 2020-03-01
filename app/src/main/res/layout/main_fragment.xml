@@ -7,11 +7,6 @@
         android:orientation="vertical"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".ui.main.MainFragment">
-    <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBar_match"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_match"
@@ -28,22 +23,11 @@
                 app:tabTextColor="@android:color/white"/>
 
 
-        <!--<AutoCompleteTextView
-                android:id="@+id/acSearch"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:hint="Cari disini.."
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>-->
-
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPagerMain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/appBar_match"
+            android:layout_below="@id/tabLayoutMain"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 

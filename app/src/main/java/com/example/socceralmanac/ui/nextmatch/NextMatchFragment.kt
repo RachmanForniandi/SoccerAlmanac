@@ -92,9 +92,7 @@ class NextMatchFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedItem = parent?.getItemAtPosition(position).toString()
-                if (selectedItem.equals("--Select Name of League--")){
-                    selectedItemId=""
-                }
+
                 selectedItemId = idLeague[position]
                 //Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
                 viewModel.forNextMatchOfLeague(selectedItemId)

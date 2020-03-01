@@ -18,27 +18,23 @@
                 android:id="@+id/acSearch"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/white"
-                android:padding="12dp"
-                android:layout_marginLeft="@dimen/layout_margin_16dp"
-                android:layout_marginRight="@dimen/layout_margin_16dp"
                 android:theme="@style/ThemeOverlay.AppCompat.Light"/>
 
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
+    <!--<FrameLayout
             android:id="@+id/borderResultSearchTeam"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/appBarSearch">
+            android:layout_below="@id/appBarSearch">-->
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/searchListMatchOfTeam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_margin="12dp"
+                android:layout_below="@id/appBarSearch"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_match" />
 
@@ -49,7 +45,7 @@
                 android:layout_gravity="center"
                 android:visibility="gone" />
 
-    </FrameLayout>
+   <!-- </FrameLayout>-->
     <ImageView
             android:id="@+id/img_background_search"
             android:layout_gravity="center"
