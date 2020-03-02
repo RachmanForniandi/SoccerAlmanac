@@ -1,13 +1,13 @@
-package com.example.socceralmanac.ui.searchmatch
+package com.example.socceralmanac.ui.main
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel;
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
-import com.example.socceralmanac.models.search.ResponseSearch
 import com.example.socceralmanac.repo.GlobalRepository
 
-class SearchMatchViewModel : ViewModel() {
+class MainViewModel : ViewModel() {
+    // TODO: Implement the ViewModel
     var repo = GlobalRepository()
     var apiError = MutableLiveData<Throwable>()
     var isLoadingSearch = MutableLiveData<Boolean>()
@@ -26,6 +26,4 @@ class SearchMatchViewModel : ViewModel() {
             isLoadingSearch.value = false
         })
     }
-
-
 }

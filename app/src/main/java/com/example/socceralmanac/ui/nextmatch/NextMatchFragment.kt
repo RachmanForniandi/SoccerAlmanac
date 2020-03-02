@@ -11,17 +11,17 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.example.socceralmanac.MatchDetailActivity
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
+import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
-import kotlinx.android.synthetic.main.last_match_fragment.*
 import kotlinx.android.synthetic.main.next_match_fragment.*
 import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 
 class NextMatchFragment : Fragment() {
 
@@ -63,6 +63,11 @@ class NextMatchFragment : Fragment() {
         viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingNextMatch(it) })
         viewModel.responseNextMatch.observe(viewLifecycleOwner, Observer {showListOfNextMatch(it)})
+        viewModel.apiError.observe(viewLifecycleOwner, Observer { showErrorMatch(it) })
+    }
+
+    private fun showErrorMatch(it: Throwable?) {
+        toast(it?.message ?: "")
     }
 
     private fun showLoadingNextMatch(it: Boolean?) {
@@ -87,8 +92,9 @@ class NextMatchFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedItem = parent?.getItemAtPosition(position).toString()
+
                 selectedItemId = idLeague[position]
-                Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
+                //Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
                 viewModel.forNextMatchOfLeague(selectedItemId)
                 //Toast.makeText( activity,"Kode: $selectedItemId, Desc: $selectedItem", Toast.LENGTH_SHORT).show()
                 //showListOfNextMatch(selectedItemId)
@@ -96,14 +102,11 @@ class NextMatchFragment : Fragment() {
         }
     }
 
-    /*private fun showListOfNextMatch(selectedItemId: String) {
-
-    }*/
     private fun showListOfNextMatch(it: ResponseTimeMatch?) {
         listOfNextMatch.adapter = MatchAdapter(it?.events,object : MatchAdapter.onClickItem{
             override fun matchClick(item: EventsTime?) {
                 startActivity<MatchDetailActivity>(
-                    "idEvent" to item?.idEvent
+                    "detailMatch" to item
                 )
             }
 

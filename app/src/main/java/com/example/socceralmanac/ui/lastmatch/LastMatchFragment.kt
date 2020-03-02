@@ -11,16 +11,17 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.example.socceralmanac.MatchDetailActivity
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
+import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
 import kotlinx.android.synthetic.main.last_match_fragment.*
 import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 
 class LastMatchFragment : Fragment() {
 
@@ -62,6 +63,12 @@ class LastMatchFragment : Fragment() {
         viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingLastMatch(it) })
         viewModel.responsePreviousMatch.observe(viewLifecycleOwner, Observer { showListOfPreviousMatch(it) })
+        viewModel.apiError.observe(viewLifecycleOwner, Observer { showErrorMatch(it) })
+
+    }
+
+    private fun showErrorMatch(it: Throwable?) {
+        toast(it?.message ?: "")
     }
 
     private fun showLoadingLastMatch(it: Boolean?) {
@@ -90,7 +97,7 @@ class LastMatchFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedItem = parent?.getItemAtPosition(position).toString()
                 selectedItemId = idLeague[position]
-                Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
+                //Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
 
                 viewModel.forPreviousMatchOfLeague(selectedItemId)
             }
@@ -106,7 +113,34 @@ class LastMatchFragment : Fragment() {
         listOfLastMatch.adapter = MatchAdapter(it?.events,object :MatchAdapter.onClickItem{
             override fun matchClick(item: EventsTime?) {
                 startActivity<MatchDetailActivity>(
-                    "idEvent" to item?.idEvent
+                    "detailMatch" to item
+                    /*"idEvent" to item?.idEvent,*/
+                    /*"dateEvent" to item?.dateEvent,
+                    "strTime" to item?.strTime,
+                    "strHomeTeam" to item?.strHomeTeam,
+                    "strAwayTeam" to item?.strAwayTeam,
+                    "idHomeTeam" to item?.idHomeTeam,
+                    "idAwayTeam" to item?.idAwayTeam,
+                    "intHomeScore" to item?.intHomeScore,
+                    "intAwayScore" to item?.intAwayScore,
+                    "strHomeGoalDetails" to item?.strHomeGoalDetails,
+                    "strAwayGoalDetails" to item?.strAwayGoalDetails,
+
+                    "strHomeYellowCards" to item?.strHomeYellowCards,
+                    "strAwayYellowCards" to item?.strAwayYellowCards,
+                    "strHomeRedCards" to item?.strHomeRedCards,
+                    "strAwayRedCards" to item?.strAwayRedCards,
+
+                    "strHomeLineupGoalkeeper" to item?.strHomeLineupGoalkeeper,
+                    "strAwayLineupGoalkeeper" to item?.strAwayLineupGoalkeeper,
+                    "strHomeLineupDefense" to item?.strHomeLineupDefense,
+                    "strAwayLineupDefense" to item?.strAwayLineupDefense,
+                    "strHomeLineupMidfield" to item?.strHomeLineupMidfield,
+                    "strAwayLineupMidfield" to item?.strAwayLineupMidfield,
+                    "strHomeLineupForward" to item?.strHomeLineupForward,
+                    "strAwayLineupForward" to item?.strAwayLineupForward,
+                    "strHomeLineupSubstitutes" to item?.strHomeLineupSubstitutes,
+                    "strAwayLineupSubstitutes" to item?.strAwayLineupSubstitutes*/
                 )
             }
 

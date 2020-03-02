@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/score_layout"
                 android:layout_toLeftOf="@id/score_layout"
-                android:text="@string/team_a"
+                android:text="@string/team_home"
                 tools:ignore="RelativeOverlap" />
 
         <LinearLayout
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/score_layout"
                 android:layout_toEndOf="@id/score_layout"
-                android:text="@string/team_b"/>
+                android:text="@string/team_away"/>
 
     </RelativeLayout>
 

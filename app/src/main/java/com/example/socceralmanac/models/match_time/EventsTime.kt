@@ -2,6 +2,7 @@ package com.example.socceralmanac.models.match_time
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class EventsTime(
 
@@ -178,4 +179,7 @@ data class EventsTime(
 
 	@field:SerializedName("strPoster")
 	val strPoster: Any? = null
-)
+):Serializable
+
+
+

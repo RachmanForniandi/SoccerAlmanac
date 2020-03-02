@@ -7,17 +7,17 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:fitsSystemWindows="true"
-        tools:context=".ui.detailMatch.MatchDetailActivity">
+        tools:context=".ui.detailMatch.MatchDetailFragment">
 
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="260dp"
             android:fitsSystemWindows="true"
             android:theme="@style/AppTheme.AppBarOverlay">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar_detail"
+                android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
@@ -26,7 +26,7 @@
                 app:titleEnabled="false">
 
             <RelativeLayout
-                    android:id="@+id/headerContentDetail"
+                    android:id="@+id/headerContent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="?attr/actionBarSize"
@@ -38,44 +38,42 @@
                         android:id="@+id/date_match"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_above="@+id/badge_home"
+                        android:layout_above="@+id/imgTeamHome"
                         android:layout_marginBottom="@dimen/layout_margin_16dp"
                         android:layout_centerHorizontal="true"
-                        android:text="dd/MM/YYYY | 00:00"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorBackground"/>
+                        android:textSize="15sp" />
 
                 <ImageView
-                        android:id="@+id/badge_home"
+                        android:id="@+id/imgTeamHome"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@+id/score"
-                        android:layout_toStartOf="@+id/score"
+                        android:layout_toLeftOf="@+id/txtScore"
+                        android:layout_toStartOf="@+id/txtScore"
                         android:layout_marginLeft="@dimen/layout_margin_16dp"
                         android:layout_marginStart="@dimen/layout_margin_16dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/soccer_badge"
-                        android:contentDescription="@string/badge_home" />
+                        android:contentDescription="@string/imgTeamHome" />
 
                 <TextView
-                        android:id="@+id/home_team"
+                        android:id="@+id/txtHomeTeam"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignEnd="@+id/badge_home"
-                        android:layout_alignRight="@+id/badge_home"
-                        android:layout_below="@+id/badge_home"
+                        android:layout_alignEnd="@+id/imgTeamHome"
+                        android:layout_alignRight="@+id/imgTeamHome"
+                        android:layout_below="@+id/imgTeamHome"
                         android:layout_marginLeft="@dimen/layout_margin_16dp"
                         android:layout_marginStart="@dimen/layout_margin_16dp"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
-                        android:text="@string/team_a"
+                        android:text="@string/team_home"
                         android:textColor="@color/colorBackground"
                         android:textSize="17sp" />
 
                 <TextView
-                        android:id="@+id/score"
+                        android:id="@+id/txtScore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
@@ -88,36 +86,36 @@
                         android:textSize="34sp" />
 
                 <ImageView
-                        android:id="@+id/badge_away"
+                        android:id="@+id/imgTeamAway"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
-                        android:layout_toEndOf="@+id/score"
-                        android:layout_toRightOf="@+id/score"
+                        android:layout_toEndOf="@+id/txtScore"
+                        android:layout_toRightOf="@+id/txtScore"
                         android:layout_marginRight="@dimen/layout_margin_16dp"
                         android:layout_marginEnd="@dimen/layout_margin_16dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/soccer_badge"
-                        android:contentDescription="@string/badge_away" />
+                        android:contentDescription="@string/imgTeamAway" />
 
                 <TextView
-                        android:id="@+id/away_team"
+                        android:id="@+id/txtAwayTeam"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignStart="@+id/badge_away"
-                        android:layout_below="@+id/badge_home"
-                        android:text="@string/team_b"
+                        android:layout_alignStart="@+id/imgTeamAway"
+                        android:layout_below="@+id/imgTeamHome"
+                        android:text="@string/team_away"
                         android:textColor="@color/colorBackground"
                         android:textSize="17sp"
                         android:gravity="center"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="@dimen/layout_margin_16dp"
                         android:layout_marginEnd="@dimen/layout_margin_16dp"
-                        android:layout_alignLeft="@+id/badge_away" />
+                        android:layout_alignLeft="@+id/imgTeamAway" />
 
             </RelativeLayout>
-            <androidx.appcompat.widget.Toolbar
+            <!--<androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
@@ -126,7 +124,7 @@
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-            </androidx.appcompat.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>-->
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -146,14 +144,14 @@
                 android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/card_margin_horizontal"
-                    android:layout_marginRight="@dimen/card_margin_horizontal"
-                    android:layout_marginTop="@dimen/card_margin_vertical"
+                    android:layout_marginLeft="@dimen/margin_horizontal"
+                    android:layout_marginRight="@dimen/margin_horizontal"
+                    android:layout_marginTop="@dimen/margin_vertical"
                     app:cardElevation="0.5dp"
                     app:cardCornerRadius="7dp"
-                    app:cardBackgroundColor="@color/colorCardBackground">
+                    app:cardBackgroundColor="@color/colorCardBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <LinearLayout
                         android:orientation="vertical"
@@ -168,14 +166,14 @@
                             android:layout_marginLeft="@dimen/layout_margin_16dp"
                             android:layout_marginRight="@dimen/layout_margin_16dp"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/card_margin_vertical">
+                            android:layout_marginTop="@dimen/margin_vertical">
 
                         <TextView
                                 android:id="@+id/home_goals"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="start|top"
-                                android:text="@string/team_a"
+                                android:text="@string/team_home"
                                 android:textColor="@color/colorTextLight"
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
@@ -193,20 +191,20 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="end|top"
-                                android:text="@string/team_b"
+                                android:text="@string/team_away"
                                 android:textColor="@color/colorTextLight"
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <!--<LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/layout_margin_16dp"
                             android:layout_marginRight="@dimen/layout_margin_16dp"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/card_margin_vertical">
+                            android:layout_marginTop="@dimen/margin_vertical">
 
                         <TextView
                                 android:id="@+id/home_shots"
@@ -236,6 +234,82 @@
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
 
+                    </LinearLayout>-->
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/layout_margin_16dp"
+                            android:layout_marginRight="@dimen/layout_margin_16dp"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/margin_vertical">
+
+                        <TextView
+                                android:id="@+id/home_yellow_card"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="start|top"
+                                android:text="@string/team_home"
+                                android:textColor="@color/colorTextLight"
+                                android:textSize="15sp"
+                                android:layout_weight="1"/>
+
+                        <TextView
+                                android:text="@string/yellow_card"
+                                android:textColor="@color/colorTextExtraLight"
+                                android:gravity="center|top"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"/>
+
+                        <TextView
+                                android:id="@+id/away_yellow_card"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end|top"
+                                android:text="@string/team_away"
+                                android:textColor="@color/colorTextLight"
+                                android:textSize="15sp"
+                                android:layout_weight="1"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/layout_margin_16dp"
+                            android:layout_marginRight="@dimen/layout_margin_16dp"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/margin_vertical">
+
+                        <TextView
+                                android:id="@+id/home_red_card"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="start|top"
+                                android:text="@string/team_home"
+                                android:textColor="@color/colorTextLight"
+                                android:textSize="15sp"
+                                android:layout_weight="1"/>
+
+                        <TextView
+                                android:text="@string/red_card"
+                                android:textColor="@color/colorTextExtraLight"
+                                android:gravity="center|top"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"/>
+
+                        <TextView
+                                android:id="@+id/away_red_card"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="end|top"
+                                android:text="@string/team_away"
+                                android:textColor="@color/colorTextLight"
+                                android:textSize="15sp"
+                                android:layout_weight="1"/>
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -247,7 +321,10 @@
                     android:background="@drawable/layout_rounded_white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/layout_margin_16dp"
+                    android:layout_marginLeft="@dimen/layout_margin_16dp"
+                    android:layout_marginRight="@dimen/layout_margin_16dp"
+                    android:layout_marginBottom="@dimen/layout_margin_16dp"
+                    android:layout_marginTop="@dimen/layout_margin_16dp"
                     android:layout_gravity="center_horizontal"
                     android:padding="5dp">
                 <TextView
@@ -255,20 +332,20 @@
                         android:textColor="@color/colorAccent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/team_lineups"
+                        android:text="@string/lineups"
                         android:layout_marginLeft="@dimen/layout_margin_16dp"
                         android:layout_marginRight="@dimen/layout_margin_16dp" />
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/card_margin_horizontal"
-                    android:layout_marginRight="@dimen/card_margin_horizontal"
+                    android:layout_marginLeft="@dimen/margin_vertical"
+                    android:layout_marginRight="@dimen/margin_vertical"
                     android:layout_marginBottom="@dimen/layout_margin_16dp"
                     app:cardElevation="0.5dp"
                     app:cardCornerRadius="7dp"
-                    app:cardBackgroundColor="@color/colorCardBackground">
+                    app:cardBackgroundColor="@color/colorCardBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <LinearLayout
                         android:orientation="vertical"
@@ -283,14 +360,14 @@
                             android:layout_marginLeft="@dimen/layout_margin_16dp"
                             android:layout_marginRight="@dimen/layout_margin_16dp"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/card_margin_vertical">
+                            android:layout_marginTop="@dimen/margin_vertical">
 
                         <TextView
-                                android:id="@+id/home_goalskeeper"
+                                android:id="@+id/player_home_goal_keeper"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="start|top"
-                                android:text="@string/team_a"
+                                android:text="@string/team_home"
                                 android:textColor="@color/colorTextLight"
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
@@ -304,11 +381,11 @@
                                 android:layout_weight="1"/>
 
                         <TextView
-                                android:id="@+id/away_goalskeeper"
+                                android:id="@+id/player_away_goal_keeper"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="end|top"
-                                android:text="@string/team_b"
+                                android:text="@string/team_away"
                                 android:textColor="@color/colorTextLight"
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
@@ -320,14 +397,14 @@
                             android:layout_marginLeft="@dimen/layout_margin_16dp"
                             android:layout_marginRight="@dimen/layout_margin_16dp"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/card_margin_vertical">
+                            android:layout_marginTop="@dimen/margin_vertical">
 
                         <TextView
-                                android:id="@+id/home_defense"
+                                android:id="@+id/player_home_defense"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="start|top"
-                                android:text="@string/team_a"
+                                android:text="@string/team_home"
                                 android:textColor="@color/colorTextLight"
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
@@ -341,11 +418,11 @@
                                 android:layout_weight="1"/>
 
                         <TextView
-                                android:id="@+id/away_defense"
+                                android:id="@+id/player_away_defense"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="end|top"
-                                android:text="@string/team_b"
+                                android:text="@string/team_away"
                                 android:textColor="@color/colorTextLight"
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
@@ -357,14 +434,14 @@
                             android:layout_marginLeft="@dimen/layout_margin_16dp"
                             android:layout_marginRight="@dimen/layout_margin_16dp"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/card_margin_vertical">
+                            android:layout_marginTop="@dimen/margin_vertical">
 
                         <TextView
-                                android:id="@+id/home_midfield"
+                                android:id="@+id/player_home_midfield"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="start|top"
-                                android:text="@string/team_a"
+                                android:text="@string/team_home"
                                 android:textColor="@color/colorTextLight"
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
@@ -378,11 +455,11 @@
                                 android:layout_weight="1"/>
 
                         <TextView
-                                android:id="@+id/away_midfield"
+                                android:id="@+id/player_away_midfield"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="end|top"
-                                android:text="@string/team_b"
+                                android:text="@string/team_away"
                                 android:textColor="@color/colorTextLight"
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
@@ -394,14 +471,14 @@
                             android:layout_marginLeft="@dimen/layout_margin_16dp"
                             android:layout_marginRight="@dimen/layout_margin_16dp"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/card_margin_vertical">
+                            android:layout_marginTop="@dimen/margin_vertical">
 
                         <TextView
-                                android:id="@+id/home_forward"
+                                android:id="@+id/player_home_forward"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="start|top"
-                                android:text="@string/team_a"
+                                android:text="@string/team_home"
                                 android:textColor="@color/colorTextLight"
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
@@ -415,11 +492,11 @@
                                 android:layout_weight="1"/>
 
                         <TextView
-                                android:id="@+id/away_forward"
+                                android:id="@+id/player_away_forward"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="end|top"
-                                android:text="@string/team_b"
+                                android:text="@string/team_away"
                                 android:textColor="@color/colorTextLight"
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
@@ -431,14 +508,14 @@
                             android:layout_marginLeft="@dimen/layout_margin_16dp"
                             android:layout_marginRight="@dimen/layout_margin_16dp"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/card_margin_vertical">
+                            android:layout_marginTop="@dimen/margin_vertical">
 
                         <TextView
-                                android:id="@+id/home_substitutes"
+                                android:id="@+id/player_home_substitutes"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="start|top"
-                                android:text="@string/team_a"
+                                android:text="@string/team_home"
                                 android:textColor="@color/colorTextLight"
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
@@ -452,11 +529,11 @@
                                 android:layout_weight="1"/>
 
                         <TextView
-                                android:id="@+id/away_substitutes"
+                                android:id="@+id/player_away_substitutes"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="end|top"
-                                android:text="@string/team_b"
+                                android:text="@string/team_away"
                                 android:textColor="@color/colorTextLight"
                                 android:textSize="15sp"
                                 android:layout_weight="1"/>
@@ -471,9 +548,8 @@
     </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
-            android:id="@+id/progress_circular"
-            android:layout_marginTop="97dp"
+            android:id="@+id/progress_detail_circular"
+            android:layout_marginTop="96dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
