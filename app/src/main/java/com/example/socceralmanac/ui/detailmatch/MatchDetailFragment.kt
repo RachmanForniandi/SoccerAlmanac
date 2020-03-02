@@ -53,8 +53,6 @@ class MatchDetailFragment : Fragment() {
 
         Toast.makeText(context, "id_1: $idTeamHome, id_2: $idTeamAway", Toast.LENGTH_SHORT).show()
 
-
-
         val detailDateEvent: String = dataItem?.dateEvent?.let { getStringDate(it) }?: "-"
         val detailTimeEvent:String = dataItem?.strTime?.let { getStringTime(it) } ?: "-:-"
 
@@ -130,24 +128,6 @@ class MatchDetailFragment : Fragment() {
         })
     }
 
-
-    /*private fun showBadgeTeam(homeBadge: List<TeamsItem>, awayBadge: List<TeamsItem>) {
-        //viewModelDetail.accessBadgeHome(activity, idTeamHome)
-        Glide.with(imgTeamHome)
-            .load(homeBadge[0].strTeamBadge)
-            .placeholder(R.drawable.soccer_badge)
-            .error(R.drawable.soccer_badge)
-            .into(imgTeamHome)
-        //viewModelDetail.accessBadgeAway(idTeamAway)
-        Glide.with(imgTeamAway)
-            .load(awayBadge[0].strTeamBadge)
-            .placeholder(R.drawable.soccer_badge)
-            .error(R.drawable.soccer_badge)
-            .into(imgTeamAway)
-    }*/
-
-    /*private fun showBadgeHomeTeam(it: ResponseLookUpTeam?) {
-    }*/
 
     private fun showLoadingDetailMatch(it: Boolean?) {
         if (it?:false){

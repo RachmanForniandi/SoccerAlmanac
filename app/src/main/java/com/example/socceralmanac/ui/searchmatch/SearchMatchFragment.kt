@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
@@ -116,6 +117,7 @@ class SearchMatchFragment : Fragment() {
     }
 
     private fun showResponseSearch(it: ResponseTimeMatch?) {
+        Log.e("testObserve1",""+ it)
         hideErrorMessageSearch()
         searchListMatchOfTeam.adapter = MatchAdapter(it?.events,object :MatchAdapter.onClickItem{
             override fun matchClick(item: EventsTime?) {
