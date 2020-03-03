@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -19,36 +20,35 @@ import com.example.socceralmanac.ui.searchmatch.SearchMatchActivity
 import com.example.socceralmanac.ui.searchmatch.SearchMatchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_menu_search.*
-import kotlinx.android.synthetic.main.main_fragment.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.support.v4.startActivity
 
 class MainActivity : AppCompatActivity() {
 
-    //private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (savedInstanceState == null) {
+        /*if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container_main, MainFragment.newInstance())
                 .commitNow()
-        }
+        }*/
         //viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
-        //supportActionBar?.elevation = 0.0f
+        supportActionBar?.elevation = 0.0f
 
-        /*val adapter = TabAdapter(
+        val adapter = TabAdapter(
             supportFragmentManager,
             BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
         )
         viewPagerMain.adapter = adapter
 
-        tabLayoutMain.setupWithViewPager(viewPagerMain)*/
+        tabLayoutMain.setupWithViewPager(viewPagerMain)
 
     }
 
-    /*class TabAdapter(sfm: FragmentManager, behavior: Int) : FragmentStatePagerAdapter(sfm,behavior) {
+    class TabAdapter(sfm: FragmentManager, behavior: Int) : FragmentStatePagerAdapter(sfm,behavior) {
 
         private val tabName : Array<String> = arrayOf("Last Match","Next Match" )
 
@@ -61,37 +61,21 @@ class MainActivity : AppCompatActivity() {
         override fun getCount(): Int =2
         override fun getPageTitle(position: Int): CharSequence? = tabName.get(position)
 
-    }*/
+    }
 
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu_search,menu)
-        //menu?.findItem(R.id.action_search)?.title = getString(R.string.match_search)
-        //val manager = getSystemService(Context.SEARCH_SERVICE)as SearchManager
-        //val searchItem = menu?.findItem(R.id.action_search_view)
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu,menu)
+        menu.findItem(R.id.action_search).title = getString(R.string.match_search)
+        return super.onCreateOptionsMenu(menu)
+    }
 
-        //val searchView = searchItem?.actionView as SearchView
-        *//*searchView?.onClick {
-            startActivity<SearchMatchActivity>()
-        }*//*
-        *//*searchView.setSearchableInfo(manager.getSearchableInfo(componentName))
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                searchView.clearFocus()
-                searchItem.collapseActionView()
-
-                return true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return  when(item.itemId){
+            R.id.action_search->{
+                startActivity<SearchMatchActivity>()
+                true
             }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-
-                return false
-            }
-
-
-        })*//*
-
-        return true
-    }*/
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }

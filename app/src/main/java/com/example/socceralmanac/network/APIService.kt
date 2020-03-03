@@ -33,5 +33,5 @@ interface APIService {
     fun getLogoTeam(@QueryMap option: HashMap<String, Any>):Observable<ResponseLookUpTeam>
 
     @GET("searchevents.php")
-    fun getSearchEvents(@QueryMap option: HashMap<String, Any>):Observable<ResponseTimeMatch>
+    fun getSearchEvents(@QueryMap option: HashMap<String, Any>):Observable<ResponseSearch>
 }

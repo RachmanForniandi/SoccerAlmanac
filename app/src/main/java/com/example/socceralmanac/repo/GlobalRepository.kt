@@ -91,7 +91,7 @@ class GlobalRepository {
         )
     }
 
-    fun getSearchOfTeamMatch(q:HashMap<String, Any>,responseHandler: (ResponseTimeMatch) -> Unit,
+    fun getSearchOfTeamMatch(q:HashMap<String, Any>,responseHandler: (ResponseSearch) -> Unit,
                              errorHandler: (Throwable)->Unit){
         compositeDisposable.add(
             api.getSearchEvents(q)

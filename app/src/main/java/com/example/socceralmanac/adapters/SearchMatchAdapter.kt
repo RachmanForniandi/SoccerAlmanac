@@ -48,7 +48,6 @@ class SearchMatchAdapter (val data: List<EventItem?>?, val clicked: onClickItem)
         val scoreHomeTeam = itemView.tv_teamHome_score
         val scoreAwayTeam = itemView.tv_teamAway_score
 
-
     }
 
     interface onClickItem {
