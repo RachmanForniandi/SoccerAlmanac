@@ -116,14 +116,15 @@ class SearchMatchFragment : Fragment() {
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun showResponseSearch(it: ResponseTimeMatch?) {
+    private fun showResponseSearch(it: ResponseSearch?) {
         Log.e("testObserve1",""+ it)
+        img_background_search.gone()
         hideErrorMessageSearch()
-        searchListMatchOfTeam.adapter = MatchAdapter(it?.events,object :MatchAdapter.onClickItem{
-            override fun matchClick(item: EventsTime?) {
-                startActivity<MatchDetailActivity>(
+        searchListMatchOfTeam.adapter = SearchMatchAdapter(it?.event,object :SearchMatchAdapter.onClickItem{
+            override fun searchMatchClick(item: EventItem?) {
+                /*startActivity<MatchDetailActivity>(
                     getString(R.string.detail_match) to item
-                )
+                )*/
             }
         })
     }
