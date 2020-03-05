@@ -2,6 +2,7 @@ package com.example.socceralmanac.ui.searchmatch
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.text.Editable
@@ -17,7 +18,6 @@ import androidx.lifecycle.Observer
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
 import com.example.socceralmanac.adapters.SearchMatchAdapter
-import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
 import com.example.socceralmanac.models.search.EventItem
 import com.example.socceralmanac.models.search.ResponseSearch
@@ -122,11 +122,19 @@ class SearchMatchFragment : Fragment() {
         hideErrorMessageSearch()
         searchListMatchOfTeam.adapter = SearchMatchAdapter(it?.event,object :SearchMatchAdapter.onClickItem{
             override fun searchMatchClick(item: EventItem?) {
-                /*startActivity<MatchDetailActivity>(
-                    getString(R.string.detail_match) to item
-                )*/
+                startActivity<SearchMatchDetailActivity>(
+                    "searchMatch" to item
+                )
+                /*val intentToDetail = Intent(activity,MatchDetailActivity::class.java)
+                intentToDetail.putExtra("detailSearch",item)
+                startActivity(intentToDetail)*/
+                /*val bundle = Bundle()
+                bundle.putParcelable("detailSearch",item)*/
+                //MatchDetailActivity.getDetailSearchOfMatch(activity!!, item!!)
             }
         })
     }
 
 }
+
+

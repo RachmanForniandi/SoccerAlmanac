@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
@@ -104,9 +103,9 @@ class NextMatchFragment : Fragment() {
 
     private fun showListOfNextMatch(it: ResponseTimeMatch?) {
         listOfNextMatch.adapter = MatchAdapter(it?.events,object : MatchAdapter.onClickItem{
-            override fun matchClick(item: EventsTime?) {
+            override fun matchClick(time: EventsTime?) {
                 startActivity<MatchDetailActivity>(
-                    "detailMatch" to item
+                    "detailMatch" to time
                 )
             }
 

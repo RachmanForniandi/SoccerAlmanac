@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socceralmanac.R
 import com.example.socceralmanac.models.match_time.EventsTime
-import com.example.socceralmanac.models.search.EventItem
 import com.example.socceralmanac.utility.getStringDate
 import com.example.socceralmanac.utility.getStringTime
 import kotlinx.android.synthetic.main.item_match.view.*
@@ -53,6 +52,6 @@ class MatchAdapter (val data: List<EventsTime?>?, val clicked: onClickItem): Rec
     }
 
     interface onClickItem {
-        fun matchClick(item:EventsTime?)
+        fun matchClick(time:EventsTime?)
     }
 }
