@@ -7,13 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.socceralmanac.R
 import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
 import com.example.socceralmanac.models.match_time.EventsTime
-import com.example.socceralmanac.models.search.EventItem
 import com.example.socceralmanac.utility.getStringDate
 import com.example.socceralmanac.utility.getStringTime
 import com.example.socceralmanac.utility.hide
@@ -21,7 +19,7 @@ import com.example.socceralmanac.utility.show
 import kotlinx.android.synthetic.main.match_detail_fragment.*
 import org.jetbrains.anko.support.v4.toast
 
-class MatchDetailFragment : Fragment(),MatchDetailActivity.useBundleSearch {
+class MatchDetailFragment : Fragment(){
 
     companion object {
         fun newInstance() = MatchDetailFragment()
@@ -44,10 +42,7 @@ class MatchDetailFragment : Fragment(),MatchDetailActivity.useBundleSearch {
 
         val dataItem = activity?.intent?.getSerializableExtra("detailMatch") as? EventsTime
 
-
-
         Log.e("debugBundleDetail",""+dataItem);
-
 
         idTeamHome = dataItem?.idHomeTeam.toString()
         idTeamAway = dataItem?.idAwayTeam.toString()
@@ -143,6 +138,7 @@ class MatchDetailFragment : Fragment(),MatchDetailActivity.useBundleSearch {
         val team = responseLookUpTeam.teams
         for(dataTeam in team!!){
             val strTeamBadge = dataTeam?.strTeamBadge
+            venueMatch.text= dataTeam?.strStadium
             //Toast.makeText(activity, "strTeamBadge: $strTeamBadge", Toast.LENGTH_SHORT).show()
             Glide.with(imgTeamHome)
                 .load(strTeamBadge)
@@ -165,9 +161,5 @@ class MatchDetailFragment : Fragment(),MatchDetailActivity.useBundleSearch {
         }
     }
 
-    override fun sendSearchResultData(item: EventItem) {
-        Toast.makeText(activity, "TESS DATA FRAGMENT: "+item, Toast.LENGTH_SHORT).show()
-        Log.e("logFragment", ""+ item.strSport)
-    }
 
 }

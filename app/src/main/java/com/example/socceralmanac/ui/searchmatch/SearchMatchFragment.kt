@@ -1,33 +1,20 @@
 package com.example.socceralmanac.ui.searchmatch
 
-import android.app.SearchManager
-import android.content.Context
-import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.socceralmanac.R
-import com.example.socceralmanac.adapters.MatchAdapter
 import com.example.socceralmanac.adapters.SearchMatchAdapter
-import com.example.socceralmanac.models.match_time.ResponseTimeMatch
 import com.example.socceralmanac.models.search.EventItem
 import com.example.socceralmanac.models.search.ResponseSearch
-import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import com.example.socceralmanac.utility.*
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.last_match_fragment.*
 import kotlinx.android.synthetic.main.search_match_fragment.*
 import org.jetbrains.anko.support.v4.startActivity
-import javax.xml.transform.Templates
 
 class SearchMatchFragment : Fragment() {
 

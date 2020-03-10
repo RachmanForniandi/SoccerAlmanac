@@ -1,7 +1,5 @@
 package com.example.socceralmanac.repo
 
-import android.util.Log
-import com.example.socceralmanac.models.detail_match.RootDetailMatch
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
@@ -31,8 +29,8 @@ class GlobalRepository {
         )
     }
 
-    fun getMatchEventLastName(idLeague: HashMap<String, Any>,responseHandler:(ResponseTimeMatch)->Unit,
-                       errorHandler: (Throwable)->Unit){
+    fun getMatchEventLastName(idLeague: HashMap<String, Any>, responseHandler:(ResponseTimeMatch)->Unit,
+                              errorHandler: (Throwable)->Unit){
 
         compositeDisposable.add(
             api.getPreviousMatch(idLeague)

@@ -11,23 +11,29 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.searchmatch.SearchMatchDetailActivity"></activity>
-        <activity
-                android:name=".ui.searchmatch.SearchMatchActivity"
-                android:parentActivityName=".ui.main.MainActivity"
-                android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.splashscreen.SplashScreenActivity"
+                android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".ui.lastmatch.LastMatchActivity"></activity>
-        <activity android:name=".ui.nextmatch.NextMatchActivity"></activity>
+        <activity android:name=".ui.searchmatch.SearchMatchDetailActivity"
+                android:parentActivityName=".ui.searchmatch.SearchMatchActivity"/>
+        <activity
+                android:name=".ui.searchmatch.SearchMatchActivity"
+                android:parentActivityName=".ui.main.MainActivity"
+                android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.main.MainActivity">
+
+        </activity>
+        <activity android:name=".ui.lastmatch.LastMatchActivity" />
+        <activity android:name=".ui.nextmatch.NextMatchActivity" />
         <activity
                 android:name=".ui.detailMatch.MatchDetailActivity"
-                android:parentActivityName=".ui.main.MainActivity"></activity>
+                android:parentActivityName=".ui.main.MainActivity" />
     </application>
 
 </manifest>

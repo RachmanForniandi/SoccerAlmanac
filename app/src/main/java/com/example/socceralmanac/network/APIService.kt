@@ -17,17 +17,11 @@ interface APIService {
     @GET("all_leagues.php")
     fun getSoccerLeagueName(@Query("s")s:String?):Observable<ResponseAllLeague>
 
-    @GET("lookupleague.php")
-    fun getDetailLeague(@Query("idLeague")id:String?):Observable<RootDetailLeague>
-
     @GET("eventspastleague.php")
     fun getPreviousMatch(@QueryMap option: HashMap<String, Any>):Observable<ResponseTimeMatch>
 
     @GET("eventsnextleague.php")
     fun getNextMatch(@QueryMap option: HashMap<String, Any>):Observable<ResponseTimeMatch>
-
-    @GET("lookupevent.php")
-    fun getDetailMatch(@Query("idEvent")id:String?):Observable<RootDetailMatch>
 
     @GET("lookupteam.php")
     fun getLogoTeam(@QueryMap option: HashMap<String, Any>):Observable<ResponseLookUpTeam>
