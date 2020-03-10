@@ -69,7 +69,7 @@
                         android:gravity="center"
                         android:text="@string/team_home"
                         android:textColor="@color/colorBackground"
-                        android:textSize="17sp" />
+                        android:textSize="18sp" />
 
                 <TextView
                         android:id="@+id/txtScore"
@@ -83,6 +83,18 @@
                         android:text="@string/_0_0"
                         android:textColor="@color/colorCardBackground"
                         android:textSize="34sp" />
+
+                <TextView
+                        android:id="@+id/venueMatch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtScore"
+                        android:layout_marginTop="40dp"
+                        android:layout_alignParentBottom="true"
+                        android:text="@string/venue"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorBackground"
+                        android:textAlignment="center" />
 
                 <ImageView
                         android:id="@+id/imgTeamAway"
@@ -106,7 +118,7 @@
                         android:layout_below="@+id/imgTeamHome"
                         android:text="@string/team_away"
                         android:textColor="@color/colorBackground"
-                        android:textSize="17sp"
+                        android:textSize="18sp"
                         android:gravity="center"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="@dimen/layout_margin_16dp"

@@ -82,6 +82,18 @@
                         android:textColor="@color/colorCardBackground"
                         android:textSize="34sp" />
 
+                <TextView
+                        android:id="@+id/venueMatch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtScore"
+                        android:layout_marginTop="40dp"
+                        android:layout_alignParentBottom="true"
+                        android:text="@string/venue"
+                        android:textSize="18sp"
+                        android:textColor="@color/colorBackground"
+                        android:textAlignment="center" />
+
                 <ImageView
                         android:id="@+id/imgTeamAway"
                         android:layout_width="match_parent"

@@ -124,6 +124,7 @@ class SearchMatchDetailActivity : AppCompatActivity() {
         val team = responseLookUpTeam.teams
         for(dataTeam in team!!){
             val strTeamBadge = dataTeam?.strTeamBadge
+            venueMatch.text= dataTeam?.strStadium
             //Toast.makeText(activity, "strTeamBadge: $strTeamBadge", Toast.LENGTH_SHORT).show()
             Glide.with(imgTeamHome)
                 .load(strTeamBadge)
