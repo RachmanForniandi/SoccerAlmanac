@@ -1,6 +1,7 @@
 package com.example.socceralmanac.models.search
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class EventItem(
@@ -181,4 +182,4 @@ data class EventItem(
 
 	@field:SerializedName("strPoster")
 	val strPoster: Any? = null
-)
+): Serializable

@@ -5,10 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.socceralmanac.R
-import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.search.EventItem
 import com.example.socceralmanac.utility.getStringDate
-import com.example.socceralmanac.utility.getStringTime
 import kotlinx.android.synthetic.main.item_match.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 

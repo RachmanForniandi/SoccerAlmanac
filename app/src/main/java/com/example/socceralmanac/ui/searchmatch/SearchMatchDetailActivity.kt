@@ -1,54 +1,35 @@
-package com.example.socceralmanac.ui.detailMatch
+package com.example.socceralmanac.ui.searchmatch
 
-import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.socceralmanac.R
 import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
-import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.search.EventItem
+import com.example.socceralmanac.ui.detailMatch.MatchDetailViewModel
 import com.example.socceralmanac.utility.getStringDate
 import com.example.socceralmanac.utility.getStringTime
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
 import kotlinx.android.synthetic.main.match_detail_fragment.*
-import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.toast
 
-class MatchDetailFragment : Fragment(),MatchDetailActivity.useBundleSearch {
-
-    companion object {
-        fun newInstance() = MatchDetailFragment()
-    }
+class SearchMatchDetailActivity : AppCompatActivity() {
 
     private lateinit var viewModelDetail: MatchDetailViewModel
     private var idTeamHome:String= ""
     private var idTeamAway:String= ""
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.match_detail_fragment, container, false)
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_search_match_detail)
+
         viewModelDetail = ViewModelProviders.of(this).get(MatchDetailViewModel::class.java)
 
-        val dataItem = activity?.intent?.getSerializableExtra("detailMatch") as? EventsTime
-
-
-
-        Log.e("debugBundleDetail",""+dataItem);
-
-
+        val dataItem = intent?.getSerializableExtra("searchMatch") as? EventItem
         idTeamHome = dataItem?.idHomeTeam.toString()
         idTeamAway = dataItem?.idAwayTeam.toString()
 
@@ -63,34 +44,34 @@ class MatchDetailFragment : Fragment(),MatchDetailActivity.useBundleSearch {
         val homeScore = dataItem?.intHomeScore?.let { it } as CharSequence? ?: "-"
         val awayScore = dataItem?.intAwayScore?.let { it } as CharSequence? ?: "-"
 
-        home_yellow_card.text = dataItem?.strHomeYellowCards
-        away_yellow_card.text = dataItem?.strAwayYellowCards
+        home_yellow_card.text = dataItem?.strHomeYellowCards as CharSequence?
+        away_yellow_card.text = dataItem?.strAwayYellowCards as CharSequence?
 
-        home_red_card.text =dataItem?.strHomeRedCards
-        away_red_card.text =dataItem?.strAwayRedCards
+        home_red_card.text = dataItem?.strHomeRedCards as CharSequence?
+        away_red_card.text = dataItem?.strAwayRedCards as CharSequence?
 
         txtHomeTeam.text = dataItem?.strHomeTeam
         txtAwayTeam.text = dataItem?.strAwayTeam
 
         txtScore.text = "$homeScore " +"-"+ " $awayScore"
-        home_goals.text = dataItem?.strHomeGoalDetails
-        away_goals.text = dataItem?.strAwayGoalDetails
+        home_goals.text = dataItem?.strHomeGoalDetails as CharSequence?
+        away_goals.text = dataItem?.strAwayGoalDetails as CharSequence?
 
 
-        player_home_goal_keeper.text = dataItem?.strHomeLineupGoalkeeper
-        player_away_goal_keeper.text = dataItem?.strAwayLineupGoalkeeper
+        player_home_goal_keeper.text = dataItem?.strHomeLineupGoalkeeper as CharSequence?
+        player_away_goal_keeper.text = dataItem?.strAwayLineupGoalkeeper as CharSequence?
 
-        player_home_defense.text = dataItem?.strHomeLineupDefense
-        player_away_defense.text = dataItem?.strAwayLineupDefense
+        player_home_defense.text = dataItem?.strHomeLineupDefense as CharSequence?
+        player_away_defense.text = dataItem?.strAwayLineupDefense as CharSequence?
 
-        player_home_midfield.text = dataItem?.strHomeLineupMidfield
-        player_away_midfield.text = dataItem?.strAwayLineupMidfield
+        player_home_midfield.text = dataItem?.strHomeLineupMidfield as CharSequence?
+        player_away_midfield.text = dataItem?.strAwayLineupMidfield as CharSequence?
 
-        player_home_forward.text = dataItem?.strHomeLineupForward
-        player_away_forward.text = dataItem?.strAwayLineupForward
+        player_home_forward.text = dataItem?.strHomeLineupForward as CharSequence?
+        player_away_forward.text = dataItem?.strAwayLineupForward as CharSequence?
 
-        player_home_substitutes.text = dataItem?.strHomeLineupSubstitutes
-        player_away_substitutes.text = dataItem?.strAwayLineupSubstitutes
+        player_home_substitutes.text = dataItem?.strHomeLineupSubstitutes as CharSequence?
+        player_away_substitutes.text = dataItem?.strAwayLineupSubstitutes as CharSequence?
 
         viewModelDetail.accessBadgeHome(idTeamHome)
 
@@ -103,8 +84,8 @@ class MatchDetailFragment : Fragment(),MatchDetailActivity.useBundleSearch {
     }
 
     private fun detailMatchObserver(){
-        viewModelDetail.isLoading.observe(viewLifecycleOwner, Observer{showLoadingDetailMatch(it)})
-        viewModelDetail.apiError.observe(viewLifecycleOwner, Observer { showErrorTeamBadge(it) })
+        viewModelDetail.isLoading.observe(this, Observer{showLoadingDetailMatch(it)})
+        viewModelDetail.apiError.observe(this, Observer { showErrorTeamBadge(it) })
         //viewModelDetail.responseAwayBadge.observe(viewLifecycleOwner, Observer{showBadgeTeam(homeBadge, awayBadge)} )
     }
 
@@ -113,7 +94,7 @@ class MatchDetailFragment : Fragment(),MatchDetailActivity.useBundleSearch {
     }
 
     fun getResultBadge(){
-        viewModelDetail.resultHomeBadge().observe(viewLifecycleOwner, Observer {
+        viewModelDetail.resultHomeBadge().observe(this, Observer {
                 t ->
             t?.let{
                 //Toast.makeText(activity, "aa: $it", Toast.LENGTH_SHORT).show()
@@ -121,7 +102,7 @@ class MatchDetailFragment : Fragment(),MatchDetailActivity.useBundleSearch {
             }
         })
 
-        viewModelDetail.resultAwayBadge().observe(viewLifecycleOwner, Observer {
+        viewModelDetail.resultAwayBadge().observe(this, Observer {
                 t ->
             t?.let{
                 //Toast.makeText(activity, "aa: $it", Toast.LENGTH_SHORT).show()
@@ -164,10 +145,4 @@ class MatchDetailFragment : Fragment(),MatchDetailActivity.useBundleSearch {
                 .into(imgTeamAway)
         }
     }
-
-    override fun sendSearchResultData(item: EventItem) {
-        Toast.makeText(activity, "TESS DATA FRAGMENT: "+item, Toast.LENGTH_SHORT).show()
-        Log.e("logFragment", ""+ item.strSport)
-    }
-
 }
