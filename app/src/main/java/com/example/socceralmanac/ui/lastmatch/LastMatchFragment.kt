@@ -3,6 +3,7 @@ package com.example.socceralmanac.ui.lastmatch
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -78,10 +79,8 @@ class LastMatchFragment : Fragment() {
         }
     }
 
-
     private fun showNameLeague(it: ResponseAllLeague?) {
         for (i in it?.leagues?.indices ?: ArrayList<String>()){
-            //content?.add(it?.countrys?.get(i as Int)?.idLeague.toString()+"-"+it?.countrys?.get(i as Int)?.strLeague.toString())
             content?.add(it?.leagues?.get(i as Int)?.strLeague.toString())
             idLeague.add(it?.leagues?.get(i as Int)?.idLeague.toString())
         }
@@ -89,26 +88,22 @@ class LastMatchFragment : Fragment() {
         val spinnerLast = ArrayAdapter(context,android.R.layout.simple_spinner_dropdown_item,content)
         spinnerLast.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_last.adapter = spinnerLast
-
+        Log.e("testObserveNameLeague",""+ it)
         spinner_last.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedItem = parent?.getItemAtPosition(position).toString()
                 selectedItemId = idLeague[position]
-                //Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
 
                 viewModel.forPreviousMatchOfLeague(selectedItemId)
             }
         }
     }
 
-    /*private fun showListOfPreviousMatch(selectedItemId: String) {
-        viewModel.responsePreviousMatch(selectedItemId)
-    }*/
 
     private fun showListOfPreviousMatch(it: ResponseTimeMatch?) {
-
+        Log.e("testObserveLastMatch",""+ it)
         listOfLastMatch.adapter = MatchAdapter(it?.events,object :MatchAdapter.onClickItem{
             override fun matchClick(time: EventsTime?) {
                 startActivity<MatchDetailActivity>(

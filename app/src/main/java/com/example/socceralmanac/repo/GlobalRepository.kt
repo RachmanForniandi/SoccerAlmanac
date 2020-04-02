@@ -29,7 +29,7 @@ class GlobalRepository {
         )
     }
 
-    fun getMatchEventLastName(idLeague: HashMap<String, Any>, responseHandler:(ResponseTimeMatch)->Unit,
+    fun getMatchEventLastName(idLeague: HashMap<String, Any>, responseHandler:(ResponseTimeMatch?)->Unit,
                               errorHandler: (Throwable)->Unit){
 
         compositeDisposable.add(
@@ -44,7 +44,7 @@ class GlobalRepository {
             )
     }
 
-    fun getMatchEventNextName(idLeague: HashMap<String, Any>,responseHandler:(ResponseTimeMatch)->Unit,
+    fun getMatchEventNextName(idLeague: HashMap<String, Any>,responseHandler:(ResponseTimeMatch?)->Unit,
                            errorHandler: (Throwable)->Unit){
 
         compositeDisposable.add(
@@ -103,5 +103,8 @@ class GlobalRepository {
         )
     }
 
+    fun onClear(){
+        compositeDisposable.clear()
+    }
 
 }
