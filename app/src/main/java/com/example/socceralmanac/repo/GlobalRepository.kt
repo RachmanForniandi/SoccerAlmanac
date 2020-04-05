@@ -59,22 +59,6 @@ class GlobalRepository {
         )
     }
 
-    /*fun getDetailMatchEvent(idEvent: String,responseHandler:(RootDetailMatch)->Unit,
-                              errorHandler: (Throwable)->Unit){
-
-        compositeDisposable.add(
-            api.getDetailMatch(idEvent)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    responseHandler(it)
-                },{
-                    errorHandler(it)
-                })
-        )
-    }*/
-
-
     fun getBadgeLogoTeam(idTeam:HashMap<String, Any>,responseHandler: (ResponseLookUpTeam) -> Unit,
                          errorHandler: (Throwable)->Unit){
         compositeDisposable.add(

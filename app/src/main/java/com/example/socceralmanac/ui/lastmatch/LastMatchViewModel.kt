@@ -18,7 +18,6 @@ class LastMatchViewModel : ViewModel() {
     val param = HashMap<String, Any>()
 
 
-
     //utk nama liga di spinner
     fun forNameOfLeagueLast(s:String){
         repo.leagueSoccerName(s,{
