@@ -50,4 +50,9 @@ class MatchDetailViewModel : ViewModel() {
     fun resultAwayBadge(): MutableLiveData<ResponseLookUpTeam>{
         return responseAwayBadge
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        repo.onClear()
+    }
 }

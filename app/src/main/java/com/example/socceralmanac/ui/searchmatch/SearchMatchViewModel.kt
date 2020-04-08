@@ -28,5 +28,10 @@ class SearchMatchViewModel : ViewModel() {
         })
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        repo.onClear()
+    }
+
 
 }

@@ -12,7 +12,7 @@ import com.example.socceralmanac.utility.getStringTime
 import kotlinx.android.synthetic.main.item_match.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
-class MatchAdapter (val data: List<EventsTime?>?, val clicked: onClickItem): RecyclerView.Adapter<MatchAdapter.MatchHolder>(){
+class MatchAdapter (val data: List<EventsTime>?, val clicked: onClickItem): RecyclerView.Adapter<MatchAdapter.MatchHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchHolder {
@@ -25,7 +25,7 @@ class MatchAdapter (val data: List<EventsTime?>?, val clicked: onClickItem): Rec
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: MatchAdapter.MatchHolder, position: Int) {
+    override fun onBindViewHolder(holder: MatchHolder, position: Int) {
         val item = data?.get(position)
 
         val formatDateEvent:String = item?.dateEvent?.let {  getStringDate(it)}?: "-"

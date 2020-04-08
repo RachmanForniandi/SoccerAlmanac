@@ -8,48 +8,25 @@ import java.util.*
 @SuppressLint("SimpleDateFormat")
 fun getStringDate(date: String): String? {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-    val output = SimpleDateFormat("EEE, dd MMM yyy")
-    var t: Date? = null
+    val outputDate = SimpleDateFormat("EEE, dd MMM yyy")
+    var d: Date? = null
     try {
-        t = dateFormat.parse(date)
+        d = dateFormat.parse(date)
     } catch (e: ParseException) {
         e.printStackTrace()
     }
-    return output.format(t)
+    return outputDate.format(d)
 }
 
 @SuppressLint("SimpleDateFormat")
 fun getStringTime(time: String): String? {
     val timeFormat = SimpleDateFormat("HH:mm")
-    val output = SimpleDateFormat("hh:mm a")
+    val outputTime = SimpleDateFormat("hh:mm a")
     var t: Date? = null
     try {
         t = timeFormat.parse(time)
     } catch (e: ParseException) {
         e.printStackTrace()
     }
-    return output.format(t)
-}
-
-@SuppressLint("SimpleDateFormat")
-fun getCalendar(dates: String, times: String): Long {
-
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-    val timeFormat = SimpleDateFormat("HH:mm")
-
-    val year = SimpleDateFormat("yyy")
-    val month = SimpleDateFormat("MM")
-    val date = SimpleDateFormat("dd")
-    val hour = SimpleDateFormat("hh")
-    val minute = SimpleDateFormat("mm")
-
-    val calendar = Calendar.getInstance(Locale.getDefault())
-    calendar.set(
-        year.format(dateFormat.parse(dates)).toInt() - 0,
-        month.format(dateFormat.parse(dates)).toInt() - 1,
-        date.format(dateFormat.parse(dates)).toInt() - 0,
-        hour.format(timeFormat.parse(times)).toInt() - 0,
-        minute.format(timeFormat.parse(times)).toInt() - 0)
-
-    return calendar.timeInMillis
+    return outputTime.format(t)
 }

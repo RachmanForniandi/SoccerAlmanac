@@ -1,6 +1,7 @@
 package com.example.socceralmanac.ui.lastmatch
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
@@ -16,11 +17,13 @@ class LastMatchViewModel : ViewModel() {
     val context: Context? = null
     val param = HashMap<String, Any>()
 
+
     //utk nama liga di spinner
     fun forNameOfLeagueLast(s:String){
         repo.leagueSoccerName(s,{
             responseNameLeague.value =it
             isLoading.value = false
+            Log.e("debugNameLeague1",""+ it)
         },{
             apiError.value = it
             isLoading.value = false
@@ -34,10 +37,16 @@ class LastMatchViewModel : ViewModel() {
         repo.getMatchEventLastName(param,{
             responsePreviousMatch.value =it
             isLoading.value = false
+            Log.e("debugListLastMatch",""+ it)
         },{
             apiError.value = it
             isLoading.value = false
         })
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        repo.onClear()
     }
 
 }

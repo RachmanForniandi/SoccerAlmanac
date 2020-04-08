@@ -3,6 +3,7 @@ package com.example.socceralmanac.ui.nextmatch
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -80,6 +81,7 @@ class NextMatchFragment : Fragment() {
 
     private fun showNameLeague(it: ResponseAllLeague?) {
         for (i in it?.leagues?.indices ?: ArrayList<String>()){
+            Log.e("testObserveNameLeague2",""+ it)
             content?.add(it?.leagues?.get(i as Int)?.strLeague.toString())
             idLeague.add(it?.leagues?.get(i as Int)?.idLeague.toString())
         }
@@ -102,7 +104,9 @@ class NextMatchFragment : Fragment() {
     }
 
     private fun showListOfNextMatch(it: ResponseTimeMatch?) {
+        Log.e("testObserveNextMatch",""+ it)
         listOfNextMatch.adapter = MatchAdapter(it?.events,object : MatchAdapter.onClickItem{
+
             override fun matchClick(time: EventsTime?) {
                 startActivity<MatchDetailActivity>(
                     "detailMatch" to time

@@ -1,5 +1,6 @@
 package com.example.socceralmanac.ui.nextmatch
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
@@ -19,6 +20,7 @@ class NextMatchViewModel : ViewModel() {
         repo.leagueSoccerName(s,{
             responseNameLeague.value =it
             isLoading.value = false
+            Log.e("debugNameLeague2",""+ it)
         },{
             apiError.value = it
             isLoading.value = false
@@ -31,9 +33,15 @@ class NextMatchViewModel : ViewModel() {
         repo.getMatchEventNextName(param,{
             responseNextMatch.value =it
             isLoading.value = false
+            Log.e("debugListNextMatch",""+ it)
         },{
             apiError.value = it
             isLoading.value = false
         })
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        repo.onClear()
     }
 }

@@ -29,7 +29,7 @@ class GlobalRepository {
         )
     }
 
-    fun getMatchEventLastName(idLeague: HashMap<String, Any>, responseHandler:(ResponseTimeMatch)->Unit,
+    fun getMatchEventLastName(idLeague: HashMap<String, Any>, responseHandler:(ResponseTimeMatch?)->Unit,
                               errorHandler: (Throwable)->Unit){
 
         compositeDisposable.add(
@@ -44,7 +44,7 @@ class GlobalRepository {
             )
     }
 
-    fun getMatchEventNextName(idLeague: HashMap<String, Any>,responseHandler:(ResponseTimeMatch)->Unit,
+    fun getMatchEventNextName(idLeague: HashMap<String, Any>,responseHandler:(ResponseTimeMatch?)->Unit,
                            errorHandler: (Throwable)->Unit){
 
         compositeDisposable.add(
@@ -58,22 +58,6 @@ class GlobalRepository {
                 })
         )
     }
-
-    /*fun getDetailMatchEvent(idEvent: String,responseHandler:(RootDetailMatch)->Unit,
-                              errorHandler: (Throwable)->Unit){
-
-        compositeDisposable.add(
-            api.getDetailMatch(idEvent)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    responseHandler(it)
-                },{
-                    errorHandler(it)
-                })
-        )
-    }*/
-
 
     fun getBadgeLogoTeam(idTeam:HashMap<String, Any>,responseHandler: (ResponseLookUpTeam) -> Unit,
                          errorHandler: (Throwable)->Unit){
@@ -103,5 +87,8 @@ class GlobalRepository {
         )
     }
 
+    fun onClear(){
+        compositeDisposable.clear()
+    }
 
 }
