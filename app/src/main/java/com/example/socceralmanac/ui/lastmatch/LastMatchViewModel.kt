@@ -44,6 +44,10 @@ class LastMatchViewModel : ViewModel() {
         })
     }
 
+    fun getFilteredPreviousMatch():MutableLiveData<ResponseTimeMatch>{
+        return responsePreviousMatch
+    }
+
     override fun onCleared() {
         super.onCleared()
         repo.onClear()

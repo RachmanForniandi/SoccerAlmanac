@@ -136,28 +136,32 @@ class MatchDetailFragment : Fragment(){
 
     fun parseLookupTeamHomeResponse(responseLookUpTeam: ResponseLookUpTeam){
         val team = responseLookUpTeam.teams
-        for(dataTeam in team!!){
-            val strTeamBadge = dataTeam?.strTeamBadge
-            venueMatch.text= dataTeam?.strStadium
-            //Toast.makeText(activity, "strTeamBadge: $strTeamBadge", Toast.LENGTH_SHORT).show()
-            Glide.with(imgTeamHome)
-                .load(strTeamBadge)
-                .placeholder(R.drawable.soccer_badge)
-                .error(R.drawable.soccer_badge)
-                .into(imgTeamHome)
+        if (team != null) {
+            for(dataTeam in team){
+                val strTeamBadge = dataTeam?.strTeamBadge
+                venueMatch.text= dataTeam?.strStadium
+                //Toast.makeText(activity, "strTeamBadge: $strTeamBadge", Toast.LENGTH_SHORT).show()
+                Glide.with(imgTeamHome)
+                    .load(strTeamBadge)
+                    .placeholder(R.drawable.soccer_badge)
+                    .error(R.drawable.soccer_badge)
+                    .into(imgTeamHome)
+            }
         }
     }
 
     fun parseLookupTeamAwayResponse(responseLookUpTeam: ResponseLookUpTeam){
         val team = responseLookUpTeam.teams
-        for(dataTeam in team!!){
-            val strTeamBadge = dataTeam?.strTeamBadge
-            //Toast.makeText(activity, "strTeamBadge: $strTeamBadge", Toast.LENGTH_SHORT).show()
-            Glide.with(imgTeamAway)
-                .load(strTeamBadge)
-                .placeholder(R.drawable.soccer_badge)
-                .error(R.drawable.soccer_badge)
-                .into(imgTeamAway)
+        if (team != null) {
+            for(dataTeam in team){
+                val strTeamBadge = dataTeam?.strTeamBadge
+                //Toast.makeText(activity, "strTeamBadge: $strTeamBadge", Toast.LENGTH_SHORT).show()
+                Glide.with(imgTeamAway)
+                    .load(strTeamBadge)
+                    .placeholder(R.drawable.soccer_badge)
+                    .error(R.drawable.soccer_badge)
+                    .into(imgTeamAway)
+            }
         }
     }
 
