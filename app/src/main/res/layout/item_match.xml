@@ -14,21 +14,22 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/layout_margin_16dp"
-            android:layout_marginRight="@dimen/layout_margin_16dp"
-            android:layout_marginTop="@dimen/margin_vertical">
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_12"
+            android:layout_marginBottom="@dimen/margin_12">
         <TextView
                 android:id="@+id/tv_date_match"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:text="dd/MM/YYYY"
-                android:textColor="@color/colorTextExtraLight"/>
+                android:textColor="@color/colorTextGrayLight"/>
 
         <TextView
                 android:id="@+id/tv_home_team"
                 android:textSize="15sp"
-                android:textColor="@color/colorTextLight"
+                android:textColor="@color/colorTextDarkLight"
                 android:gravity="end"
                 android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
@@ -36,18 +37,17 @@
                 android:layout_toStartOf="@id/score_layout"
                 android:layout_toLeftOf="@id/score_layout"
                 android:text="@string/team_home"
-                tools:ignore="RelativeOverlap" />
+                android:maxLines="2" />
 
         <LinearLayout
                 android:id="@+id/score_layout"
-                android:clickable="false"
                 android:background="@drawable/layout_rounded_white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/tv_date_match"
-                android:layout_margin="@dimen/layout_margin_16dp"
+                android:layout_margin="@dimen/margin_16"
                 android:orientation="horizontal"
                 android:padding="5dp">
             <TextView
@@ -57,8 +57,8 @@
                     android:textColor="@color/colorTextDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_horizontal"
-                    android:layout_marginRight="@dimen/margin_horizontal"/>
+                    android:layout_marginLeft="@dimen/margin_8"
+                    android:layout_marginRight="@dimen/margin_8"/>
             <TextView
                     android:textSize="21sp"
                     android:textStyle="bold"
@@ -76,21 +76,22 @@
                     android:textColor="@color/colorTextDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_horizontal"
-                    android:layout_marginRight="@dimen/margin_horizontal"/>
+                    android:layout_marginLeft="@dimen/margin_8"
+                    android:layout_marginRight="@dimen/margin_8"/>
         </LinearLayout>
 
         <TextView
                 android:id="@+id/tv_away_team"
                 android:textSize="15sp"
-                android:textColor="@color/colorTextLight"
+                android:textColor="@color/colorTextDarkLight"
                 android:layout_centerVertical="true"
                 android:gravity="start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/score_layout"
                 android:layout_toEndOf="@id/score_layout"
-                android:text="@string/team_away"/>
+                android:text="@string/team_away"
+                android:maxLines="2"/>
 
     </RelativeLayout>
 

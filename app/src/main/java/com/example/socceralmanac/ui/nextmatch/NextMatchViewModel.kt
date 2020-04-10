@@ -40,6 +40,10 @@ class NextMatchViewModel : ViewModel() {
         })
     }
 
+    fun getFilteredNextMatch():MutableLiveData<ResponseTimeMatch>{
+        return responseNextMatch
+    }
+
     override fun onCleared() {
         super.onCleared()
         repo.onClear()

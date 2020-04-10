@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 app:cardCornerRadius="0dp"
-                android:background="@color/colorCardBackground">
+                android:background="@color/colorGreyBackground">
             <Spinner
                     android:id="@+id/spinner_last"
                     android:layout_width="match_parent"

@@ -14,12 +14,14 @@ import androidx.lifecycle.Observer
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
+import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
 import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.match_time.ResponseTimeMatch
 import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
 import kotlinx.android.synthetic.main.next_match_fragment.*
+import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 
@@ -57,14 +59,16 @@ class NextMatchFragment : Fragment() {
                 swipeRefreshNextMatch.isRefreshing = false
             }, 3000)
         }
+
+        getFilteredResultNextMatch()
     }
 
     private fun leagueObserverForNext() {
         viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingNextMatch(it) })
-        viewModel.responseNextMatch.observe(viewLifecycleOwner, Observer {showListOfNextMatch(it)})
         viewModel.apiError.observe(viewLifecycleOwner, Observer { showErrorMatch(it) })
     }
+
 
     private fun showErrorMatch(it: Throwable?) {
         toast(it?.message ?: "")
@@ -103,6 +107,25 @@ class NextMatchFragment : Fragment() {
         }
     }
 
+
+
+    fun getFilteredResultNextMatch(){
+        viewModel.getFilteredNextMatch().observe(viewLifecycleOwner, Observer {
+                t ->
+            t?.let{
+                parseFilteredNextMatch(it)
+            }
+        })
+    }
+
+    fun parseFilteredNextMatch(it: ResponseTimeMatch){
+        val event = it.events
+        if (event != null){
+            showListOfNextMatch(it)
+        }
+    }
+
+
     private fun showListOfNextMatch(it: ResponseTimeMatch?) {
         Log.e("testObserveNextMatch",""+ it)
         listOfNextMatch.adapter = MatchAdapter(it?.events,object : MatchAdapter.onClickItem{
@@ -112,7 +135,6 @@ class NextMatchFragment : Fragment() {
                     "detailMatch" to time
                 )
             }
-
         })
     }
 

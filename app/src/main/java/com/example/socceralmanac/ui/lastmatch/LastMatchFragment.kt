@@ -50,7 +50,10 @@ class LastMatchFragment : Fragment() {
         viewModel.forPreviousMatchOfLeague(selectedItemId)
 
         content = ArrayList<String>()
+
         leagueObserver()
+        //getFilteredResultNextMatch()
+
         swipeRefreshLastMatch.setOnRefreshListener {
             val handler = Handler()
             handler.postDelayed(Runnable {
@@ -101,6 +104,25 @@ class LastMatchFragment : Fragment() {
         }
     }
 
+    /*fun getFilteredResultNextMatch(){
+        viewModel.getFilteredPreviousMatch().observe(viewLifecycleOwner, Observer {
+                t ->
+            t?.let{
+                //Toast.makeText(activity, "aa: $it", Toast.LENGTH_SHORT).show()
+                parseFilteredPreviousMatch(it)
+            }
+        })
+    }
+
+    fun parseFilteredPreviousMatch(it: ResponseTimeMatch){
+        val event =it.events
+        if (event != null){
+            showListOfPreviousMatch(it)
+        }else{
+            return
+        }
+    }*/
+
 
     private fun showListOfPreviousMatch(it: ResponseTimeMatch?) {
         Log.e("testObserveLastMatch",""+ it)
@@ -108,40 +130,10 @@ class LastMatchFragment : Fragment() {
             override fun matchClick(time: EventsTime?) {
                 startActivity<MatchDetailActivity>(
                     "detailMatch" to time
-                    /*"idEvent" to item?.idEvent,*/
-                    /*"dateEvent" to item?.dateEvent,
-                    "strTime" to item?.strTime,
-                    "strHomeTeam" to item?.strHomeTeam,
-                    "strAwayTeam" to item?.strAwayTeam,
-                    "idHomeTeam" to item?.idHomeTeam,
-                    "idAwayTeam" to item?.idAwayTeam,
-                    "intHomeScore" to item?.intHomeScore,
-                    "intAwayScore" to item?.intAwayScore,
-                    "strHomeGoalDetails" to item?.strHomeGoalDetails,
-                    "strAwayGoalDetails" to item?.strAwayGoalDetails,
-
-                    "strHomeYellowCards" to item?.strHomeYellowCards,
-                    "strAwayYellowCards" to item?.strAwayYellowCards,
-                    "strHomeRedCards" to item?.strHomeRedCards,
-                    "strAwayRedCards" to item?.strAwayRedCards,
-
-                    "strHomeLineupGoalkeeper" to item?.strHomeLineupGoalkeeper,
-                    "strAwayLineupGoalkeeper" to item?.strAwayLineupGoalkeeper,
-                    "strHomeLineupDefense" to item?.strHomeLineupDefense,
-                    "strAwayLineupDefense" to item?.strAwayLineupDefense,
-                    "strHomeLineupMidfield" to item?.strHomeLineupMidfield,
-                    "strAwayLineupMidfield" to item?.strAwayLineupMidfield,
-                    "strHomeLineupForward" to item?.strHomeLineupForward,
-                    "strAwayLineupForward" to item?.strAwayLineupForward,
-                    "strHomeLineupSubstitutes" to item?.strHomeLineupSubstitutes,
-                    "strAwayLineupSubstitutes" to item?.strAwayLineupSubstitutes*/
                 )
             }
 
         })
     }
-
-
-
 
 }
