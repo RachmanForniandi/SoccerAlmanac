@@ -112,12 +112,6 @@ class SearchMatchFragment : Fragment() {
                 startActivity<SearchMatchDetailActivity>(
                     "searchMatch" to item
                 )
-                /*val intentToDetail = Intent(activity,MatchDetailActivity::class.java)
-                intentToDetail.putExtra("detailSearch",item)
-                startActivity(intentToDetail)*/
-                /*val bundle = Bundle()
-                bundle.putParcelable("detailSearch",item)*/
-                //MatchDetailActivity.getDetailSearchOfMatch(activity!!, item!!)
             }
         })
     }

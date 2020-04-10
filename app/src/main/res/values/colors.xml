@@ -3,12 +3,13 @@
     <color name="colorPrimary">#2196F3</color>
     <color name="colorPrimaryDark">#1976d2</color>
     <color name="colorAccent">#03A9F4</color>
-    <color name="colorCardBackground">#e0e0e0</color>
+    <color name="colorGreyBackground">#e0e0e0</color>
+    <color name="colorPureWhite">#FFFFFF</color>
 
     <color name="colorTextDark">#121216</color>
-    <color name="colorTextLight">#34343e</color>
-    <color name="colorTextExtraLight">#9292a4</color>
-    <color name="colorBackground">#f0f0f5</color>
+    <color name="colorTextDarkLight">#34343e</color>
+    <color name="colorTextGrayLight">#9292a4</color>
+    <color name="colorGreyLightBackground">#f0f0f5</color>
 
     <color name="colorBackgroundHome">#43a047</color>
 </resources>
