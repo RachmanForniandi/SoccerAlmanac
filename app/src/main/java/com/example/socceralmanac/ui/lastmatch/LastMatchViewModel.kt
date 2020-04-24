@@ -5,7 +5,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
-import com.example.socceralmanac.models.match_time.ResponseTimeMatch
+import com.example.socceralmanac.models.match_time.EventsTime
+import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.repo.GlobalRepository
 
 class LastMatchViewModel : ViewModel() {
@@ -13,7 +14,7 @@ class LastMatchViewModel : ViewModel() {
     var apiError = MutableLiveData<Throwable>()
     var isLoading = MutableLiveData<Boolean>()
     var responseNameLeague = MutableLiveData<ResponseAllLeague>()
-    var responsePreviousMatch = MutableLiveData<ResponseTimeMatch>()
+    var responsePreviousMatch = MutableLiveData<ResponseAllEvents>()
     val context: Context? = null
     val param = HashMap<String, Any>()
 
@@ -32,6 +33,7 @@ class LastMatchViewModel : ViewModel() {
 
     //utk list match previous
     fun forPreviousMatchOfLeague(idLeague:String){
+        val eventSearch: MutableList<EventsTime> = mutableListOf()
         isLoading.value = true
         param.put("id", idLeague)
         repo.getMatchEventLastName(param,{
@@ -44,7 +46,7 @@ class LastMatchViewModel : ViewModel() {
         })
     }
 
-    fun getFilteredPreviousMatch():MutableLiveData<ResponseTimeMatch>{
+    fun getFilteredPreviousMatch():MutableLiveData<ResponseAllEvents>{
         return responsePreviousMatch
     }
 

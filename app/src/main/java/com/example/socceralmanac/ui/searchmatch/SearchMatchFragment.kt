@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.SearchMatchAdapter
+import com.example.socceralmanac.models.league_soccer.LeaguesItem
+import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.models.search.EventItem
 import com.example.socceralmanac.models.search.ResponseSearch
 import com.example.socceralmanac.utility.*
@@ -103,17 +105,24 @@ class SearchMatchFragment : Fragment() {
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun showResponseSearch(it: ResponseSearch?) {
+    private fun showResponseSearch(it: ResponseAllEvents?) {
         Log.e("testObserve1",""+ it)
         img_background_search.gone()
         hideErrorMessageSearch()
-        searchListMatchOfTeam.adapter = SearchMatchAdapter(it?.event,object :SearchMatchAdapter.onClickItem{
-            override fun searchMatchClick(item: EventItem?) {
-                startActivity<SearchMatchDetailActivity>(
-                    "searchMatch" to item
-                )
-            }
-        })
+        val eventSearchNoted: MutableList<EventItem> = mutableListOf()
+        it?.event.let {
+            val sportFiltered: List<EventItem> = it?.filter { s -> s?.strSport == "Soccer" } as List<EventItem>
+            eventSearchNoted.addAll(sportFiltered)
+
+            searchListMatchOfTeam.adapter = SearchMatchAdapter(eventSearchNoted,object :SearchMatchAdapter.onClickItem{
+                override fun searchMatchClick(item: EventItem?) {
+                    startActivity<SearchMatchDetailActivity>(
+                        "searchMatch" to item
+                    )
+                }
+            })
+        }
+
     }
 
 }

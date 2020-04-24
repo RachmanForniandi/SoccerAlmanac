@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
-import com.example.socceralmanac.models.match_time.ResponseTimeMatch
+import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.repo.GlobalRepository
 
 class NextMatchViewModel : ViewModel() {
@@ -12,7 +12,7 @@ class NextMatchViewModel : ViewModel() {
     var apiError = MutableLiveData<Throwable>()
     var isLoading = MutableLiveData<Boolean>()
     var responseNameLeague = MutableLiveData<ResponseAllLeague>()
-    var responseNextMatch = MutableLiveData<ResponseTimeMatch>()
+    var responseNextMatch = MutableLiveData<ResponseAllEvents>()
     val param = HashMap<String, Any>()
 
 
@@ -40,7 +40,7 @@ class NextMatchViewModel : ViewModel() {
         })
     }
 
-    fun getFilteredNextMatch():MutableLiveData<ResponseTimeMatch>{
+    fun getFilteredNextMatch():MutableLiveData<ResponseAllEvents>{
         return responseNextMatch
     }
 

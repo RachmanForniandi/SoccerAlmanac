@@ -13,9 +13,10 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
+import com.example.socceralmanac.models.league_soccer.LeaguesItem
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.EventsTime
-import com.example.socceralmanac.models.match_time.ResponseTimeMatch
+import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
@@ -52,7 +53,7 @@ class LastMatchFragment : Fragment() {
         content = ArrayList<String>()
 
         leagueObserver()
-        //getFilteredResultNextMatch()
+        getFilteredResultNextMatch()
 
         swipeRefreshLastMatch.setOnRefreshListener {
             val handler = Handler()
@@ -83,10 +84,16 @@ class LastMatchFragment : Fragment() {
     }
 
     private fun showNameLeague(it: ResponseAllLeague?) {
-        for (i in it?.leagues?.indices ?: ArrayList<String>()){
-            content?.add(it?.leagues?.get(i as Int)?.strLeague.toString())
-            idLeague.add(it?.leagues?.get(i as Int)?.idLeague.toString())
+        val eventLeaguePrevious: MutableList<LeaguesItem> = mutableListOf()
+        it?.leagues.let {
+            val sportFiltered: List<LeaguesItem> = it?.filter { s -> s?.strSport == "Soccer" } as List<LeaguesItem>
+            for (i in sportFiltered.indices ?: ArrayList<String>()){
+                content?.add(sportFiltered.get(i as Int)?.strLeague.toString())
+                idLeague.add(sportFiltered.get(i as Int)?.idLeague.toString())
+                eventLeaguePrevious.addAll(sportFiltered)
+            }
         }
+
 
         val spinnerLast = ArrayAdapter(context,android.R.layout.simple_spinner_dropdown_item,content)
         spinnerLast.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -104,7 +111,7 @@ class LastMatchFragment : Fragment() {
         }
     }
 
-    /*fun getFilteredResultNextMatch(){
+    fun getFilteredResultNextMatch(){
         viewModel.getFilteredPreviousMatch().observe(viewLifecycleOwner, Observer {
                 t ->
             t?.let{
@@ -114,18 +121,19 @@ class LastMatchFragment : Fragment() {
         })
     }
 
-    fun parseFilteredPreviousMatch(it: ResponseTimeMatch){
+    fun parseFilteredPreviousMatch(it: ResponseAllEvents){
         val event =it.events
         if (event != null){
             showListOfPreviousMatch(it)
         }else{
             return
         }
-    }*/
+    }
 
 
-    private fun showListOfPreviousMatch(it: ResponseTimeMatch?) {
+    private fun showListOfPreviousMatch(it: ResponseAllEvents?) {
         Log.e("testObserveLastMatch",""+ it)
+        //val eventsNoted: MutableList<EventsTime> = mutableListOf()
         listOfLastMatch.adapter = MatchAdapter(it?.events,object :MatchAdapter.onClickItem{
             override fun matchClick(time: EventsTime?) {
                 startActivity<MatchDetailActivity>(
