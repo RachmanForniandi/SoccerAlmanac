@@ -1,6 +1,6 @@
 package com.example.socceralmanac.models.detail_league
 
-data class LeaguesItem(
+data class DetailLeaguesItem(
 	val strDescriptionES: String? = null,
 	val dateFirstEvent: String? = null,
 	val intFormedYear: String? = null,

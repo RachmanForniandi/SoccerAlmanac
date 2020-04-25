@@ -25,7 +25,7 @@ class SearchMatchFragment : Fragment() {
     }
 
     private lateinit var viewModel: SearchMatchViewModel
-    private var queryKeywordTeam:String = ""
+    private lateinit var queryKeywordTeam:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +41,7 @@ class SearchMatchFragment : Fragment() {
             setSupportActionBar(acSearch)
         }
         viewModel = ViewModelProviders.of(this).get(SearchMatchViewModel::class.java)
-        viewModel.lookForTheMatch(queryKeywordTeam)
+        //viewModel.lookForTheMatch(queryKeywordTeam)
 
         searchObserver()
     }
@@ -54,14 +54,16 @@ class SearchMatchFragment : Fragment() {
 
     private fun showErrorSearch(it: Throwable?) {
         //Toast.makeText(activity,it?.message ?: "",Toast.LENGTH_SHORT).show()
-        showTextErrorSearch("Sorry No Result for" + "'$queryKeywordTeam'" +
+        showTextErrorSearch("Sorry No Result for" + " '$queryKeywordTeam'" +
                 "\n $it")
         img_background_search.visible()
+        //searchListMatchOfTeam.gone()
     }
 
     private fun showTextErrorSearch(msg: String) {
         txt_error_msg.text = msg
         txt_error_msg.visible()
+        //img_background_search.visible()
     }
 
     private fun hideErrorMessageSearch() {
@@ -84,17 +86,17 @@ class SearchMatchFragment : Fragment() {
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 queryKeywordTeam = query.toString()
-                menu.findItem(R.id.action_search_view).collapseActionView()
-                searchView.setQuery(queryKeywordTeam,true)
+                /*menu.findItem(R.id.action_search_view).collapseActionView()
+                searchView.setQuery(queryKeywordTeam,false)*/
                 viewModel.lookForTheMatch(queryKeywordTeam)
                 return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
                 queryKeywordTeam = newText.toString()
                 if (queryKeywordTeam.isEmpty()){
-                    img_background_search.visible()
+                    //img_background_search.visible()
                 }else{
-                    img_background_search.gone()
+                    //img_background_search.gone()
                     viewModel.lookForTheMatch(queryKeywordTeam)
                 }
                 return true
@@ -107,8 +109,9 @@ class SearchMatchFragment : Fragment() {
 
     private fun showResponseSearch(it: ResponseAllEvents?) {
         Log.e("testObserve1",""+ it)
-        img_background_search.gone()
+        //img_background_search.gone()
         hideErrorMessageSearch()
+        //searchListMatchOfTeam.visible()
         val eventSearchNoted: MutableList<EventItem> = mutableListOf()
         it?.event.let {
             val sportFiltered: List<EventItem> = it?.filter { s -> s?.strSport == "Soccer" } as List<EventItem>

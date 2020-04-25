@@ -1,5 +1,6 @@
 package com.example.socceralmanac.repo
 
+import com.example.socceralmanac.models.detail_league.RootDetailLeague
 import com.example.socceralmanac.models.league_soccer.LeaguesItem
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
@@ -19,23 +20,31 @@ class GlobalRepository {
 
     fun leagueSoccerName(s: String, responseHandler:(ResponseAllLeague)->Unit,
                          errorHandler: (Throwable)->Unit){
-        val eventsNoted: MutableList<LeaguesItem> = mutableListOf()
         compositeDisposable.add(
             api.getSoccerLeagueName(s)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                /*.filter(object: Predicate<ResponseAllLeague> {
-                    override fun test(it: ResponseAllLeague)
-                            : List<LeaguesItem?>? {
-                        return it.leagues?.filter { s -> s?.strSport == "Soccer" }
-                    }
-                })*/
                 .subscribe({
                     responseHandler(it)
                 },{
                     errorHandler(it)
                 })
 
+        )
+    }
+
+    fun getDetailInfoLeague(idLeague: HashMap<String, Any>, responseHandler:(RootDetailLeague?)->Unit,
+                              errorHandler: (Throwable)->Unit){
+
+        compositeDisposable.add(
+            api.getDetailLeague(idLeague)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    responseHandler(it)
+                },{
+                    errorHandler(it)
+                })
         )
     }
 
