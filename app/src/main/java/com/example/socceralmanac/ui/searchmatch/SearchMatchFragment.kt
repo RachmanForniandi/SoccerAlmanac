@@ -91,6 +91,9 @@ class SearchMatchFragment : Fragment() {
                 viewModel.lookForTheMatch(queryKeywordTeam)
                 return true
             }
+
+
+
             override fun onQueryTextChange(newText: String?): Boolean {
                 queryKeywordTeam = newText.toString()
                 if (queryKeywordTeam.isEmpty()){
@@ -101,6 +104,7 @@ class SearchMatchFragment : Fragment() {
                 }
                 return true
             }
+
 
         })
         menu.findItem(R.id.action_search_view)?.expandActionView()

@@ -27,7 +27,7 @@ interface APIService {
     fun getNextMatch(@QueryMap option: HashMap<String, Any>):Observable<ResponseAllEvents?>
 
     @GET("lookupteam.php")
-    fun getLogoTeam(@QueryMap option: HashMap<String, Any>):Observable<ResponseLookUpTeam>
+    fun getLogoTeam(@QueryMap option: HashMap<String, Any>):Single<ResponseLookUpTeam>
 
     @GET("searchevents.php")
     fun getSearchEvents(@QueryMap option: HashMap<String, Any>):Observable<ResponseAllEvents>

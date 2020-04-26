@@ -29,13 +29,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        /*if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container_main, MainFragment.newInstance())
-                .commitNow()
-        }*/
-        //viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-
         supportActionBar?.elevation = 0.0f
 
         val adapter = TabAdapter(

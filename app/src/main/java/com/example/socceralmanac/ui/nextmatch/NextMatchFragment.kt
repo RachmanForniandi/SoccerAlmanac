@@ -11,8 +11,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
+import com.example.socceralmanac.models.detail_league.RootDetailLeague
 import com.example.socceralmanac.models.league_soccer.LeaguesItem
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.EventsTime
@@ -20,9 +22,12 @@ import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
+import kotlinx.android.synthetic.main.last_match_fragment.*
 import kotlinx.android.synthetic.main.next_match_fragment.*
+import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.wrapContent
 
 class NextMatchFragment : Fragment() {
 
@@ -34,6 +39,7 @@ class NextMatchFragment : Fragment() {
     private var content: ArrayList<String>?=null
     private var selectedItem:String= ""
     private var selectedItemId:String = ""
+    private var selectedItemId2:String = ""
     var idLeague = ArrayList<String>()
 
     override fun onCreateView(
@@ -48,7 +54,10 @@ class NextMatchFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(NextMatchViewModel::class.java)
         viewModel.forNameOfLeagueNext("Soccer")
         viewModel.forNextMatchOfLeague(selectedItemId)
+        viewModel.forNextDetailOfLeague(selectedItemId2)
         content = ArrayList<String>()
+
+        getResultDetailLeague()
 
         leagueObserverForNext()
 
@@ -60,6 +69,42 @@ class NextMatchFragment : Fragment() {
         }
 
         getFilteredResultNextMatch()
+    }
+
+    private fun getResultDetailLeague() {
+        viewModel.resultDetailNext().observe(viewLifecycleOwner, Observer {
+            //showDetailInfoLeague(it)
+                t ->
+            t?.let{
+                parseForNextDetailInfoLeague(it)
+            }
+        })
+    }
+
+    private fun parseForNextDetailInfoLeague(it: RootDetailLeague) {
+        val detail = it.leagues
+        if (detail != null){
+            for (detailParam in detail){
+                val linkBannerLeague = detailParam?.strBanner
+                val leagueBackground = detailParam?.strPoster
+
+                Glide.with(img_banner_league_2)
+                    .load(linkBannerLeague)
+                    .fitCenter()
+                    .override(matchParent, wrapContent)
+                    .placeholder(R.drawable.blue_banner)
+                    .error(R.drawable.blue_banner)
+                    .into(img_banner_league_2)
+                Log.e("debugBanner",""+ detailParam?.strBanner)
+
+                Glide.with(background2)
+                    .load(leagueBackground)
+                    .fitCenter()
+                    .override(800,600)
+                    .into(background2)
+                Log.e("debugPoster",""+ detailParam?.strPoster)
+            }
+        }
     }
 
     private fun leagueObserverForNext() {
@@ -86,10 +131,10 @@ class NextMatchFragment : Fragment() {
         val eventLeagueNext: MutableList<LeaguesItem> = mutableListOf()
         it?.leagues.let {
             val sportFiltered: List<LeaguesItem> = it?.filter { s -> s?.strSport == "Soccer" } as List<LeaguesItem>
-            for (i in sportFiltered.indices ?: ArrayList<String>()){
+            for (i in sportFiltered.indices){
                 Log.e("testObserveNameLeague2",""+ it)
-                content?.add(sportFiltered.get(i as Int)?.strLeague.toString())
-                idLeague.add(sportFiltered.get(i as Int)?.idLeague.toString())
+                content?.add(sportFiltered.get(i).strLeague.toString())
+                idLeague.add(sportFiltered.get(i).idLeague.toString())
                 eventLeagueNext.addAll(sportFiltered)
             }
         }
@@ -106,8 +151,10 @@ class NextMatchFragment : Fragment() {
                 selectedItem = parent?.getItemAtPosition(position).toString()
 
                 selectedItemId = idLeague[position]
+                selectedItemId2 = idLeague[position]
                 //Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
                 viewModel.forNextMatchOfLeague(selectedItemId)
+                viewModel.forNextDetailOfLeague(selectedItemId2)
                 //Toast.makeText( activity,"Kode: $selectedItemId, Desc: $selectedItem", Toast.LENGTH_SHORT).show()
                 //showListOfNextMatch(selectedItemId)
             }

@@ -48,5 +48,7 @@
     <string name="detail_match">detailMatch</string>
     <string name="venue">Venue</string>
     <string name="imgcover">imgCover</string>
+    <string name="banner_league_1">BannerLeague1</string>
+    <string name="banner_league_2">BannerLeague2</string>
 
 </resources>

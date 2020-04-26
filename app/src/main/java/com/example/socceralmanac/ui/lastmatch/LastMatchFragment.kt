@@ -11,8 +11,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
+import com.example.socceralmanac.models.detail_league.RootDetailLeague
 import com.example.socceralmanac.models.league_soccer.LeaguesItem
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.EventsTime
@@ -21,8 +23,10 @@ import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
 import kotlinx.android.synthetic.main.last_match_fragment.*
+import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.wrapContent
 
 class LastMatchFragment : Fragment() {
 
@@ -34,6 +38,7 @@ class LastMatchFragment : Fragment() {
     private var content: ArrayList<String>?=null
     private var selectedItem:String= ""
     private var selectedItemId:String = ""
+    private var selectedItemId2:String = ""
     var idLeague = ArrayList<String>()
 
     override fun onCreateView(
@@ -48,12 +53,16 @@ class LastMatchFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(LastMatchViewModel::class.java)
         // TODO: Use the ViewModel
         viewModel.forNameOfLeagueLast("Soccer")
+
         viewModel.forPreviousMatchOfLeague(selectedItemId)
+        viewModel.forPreviousDetailOfLeague(selectedItemId2)
 
         content = ArrayList<String>()
 
+        getResultDetailLeague()
+
         leagueObserver()
-        getFilteredResultNextMatch()
+        getFilteredResultLastMatch()
 
         swipeRefreshLastMatch.setOnRefreshListener {
             val handler = Handler()
@@ -63,13 +72,27 @@ class LastMatchFragment : Fragment() {
         }
     }
 
+    private fun getResultDetailLeague() {
+        viewModel.resultDetailLast().observe(viewLifecycleOwner, Observer {
+            //showDetailInfoLeague(it)
+                t ->
+            t?.let{
+                parseForPreviousDetailInfoLeague(it)
+            }
+        })
+    }
+
     private fun leagueObserver() {
         viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingLastMatch(it) })
         viewModel.responsePreviousMatch.observe(viewLifecycleOwner, Observer { showListOfPreviousMatch(it) })
+        //viewModel.responseDetailLeagueLast.observe(viewLifecycleOwner, Observer { showDetailInfoLeague(it) })
         viewModel.apiError.observe(viewLifecycleOwner, Observer { showErrorMatch(it) })
 
+
     }
+
+
 
     private fun showErrorMatch(it: Throwable?) {
         toast(it?.message ?: "")
@@ -87,9 +110,9 @@ class LastMatchFragment : Fragment() {
         val eventLeaguePrevious: MutableList<LeaguesItem> = mutableListOf()
         it?.leagues.let {
             val sportFiltered: List<LeaguesItem> = it?.filter { s -> s?.strSport == "Soccer" } as List<LeaguesItem>
-            for (i in sportFiltered.indices ?: ArrayList<String>()){
-                content?.add(sportFiltered.get(i as Int)?.strLeague.toString())
-                idLeague.add(sportFiltered.get(i as Int)?.idLeague.toString())
+            for (i in sportFiltered.indices){
+                content?.add(sportFiltered.get(i ).strLeague.toString())
+                idLeague.add(sportFiltered.get(i).idLeague.toString())
                 eventLeaguePrevious.addAll(sportFiltered)
             }
         }
@@ -105,13 +128,42 @@ class LastMatchFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedItem = parent?.getItemAtPosition(position).toString()
                 selectedItemId = idLeague[position]
+                selectedItemId2 = idLeague[position]
 
                 viewModel.forPreviousMatchOfLeague(selectedItemId)
+                viewModel.forPreviousDetailOfLeague(selectedItemId2)
             }
         }
     }
 
-    fun getFilteredResultNextMatch(){
+
+    private fun parseForPreviousDetailInfoLeague(it: RootDetailLeague) {
+        val detail = it.leagues
+        if (detail != null){
+            for (detailParam in detail){
+                val linkBannerLeague = detailParam?.strBanner
+                val leagueBackground = detailParam?.strPoster
+
+                Glide.with(img_banner_league)
+                    .load(linkBannerLeague)
+                    .fitCenter()
+                    .override(matchParent, wrapContent)
+                    .placeholder(R.drawable.blue_banner)
+                    .error(R.drawable.blue_banner)
+                    .into(img_banner_league)
+                Log.e("debugBanner",""+ detailParam?.strBanner)
+
+                Glide.with(background1)
+                    .load(leagueBackground)
+                    .fitCenter()
+                    .override(800,600)
+                    .into(background1)
+                Log.e("debugPoster",""+ detailParam?.strPoster)
+            }
+        }
+
+    }
+    fun getFilteredResultLastMatch(){
         viewModel.getFilteredPreviousMatch().observe(viewLifecycleOwner, Observer {
                 t ->
             t?.let{
@@ -125,8 +177,6 @@ class LastMatchFragment : Fragment() {
         val event =it.events
         if (event != null){
             showListOfPreviousMatch(it)
-        }else{
-            return
         }
     }
 
@@ -143,5 +193,7 @@ class LastMatchFragment : Fragment() {
 
         })
     }
+
+
 
 }
