@@ -100,7 +100,7 @@ class NextMatchFragment : Fragment() {
                 Glide.with(background2)
                     .load(leagueBackground)
                     .fitCenter()
-                    .override(800,600)
+                    .override(matchParent, matchParent)
                     .into(background2)
                 Log.e("debugPoster",""+ detailParam?.strPoster)
             }

@@ -156,7 +156,7 @@ class LastMatchFragment : Fragment() {
                 Glide.with(background1)
                     .load(leagueBackground)
                     .fitCenter()
-                    .override(800,600)
+                    .override(matchParent, matchParent)
                     .into(background1)
                 Log.e("debugPoster",""+ detailParam?.strPoster)
             }

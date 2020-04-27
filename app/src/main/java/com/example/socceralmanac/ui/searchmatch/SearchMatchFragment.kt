@@ -14,6 +14,7 @@ import com.example.socceralmanac.models.league_soccer.LeaguesItem
 import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.models.search.EventItem
 import com.example.socceralmanac.models.search.ResponseSearch
+import com.example.socceralmanac.ui.main.MainActivity
 import com.example.socceralmanac.utility.*
 import kotlinx.android.synthetic.main.search_match_fragment.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -26,6 +27,7 @@ class SearchMatchFragment : Fragment() {
 
     private lateinit var viewModel: SearchMatchViewModel
     private lateinit var queryKeywordTeam:String
+    private var itemSearchMatches: MutableList<EventItem> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,13 +59,12 @@ class SearchMatchFragment : Fragment() {
         showTextErrorSearch("Sorry No Result for" + " '$queryKeywordTeam'" +
                 "\n $it")
         img_background_search.visible()
-        //searchListMatchOfTeam.gone()
+        searchListMatchOfTeam.gone()
     }
 
     private fun showTextErrorSearch(msg: String) {
         txt_error_msg.text = msg
         txt_error_msg.visible()
-        //img_background_search.visible()
     }
 
     private fun hideErrorMessageSearch() {
@@ -74,7 +75,8 @@ class SearchMatchFragment : Fragment() {
     }
 
     private fun showLoadingSearch(it: Boolean?) {
-        if (it ?: false)pbSearch.show()else pbSearch.hide()
+        if (it ?: false)pbSearch.show()
+        else pbSearch.hide()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -86,36 +88,28 @@ class SearchMatchFragment : Fragment() {
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 queryKeywordTeam = query.toString()
-                /*menu.findItem(R.id.action_search_view).collapseActionView()
-                searchView.setQuery(queryKeywordTeam,false)*/
                 viewModel.lookForTheMatch(queryKeywordTeam)
                 return true
             }
 
 
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 queryKeywordTeam = newText.toString()
-                if (queryKeywordTeam.isEmpty()){
-                    //img_background_search.visible()
-                }else{
-                    //img_background_search.gone()
-                    viewModel.lookForTheMatch(queryKeywordTeam)
-                }
+                if (queryKeywordTeam.length ==0){
+                    itemSearchMatches.clear()
+                    searchListMatchOfTeam.adapter?.notifyDataSetChanged()
+                }else viewModel.lookForTheMatch(queryKeywordTeam)
                 return true
             }
-
-
         })
         menu.findItem(R.id.action_search_view)?.expandActionView()
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
+
     private fun showResponseSearch(it: ResponseAllEvents?) {
         Log.e("testObserve1",""+ it)
-        //img_background_search.gone()
         hideErrorMessageSearch()
-        //searchListMatchOfTeam.visible()
         val eventSearchNoted: MutableList<EventItem> = mutableListOf()
         it?.event.let {
             val sportFiltered: List<EventItem> = it?.filter { s -> s?.strSport == "Soccer" } as List<EventItem>
