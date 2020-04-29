@@ -22,6 +22,7 @@ import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.last_match_fragment.*
 import kotlinx.android.synthetic.main.next_match_fragment.*
 import org.jetbrains.anko.matchParent
@@ -53,13 +54,11 @@ class NextMatchFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(NextMatchViewModel::class.java)
         viewModel.forNameOfLeagueNext("Soccer")
-        viewModel.forNextMatchOfLeague(selectedItemId)
-        viewModel.forNextDetailOfLeague(selectedItemId2)
         content = ArrayList<String>()
 
-        getResultDetailLeague()
-
         leagueObserverForNext()
+
+        getResultDetailLeague()
 
         swipeRefreshNextMatch.setOnRefreshListener {
             val handler = Handler()
@@ -68,12 +67,18 @@ class NextMatchFragment : Fragment() {
             }, 3000)
         }
 
-        getFilteredResultNextMatch()
+    }
+
+    private fun leagueObserverForNext() {
+        viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingNextMatch(it) })
+        viewModel.responseNextMatch.observe(viewLifecycleOwner, Observer {showListOfNextMatch(it)})
+        viewModel.apiError.observe(viewLifecycleOwner, Observer { showErrorMatch(it) })
+
     }
 
     private fun getResultDetailLeague() {
         viewModel.resultDetailNext().observe(viewLifecycleOwner, Observer {
-            //showDetailInfoLeague(it)
                 t ->
             t?.let{
                 parseForNextDetailInfoLeague(it)
@@ -88,44 +93,24 @@ class NextMatchFragment : Fragment() {
                 val linkBannerLeague = detailParam?.strBanner
                 val leagueBackground = detailParam?.strPoster
 
-                Glide.with(img_banner_league_2)
+                Picasso.get()
                     .load(linkBannerLeague)
-                    .fitCenter()
-                    .override(matchParent, wrapContent)
+                    .centerCrop()
+                    .fit()
                     .placeholder(R.drawable.blue_banner)
                     .error(R.drawable.blue_banner)
                     .into(img_banner_league_2)
                 Log.e("debugBanner",""+ detailParam?.strBanner)
 
-                Glide.with(background2)
+                Picasso.get()
                     .load(leagueBackground)
-                    .fitCenter()
-                    .override(matchParent, matchParent)
+                    .centerCrop()
+                    .fit()
                     .into(background2)
                 Log.e("debugPoster",""+ detailParam?.strPoster)
             }
         }
     }
-
-    private fun leagueObserverForNext() {
-        viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
-        viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingNextMatch(it) })
-        viewModel.apiError.observe(viewLifecycleOwner, Observer { showErrorMatch(it) })
-    }
-
-
-    private fun showErrorMatch(it: Throwable?) {
-        toast(it?.message ?: "")
-    }
-
-    private fun showLoadingNextMatch(it: Boolean?) {
-        if (it?:false){
-            pgNext.show()
-        }else{
-            pgNext.hide()
-        }
-    }
-
 
     private fun showNameLeague(it: ResponseAllLeague?) {
         val eventLeagueNext: MutableList<LeaguesItem> = mutableListOf()
@@ -152,33 +137,12 @@ class NextMatchFragment : Fragment() {
 
                 selectedItemId = idLeague[position]
                 selectedItemId2 = idLeague[position]
-                //Toast.makeText( activity,"Kode: $selectedItemId",Toast.LENGTH_SHORT).show()
+
                 viewModel.forNextMatchOfLeague(selectedItemId)
                 viewModel.forNextDetailOfLeague(selectedItemId2)
-                //Toast.makeText( activity,"Kode: $selectedItemId, Desc: $selectedItem", Toast.LENGTH_SHORT).show()
-                //showListOfNextMatch(selectedItemId)
             }
         }
     }
-
-
-
-    fun getFilteredResultNextMatch(){
-        viewModel.getFilteredNextMatch().observe(viewLifecycleOwner, Observer {
-                t ->
-            t?.let{
-                parseFilteredNextMatch(it)
-            }
-        })
-    }
-
-    fun parseFilteredNextMatch(it: ResponseAllEvents){
-        val event = it.events
-        if (event != null){
-            showListOfNextMatch(it)
-        }
-    }
-
 
     private fun showListOfNextMatch(it: ResponseAllEvents?) {
         Log.e("testObserveNextMatch",""+ it)
@@ -198,4 +162,15 @@ class NextMatchFragment : Fragment() {
 
     }
 
+    private fun showErrorMatch(it: Throwable?) {
+        toast(it?.message ?: "")
+    }
+
+    private fun showLoadingNextMatch(it: Boolean?) {
+        if (it?:false){
+            pgNext.show()
+        }else{
+            pgNext.hide()
+        }
+    }
 }

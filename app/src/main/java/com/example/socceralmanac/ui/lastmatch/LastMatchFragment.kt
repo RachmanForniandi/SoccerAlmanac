@@ -22,6 +22,7 @@ import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.last_match_fragment.*
 import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.support.v4.startActivity
@@ -54,15 +55,11 @@ class LastMatchFragment : Fragment() {
         // TODO: Use the ViewModel
         viewModel.forNameOfLeagueLast("Soccer")
 
-        viewModel.forPreviousMatchOfLeague(selectedItemId)
-        viewModel.forPreviousDetailOfLeague(selectedItemId2)
-
         content = ArrayList<String>()
 
-        getResultDetailLeague()
-
         leagueObserver()
-        getFilteredResultLastMatch()
+
+        getResultDetailLeague()
 
         swipeRefreshLastMatch.setOnRefreshListener {
             val handler = Handler()
@@ -72,6 +69,15 @@ class LastMatchFragment : Fragment() {
         }
     }
 
+
+    private fun leagueObserver() {
+        viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingLastMatch(it) })
+        viewModel.responsePreviousMatch.observe(viewLifecycleOwner, Observer { showListOfPreviousMatch(it) })
+        viewModel.apiError.observe(viewLifecycleOwner, Observer { showErrorMatch(it) })
+    }
+
+
     private fun getResultDetailLeague() {
         viewModel.resultDetailLast().observe(viewLifecycleOwner, Observer {
             //showDetailInfoLeague(it)
@@ -80,30 +86,6 @@ class LastMatchFragment : Fragment() {
                 parseForPreviousDetailInfoLeague(it)
             }
         })
-    }
-
-    private fun leagueObserver() {
-        viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
-        viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingLastMatch(it) })
-        viewModel.responsePreviousMatch.observe(viewLifecycleOwner, Observer { showListOfPreviousMatch(it) })
-        //viewModel.responseDetailLeagueLast.observe(viewLifecycleOwner, Observer { showDetailInfoLeague(it) })
-        viewModel.apiError.observe(viewLifecycleOwner, Observer { showErrorMatch(it) })
-
-
-    }
-
-
-
-    private fun showErrorMatch(it: Throwable?) {
-        toast(it?.message ?: "")
-    }
-
-    private fun showLoadingLastMatch(it: Boolean?) {
-        if (it?:false){
-            pgLast.show()
-        }else{
-            pgLast.hide()
-        }
     }
 
     private fun showNameLeague(it: ResponseAllLeague?) {
@@ -116,7 +98,6 @@ class LastMatchFragment : Fragment() {
                 eventLeaguePrevious.addAll(sportFiltered)
             }
         }
-
 
         val spinnerLast = ArrayAdapter(context,android.R.layout.simple_spinner_dropdown_item,content)
         spinnerLast.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -135,8 +116,6 @@ class LastMatchFragment : Fragment() {
             }
         }
     }
-
-
     private fun parseForPreviousDetailInfoLeague(it: RootDetailLeague) {
         val detail = it.leagues
         if (detail != null){
@@ -144,46 +123,28 @@ class LastMatchFragment : Fragment() {
                 val linkBannerLeague = detailParam?.strBanner
                 val leagueBackground = detailParam?.strPoster
 
-                Glide.with(img_banner_league)
+                Picasso.get()
                     .load(linkBannerLeague)
-                    .fitCenter()
-                    .override(matchParent, wrapContent)
+                    .centerCrop()
+                    .fit()
                     .placeholder(R.drawable.blue_banner)
                     .error(R.drawable.blue_banner)
                     .into(img_banner_league)
                 Log.e("debugBanner",""+ detailParam?.strBanner)
 
-                Glide.with(background1)
+                Picasso.get()
                     .load(leagueBackground)
-                    .fitCenter()
-                    .override(matchParent, matchParent)
+                    .centerCrop()
+                    .fit()
                     .into(background1)
                 Log.e("debugPoster",""+ detailParam?.strPoster)
             }
         }
-
     }
-    fun getFilteredResultLastMatch(){
-        viewModel.getFilteredPreviousMatch().observe(viewLifecycleOwner, Observer {
-                t ->
-            t?.let{
-                //Toast.makeText(activity, "aa: $it", Toast.LENGTH_SHORT).show()
-                parseFilteredPreviousMatch(it)
-            }
-        })
-    }
-
-    fun parseFilteredPreviousMatch(it: ResponseAllEvents){
-        val event =it.events
-        if (event != null){
-            showListOfPreviousMatch(it)
-        }
-    }
-
 
     private fun showListOfPreviousMatch(it: ResponseAllEvents?) {
         Log.e("testObserveLastMatch",""+ it)
-        //val eventsNoted: MutableList<EventsTime> = mutableListOf()
+
         listOfLastMatch.adapter = MatchAdapter(it?.events,object :MatchAdapter.onClickItem{
             override fun matchClick(time: EventsTime?) {
                 startActivity<MatchDetailActivity>(
@@ -193,7 +154,16 @@ class LastMatchFragment : Fragment() {
 
         })
     }
+    private fun showErrorMatch(it: Throwable?) {
+        toast(it?.message ?: "")
+    }
 
-
+    private fun showLoadingLastMatch(it: Boolean?) {
+        if (it?:false){
+            pgLast.show()
+        }else{
+            pgLast.hide()
+        }
+    }
 
 }

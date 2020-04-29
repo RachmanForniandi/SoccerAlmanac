@@ -22,7 +22,6 @@ class LastMatchViewModel : ViewModel() {
     val param = HashMap<String, Any>()
 
 
-    //utk nama liga di spinner
     fun forNameOfLeagueLast(s:String){
         repo.leagueSoccerName(s,{
             responseNameLeague.value =it
@@ -33,7 +32,6 @@ class LastMatchViewModel : ViewModel() {
             isLoading.value = false
         })
     }
-
 
     fun forPreviousDetailOfLeague(idLeague:String){
         isLoading.value = true
@@ -52,7 +50,6 @@ class LastMatchViewModel : ViewModel() {
         return responseDetailLeagueLast
     }
 
-    //utk list match previous
     fun forPreviousMatchOfLeague(idLeague:String){
         isLoading.value = true
         param.put("id", idLeague)
@@ -64,11 +61,6 @@ class LastMatchViewModel : ViewModel() {
             apiError.value = it
             isLoading.value = false
         })
-    }
-
-
-    fun getFilteredPreviousMatch():MutableLiveData<ResponseAllEvents>{
-        return responsePreviousMatch
     }
 
     override fun onCleared() {

@@ -43,7 +43,6 @@ class SearchMatchFragment : Fragment() {
             setSupportActionBar(acSearch)
         }
         viewModel = ViewModelProviders.of(this).get(SearchMatchViewModel::class.java)
-        //viewModel.lookForTheMatch(queryKeywordTeam)
 
         searchObserver()
     }
@@ -55,7 +54,6 @@ class SearchMatchFragment : Fragment() {
     }
 
     private fun showErrorSearch(it: Throwable?) {
-        //Toast.makeText(activity,it?.message ?: "",Toast.LENGTH_SHORT).show()
         showTextErrorSearch("Sorry No Result for" + " '$queryKeywordTeam'" +
                 "\n $it")
         img_background_search.visible()
