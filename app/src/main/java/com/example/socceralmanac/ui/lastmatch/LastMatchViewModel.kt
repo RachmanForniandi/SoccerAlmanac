@@ -4,8 +4,11 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.socceralmanac.models.detail_league.RootDetailLeague
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
-import com.example.socceralmanac.models.match_time.ResponseTimeMatch
+import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
+import com.example.socceralmanac.models.match_time.EventsTime
+import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.repo.GlobalRepository
 
 class LastMatchViewModel : ViewModel() {
@@ -13,12 +16,12 @@ class LastMatchViewModel : ViewModel() {
     var apiError = MutableLiveData<Throwable>()
     var isLoading = MutableLiveData<Boolean>()
     var responseNameLeague = MutableLiveData<ResponseAllLeague>()
-    var responsePreviousMatch = MutableLiveData<ResponseTimeMatch>()
+    var responsePreviousMatch = MutableLiveData<ResponseAllEvents>()
+    var responseDetailLeagueLast = MutableLiveData<RootDetailLeague>()
     val context: Context? = null
     val param = HashMap<String, Any>()
 
 
-    //utk nama liga di spinner
     fun forNameOfLeagueLast(s:String){
         repo.leagueSoccerName(s,{
             responseNameLeague.value =it
@@ -30,7 +33,23 @@ class LastMatchViewModel : ViewModel() {
         })
     }
 
-    //utk list match previous
+    fun forPreviousDetailOfLeague(idLeague:String){
+        isLoading.value = true
+        param.put("id", idLeague)
+        repo.getDetailInfoLeague(param,{
+            responseDetailLeagueLast.value =it
+            isLoading.value = false
+            Log.e("debugDetailLeagueData",""+ it)
+        },{
+            apiError.value = it
+            isLoading.value = false
+        })
+    }
+
+    fun resultDetailLast(): MutableLiveData<RootDetailLeague>{
+        return responseDetailLeagueLast
+    }
+
     fun forPreviousMatchOfLeague(idLeague:String){
         isLoading.value = true
         param.put("id", idLeague)
@@ -42,10 +61,6 @@ class LastMatchViewModel : ViewModel() {
             apiError.value = it
             isLoading.value = false
         })
-    }
-
-    fun getFilteredPreviousMatch():MutableLiveData<ResponseTimeMatch>{
-        return responsePreviousMatch
     }
 
     override fun onCleared() {

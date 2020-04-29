@@ -3,8 +3,9 @@ package com.example.socceralmanac.ui.nextmatch
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.socceralmanac.models.detail_league.RootDetailLeague
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
-import com.example.socceralmanac.models.match_time.ResponseTimeMatch
+import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.repo.GlobalRepository
 
 class NextMatchViewModel : ViewModel() {
@@ -12,7 +13,8 @@ class NextMatchViewModel : ViewModel() {
     var apiError = MutableLiveData<Throwable>()
     var isLoading = MutableLiveData<Boolean>()
     var responseNameLeague = MutableLiveData<ResponseAllLeague>()
-    var responseNextMatch = MutableLiveData<ResponseTimeMatch>()
+    var responseNextMatch = MutableLiveData<ResponseAllEvents>()
+    var responseDetailLeagueNext = MutableLiveData<RootDetailLeague>()
     val param = HashMap<String, Any>()
 
 
@@ -27,6 +29,23 @@ class NextMatchViewModel : ViewModel() {
         })
     }
 
+    fun forNextDetailOfLeague(idLeague:String){
+        isLoading.value = true
+        param.put("id", idLeague)
+        repo.getDetailInfoLeague(param,{
+            responseDetailLeagueNext.value =it
+            isLoading.value = false
+            Log.e("debugDetailLeagueData",""+ it)
+        },{
+            apiError.value = it
+            isLoading.value = false
+        })
+    }
+
+    fun resultDetailNext(): MutableLiveData<RootDetailLeague>{
+        return responseDetailLeagueNext
+    }
+
     fun forNextMatchOfLeague(idLeague:String){
         isLoading.value = true
         param.put("id", idLeague)
@@ -38,10 +57,6 @@ class NextMatchViewModel : ViewModel() {
             apiError.value = it
             isLoading.value = false
         })
-    }
-
-    fun getFilteredNextMatch():MutableLiveData<ResponseTimeMatch>{
-        return responseNextMatch
     }
 
     override fun onCleared() {

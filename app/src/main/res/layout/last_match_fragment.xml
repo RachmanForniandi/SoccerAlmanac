@@ -3,9 +3,15 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/frameLast"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.lastmatch.LastMatchFragment">
+    <ImageView
+            android:id="@+id/background1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
     <ProgressBar
             android:id="@+id/pgLast"
             android:layout_width="wrap_content"
@@ -33,11 +39,25 @@
                     android:layout_marginRight="16dp"/>
         </androidx.cardview.widget.CardView>
 
-<!--        <TextView
+        <androidx.cardview.widget.CardView
+                android:id="@+id/banner_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="textLast"/>-->
+                android:layout_height="60dp"
+                app:cardCornerRadius="0dp"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:background="@color/colorGreyBackground">
+
+            <ImageView
+                    android:id="@+id/img_banner_league"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:contentDescription="@string/banner_league_1" />
+
+        </androidx.cardview.widget.CardView>
+
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipeRefreshLastMatch"

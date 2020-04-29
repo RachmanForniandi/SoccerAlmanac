@@ -93,7 +93,6 @@ class MatchDetailFragment : Fragment(){
 
         getResultBadge()
 
-
         detailMatchObserver()
     }
 

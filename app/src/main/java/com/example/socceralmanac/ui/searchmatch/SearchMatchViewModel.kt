@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.models.search.ResponseSearch
 import com.example.socceralmanac.repo.GlobalRepository
 
@@ -11,7 +12,7 @@ class SearchMatchViewModel : ViewModel() {
     var repo = GlobalRepository()
     var apiError = MutableLiveData<Throwable>()
     var isLoadingSearch = MutableLiveData<Boolean>()
-    var responseSearchOfMatch = MutableLiveData<ResponseSearch>()
+    var responseSearchOfMatch = MutableLiveData<ResponseAllEvents>()
     val context: Context? = null
     val paramQuery = HashMap<String, Any>()
 
