@@ -4,7 +4,6 @@ import com.example.socceralmanac.models.detail_league.RootDetailLeague
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
 import com.example.socceralmanac.models.match_time.ResponseAllEvents
-import com.example.socceralmanac.models.search.ResponseSearch
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.GET

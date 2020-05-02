@@ -9,13 +9,13 @@ import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.repo.GlobalRepository
 
 class NextMatchViewModel : ViewModel() {
-    var repo = GlobalRepository()
+    private var repo = GlobalRepository()
     var apiError = MutableLiveData<Throwable>()
     var isLoading = MutableLiveData<Boolean>()
     var responseNameLeague = MutableLiveData<ResponseAllLeague>()
     var responseNextMatch = MutableLiveData<ResponseAllEvents>()
-    var responseDetailLeagueNext = MutableLiveData<RootDetailLeague>()
-    val param = HashMap<String, Any>()
+    private var responseDetailLeagueNext = MutableLiveData<RootDetailLeague>()
+    private val param = HashMap<String, Any>()
 
 
     fun forNameOfLeagueNext(s:String){

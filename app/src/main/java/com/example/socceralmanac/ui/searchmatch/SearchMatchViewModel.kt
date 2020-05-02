@@ -9,12 +9,12 @@ import com.example.socceralmanac.models.search.ResponseSearch
 import com.example.socceralmanac.repo.GlobalRepository
 
 class SearchMatchViewModel : ViewModel() {
-    var repo = GlobalRepository()
+    private var repo = GlobalRepository()
     var apiError = MutableLiveData<Throwable>()
     var isLoadingSearch = MutableLiveData<Boolean>()
     var responseSearchOfMatch = MutableLiveData<ResponseAllEvents>()
-    val context: Context? = null
-    val paramQuery = HashMap<String, Any>()
+    //val context: Context? = null
+    private val paramQuery = HashMap<String, Any>()
 
     fun lookForTheMatch(e:String){
         isLoadingSearch.value = true

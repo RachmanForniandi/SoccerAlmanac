@@ -8,17 +8,17 @@ import com.example.socceralmanac.repo.GlobalRepository
 
 class MatchDetailViewModel : ViewModel() {
     // TODO: Implement the ViewModel
-    var repo = GlobalRepository()
+    private var repo = GlobalRepository()
     var apiError = MutableLiveData<Throwable>()
     var isLoading = MutableLiveData<Boolean>()
-    var responseHomeBadge = MutableLiveData<ResponseLookUpTeam>()
-    var responseAwayBadge = MutableLiveData<ResponseLookUpTeam>()
-    val paramIdteamHome = HashMap<String, Any>()
-    val paramIdteamAway = HashMap<String, Any>()
+    private var responseHomeBadge = MutableLiveData<ResponseLookUpTeam>()
+    private var responseAwayBadge = MutableLiveData<ResponseLookUpTeam>()
+    private val paramIdteamHome = HashMap<String, Any>()
+    private val paramIdteamAway = HashMap<String, Any>()
 
     fun accessBadgeHome( idHomeTeam:String){
         isLoading.value = true
-        paramIdteamHome.put("id", idHomeTeam)
+        paramIdteamHome["id"] = idHomeTeam
         repo.getBadgeLogoTeam(paramIdteamHome,{
             //Toast.makeText(activity, "idBadge "+ it.toString(), Toast.LENGTH_SHORT).show()
             println("idBadge1:  "+ it.toString())
@@ -32,7 +32,7 @@ class MatchDetailViewModel : ViewModel() {
 
     fun accessBadgeAway(idAwayTeam:String){
         isLoading.value = true
-        paramIdteamAway.put("id", idAwayTeam)
+        paramIdteamAway["id"] = idAwayTeam
         repo.getBadgeLogoTeam(paramIdteamAway,{
             println("idBadge2:  "+ it.toString())
             responseAwayBadge.value =it

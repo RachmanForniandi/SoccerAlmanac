@@ -1,17 +1,16 @@
 package com.example.socceralmanac.ui.lastmatch
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.bumptech.glide.Glide
+import androidx.lifecycle.ViewModelProvider
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
 import com.example.socceralmanac.models.detail_league.RootDetailLeague
@@ -24,10 +23,8 @@ import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.last_match_fragment.*
-import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.wrapContent
 
 class LastMatchFragment : Fragment() {
 
@@ -51,7 +48,7 @@ class LastMatchFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(LastMatchViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LastMatchViewModel::class.java)
         // TODO: Use the ViewModel
         viewModel.forNameOfLeagueLast("Soccer")
 
@@ -159,7 +156,7 @@ class LastMatchFragment : Fragment() {
     }
 
     private fun showLoadingLastMatch(it: Boolean?) {
-        if (it?:false){
+        if (it== true){
             pgLast.show()
         }else{
             pgLast.hide()

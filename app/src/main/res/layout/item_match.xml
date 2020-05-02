@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="dd/MM/YYYY"
+                android:text="@string/dd_mm_yyyy"
                 android:textColor="@color/colorTextGrayLight"/>
 
         <TextView

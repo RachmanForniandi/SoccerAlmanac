@@ -1,16 +1,12 @@
 package com.example.socceralmanac.repo
 
 import com.example.socceralmanac.models.detail_league.RootDetailLeague
-import com.example.socceralmanac.models.league_soccer.LeaguesItem
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
-import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.match_time.ResponseAllEvents
-import com.example.socceralmanac.models.search.ResponseSearch
 import com.example.socceralmanac.network.NetworkConfig
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Predicate
 import io.reactivex.schedulers.Schedulers
 
 class GlobalRepository {

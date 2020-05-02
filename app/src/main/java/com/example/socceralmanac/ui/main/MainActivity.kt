@@ -1,28 +1,19 @@
 package com.example.socceralmanac.ui.main
 
-import android.app.SearchManager
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProviders
 import com.example.socceralmanac.R
 import com.example.socceralmanac.ui.lastmatch.LastMatchFragment
 import com.example.socceralmanac.ui.nextmatch.NextMatchFragment
 import com.example.socceralmanac.ui.searchmatch.SearchMatchActivity
-import com.example.socceralmanac.ui.searchmatch.SearchMatchFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_menu_search.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.support.v4.startActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         override fun getCount(): Int =2
-        override fun getPageTitle(position: Int): CharSequence? = tabName.get(position)
+        override fun getPageTitle(position: Int): CharSequence? = tabName[position]
 
     }
 

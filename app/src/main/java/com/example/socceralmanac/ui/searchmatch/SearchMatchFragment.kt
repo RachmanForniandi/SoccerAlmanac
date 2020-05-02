@@ -1,6 +1,5 @@
 package com.example.socceralmanac.ui.searchmatch
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -8,13 +7,11 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.SearchMatchAdapter
-import com.example.socceralmanac.models.league_soccer.LeaguesItem
 import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.models.search.EventItem
-import com.example.socceralmanac.models.search.ResponseSearch
-import com.example.socceralmanac.ui.main.MainActivity
 import com.example.socceralmanac.utility.*
 import kotlinx.android.synthetic.main.search_match_fragment.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -42,7 +39,7 @@ class SearchMatchFragment : Fragment() {
         with(activity as AppCompatActivity){
             setSupportActionBar(acSearch)
         }
-        viewModel = ViewModelProviders.of(this).get(SearchMatchViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SearchMatchViewModel::class.java)
 
         searchObserver()
     }

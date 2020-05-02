@@ -50,5 +50,7 @@
     <string name="imgcover">imgCover</string>
     <string name="banner_league_1">BannerLeague1</string>
     <string name="banner_league_2">BannerLeague2</string>
+    <string name="dd_mm_yyyy">dd/MM/YYYY</string>
+    <string name="cari_pertandingan">Cari Pertandingan</string>
 
 </resources>
