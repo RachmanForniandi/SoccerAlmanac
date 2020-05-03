@@ -18,42 +18,42 @@ class NextMatchViewModel : ViewModel() {
     private val param = HashMap<String, Any>()
 
 
-    fun forNameOfLeagueNext(s:String){
-        repo.leagueSoccerName(s,{
-            responseNameLeague.value =it
+    fun forNameOfLeagueNext(s: String) {
+        repo.leagueSoccerName(s, {
+            responseNameLeague.value = it
             isLoading.value = false
-            Log.e("debugNameLeague2",""+ it)
-        },{
+            Log.e("debugNameLeague2", "" + it)
+        }, {
             apiError.value = it
             isLoading.value = false
         })
     }
 
-    fun forNextDetailOfLeague(idLeague:String){
+    fun forNextDetailOfLeague(idLeague: String) {
         isLoading.value = true
         param.put("id", idLeague)
-        repo.getDetailInfoLeague(param,{
-            responseDetailLeagueNext.value =it
+        repo.getDetailInfoLeague(param, {
+            responseDetailLeagueNext.value = it
             isLoading.value = false
-            Log.e("debugDetailLeagueData",""+ it)
-        },{
+            Log.e("debugDetailLeagueData", "" + it)
+        }, {
             apiError.value = it
             isLoading.value = false
         })
     }
 
-    fun resultDetailNext(): MutableLiveData<RootDetailLeague>{
+    fun resultDetailNext(): MutableLiveData<RootDetailLeague> {
         return responseDetailLeagueNext
     }
 
-    fun forNextMatchOfLeague(idLeague:String){
+    fun forNextMatchOfLeague(idLeague: String) {
         isLoading.value = true
         param.put("id", idLeague)
-        repo.getMatchEventNextName(param,{
-            responseNextMatch.value =it
+        repo.getMatchEventNextName(param, {
+            responseNextMatch.value = it
             isLoading.value = false
-            Log.e("debugListNextMatch",""+ it)
-        },{
+            Log.e("debugListNextMatch", "" + it)
+        }, {
             apiError.value = it
             isLoading.value = false
         })

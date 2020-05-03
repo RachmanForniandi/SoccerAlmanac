@@ -1,6 +1,5 @@
 package com.example.socceralmanac.ui.lastmatch
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,46 +15,45 @@ class LastMatchViewModel : ViewModel() {
     var responseNameLeague = MutableLiveData<ResponseAllLeague>()
     var responsePreviousMatch = MutableLiveData<ResponseAllEvents>()
     private var responseDetailLeagueLast = MutableLiveData<RootDetailLeague>()
-    //val context: Context? = null
     private val param = HashMap<String, Any>()
 
 
-    fun forNameOfLeagueLast(s:String){
-        repo.leagueSoccerName(s,{
-            responseNameLeague.value =it
+    fun forNameOfLeagueLast(s: String) {
+        repo.leagueSoccerName(s, {
+            responseNameLeague.value = it
             isLoading.value = false
-            Log.e("debugNameLeague1",""+ it)
-        },{
+            Log.e("debugNameLeague1", "" + it)
+        }, {
             apiError.value = it
             isLoading.value = false
         })
     }
 
-    fun forPreviousDetailOfLeague(idLeague:String){
+    fun forPreviousDetailOfLeague(idLeague: String) {
         isLoading.value = true
         param["id"] = idLeague
-        repo.getDetailInfoLeague(param,{
-            responseDetailLeagueLast.value =it
+        repo.getDetailInfoLeague(param, {
+            responseDetailLeagueLast.value = it
             isLoading.value = false
-            Log.e("debugDetailLeagueData",""+ it)
-        },{
+            Log.e("debugDetailLeagueData", "" + it)
+        }, {
             apiError.value = it
             isLoading.value = false
         })
     }
 
-    fun resultDetailLast(): MutableLiveData<RootDetailLeague>{
+    fun resultDetailLast(): MutableLiveData<RootDetailLeague> {
         return responseDetailLeagueLast
     }
 
-    fun forPreviousMatchOfLeague(idLeague:String){
+    fun forPreviousMatchOfLeague(idLeague: String) {
         isLoading.value = true
         param["id"] = idLeague
-        repo.getMatchEventLastName(param,{
-            responsePreviousMatch.value =it
+        repo.getMatchEventLastName(param, {
+            responsePreviousMatch.value = it
             isLoading.value = false
-            Log.e("debugListLastMatch",""+ it)
-        },{
+            Log.e("debugListLastMatch", "" + it)
+        }, {
             apiError.value = it
             isLoading.value = false
         })

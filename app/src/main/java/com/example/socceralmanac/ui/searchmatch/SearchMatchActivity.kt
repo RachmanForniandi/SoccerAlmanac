@@ -1,7 +1,7 @@
 package com.example.socceralmanac.ui.searchmatch
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.socceralmanac.R
 
 class SearchMatchActivity : AppCompatActivity() {

@@ -33,10 +33,10 @@ class LastMatchFragment : Fragment() {
     }
 
     private lateinit var viewModel: LastMatchViewModel
-    private var content: ArrayList<String>?=null
-    private var selectedItem:String= ""
-    private var selectedItemId:String = ""
-    private var selectedItemId2:String = ""
+    private var content: ArrayList<String>? = null
+    private var selectedItem: String = ""
+    private var selectedItemId: String = ""
+    private var selectedItemId2: String = ""
     var idLeague = ArrayList<String>()
 
     override fun onCreateView(
@@ -70,7 +70,9 @@ class LastMatchFragment : Fragment() {
     private fun leagueObserver() {
         viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingLastMatch(it) })
-        viewModel.responsePreviousMatch.observe(viewLifecycleOwner, Observer { showListOfPreviousMatch(it) })
+        viewModel.responsePreviousMatch.observe(
+            viewLifecycleOwner,
+            Observer { showListOfPreviousMatch(it) })
         viewModel.apiError.observe(viewLifecycleOwner, Observer { showErrorMatch(it) })
     }
 
@@ -79,7 +81,7 @@ class LastMatchFragment : Fragment() {
         viewModel.resultDetailLast().observe(viewLifecycleOwner, Observer {
             //showDetailInfoLeague(it)
                 t ->
-            t?.let{
+            t?.let {
                 parseForPreviousDetailInfoLeague(it)
             }
         })
@@ -88,22 +90,29 @@ class LastMatchFragment : Fragment() {
     private fun showNameLeague(it: ResponseAllLeague?) {
         val eventLeaguePrevious: MutableList<LeaguesItem> = mutableListOf()
         it?.leagues.let {
-            val sportFiltered: List<LeaguesItem> = it?.filter { s -> s?.strSport == "Soccer" } as List<LeaguesItem>
-            for (i in sportFiltered.indices){
-                content?.add(sportFiltered.get(i ).strLeague.toString())
+            val sportFiltered: List<LeaguesItem> =
+                it?.filter { s -> s?.strSport == "Soccer" } as List<LeaguesItem>
+            for (i in sportFiltered.indices) {
+                content?.add(sportFiltered.get(i).strLeague.toString())
                 idLeague.add(sportFiltered.get(i).idLeague.toString())
                 eventLeaguePrevious.addAll(sportFiltered)
             }
         }
 
-        val spinnerLast = ArrayAdapter(context,android.R.layout.simple_spinner_dropdown_item,content)
+        val spinnerLast =
+            ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, content)
         spinnerLast.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_last.adapter = spinnerLast
-        Log.e("testObserveNameLeague",""+ it)
-        spinner_last.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener {
+        Log.e("testObserveNameLeague", "" + it)
+        spinner_last.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 selectedItem = parent?.getItemAtPosition(position).toString()
                 selectedItemId = idLeague[position]
                 selectedItemId2 = idLeague[position]
@@ -113,10 +122,11 @@ class LastMatchFragment : Fragment() {
             }
         }
     }
+
     private fun parseForPreviousDetailInfoLeague(it: RootDetailLeague) {
         val detail = it.leagues
-        if (detail != null){
-            for (detailParam in detail){
+        if (detail != null) {
+            for (detailParam in detail) {
                 val linkBannerLeague = detailParam?.strBanner
                 val leagueBackground = detailParam?.strPoster
 
@@ -127,22 +137,22 @@ class LastMatchFragment : Fragment() {
                     .placeholder(R.drawable.blue_banner)
                     .error(R.drawable.blue_banner)
                     .into(img_banner_league)
-                Log.e("debugBanner",""+ detailParam?.strBanner)
+                Log.e("debugBanner", "" + detailParam?.strBanner)
 
                 Picasso.get()
                     .load(leagueBackground)
                     .centerCrop()
                     .fit()
                     .into(background1)
-                Log.e("debugPoster",""+ detailParam?.strPoster)
+                Log.e("debugPoster", "" + detailParam?.strPoster)
             }
         }
     }
 
     private fun showListOfPreviousMatch(it: ResponseAllEvents?) {
-        Log.e("testObserveLastMatch",""+ it)
+        Log.e("testObserveLastMatch", "" + it)
 
-        listOfLastMatch.adapter = MatchAdapter(it?.events,object :MatchAdapter.onClickItem{
+        listOfLastMatch.adapter = MatchAdapter(it?.events, object : MatchAdapter.onClickItem {
             override fun matchClick(time: EventsTime?) {
                 startActivity<MatchDetailActivity>(
                     "detailMatch" to time
@@ -151,14 +161,15 @@ class LastMatchFragment : Fragment() {
 
         })
     }
+
     private fun showErrorMatch(it: Throwable?) {
         toast(it?.message ?: "")
     }
 
     private fun showLoadingLastMatch(it: Boolean?) {
-        if (it== true){
+        if (it == true) {
             pgLast.show()
-        }else{
+        } else {
             pgLast.hide()
         }
     }

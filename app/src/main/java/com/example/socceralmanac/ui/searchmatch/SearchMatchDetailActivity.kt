@@ -1,7 +1,7 @@
 package com.example.socceralmanac.ui.searchmatch
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
@@ -19,8 +19,8 @@ import org.jetbrains.anko.toast
 class SearchMatchDetailActivity : AppCompatActivity() {
 
     private lateinit var viewModelDetail: MatchDetailViewModel
-    private var idTeamHome:String= ""
-    private var idTeamAway:String= ""
+    private var idTeamHome: String = ""
+    private var idTeamAway: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,8 +35,8 @@ class SearchMatchDetailActivity : AppCompatActivity() {
 
         //Toast.makeText(context, "id_1: $idTeamHome, id_2: $idTeamAway", Toast.LENGTH_SHORT).show()
 
-        val detailDateEvent: String = dataItem?.dateEvent?.let { getStringDate(it) }?: "-"
-        val detailTimeEvent:String = dataItem?.strTime?.let { getStringTime(it) } ?: "-:-"
+        val detailDateEvent: String = dataItem?.dateEvent?.let { getStringDate(it) } ?: "-"
+        val detailTimeEvent: String = dataItem?.strTime?.let { getStringTime(it) } ?: "-:-"
 
 
         date_match.text = "$detailDateEvent | $detailTimeEvent"
@@ -53,7 +53,7 @@ class SearchMatchDetailActivity : AppCompatActivity() {
         txtHomeTeam.text = dataItem?.strHomeTeam
         txtAwayTeam.text = dataItem?.strAwayTeam
 
-        txtScore.text = "$homeScore " +"-"+ " $awayScore"
+        txtScore.text = "$homeScore " + "-" + " $awayScore"
         home_goals.text = dataItem?.strHomeGoalDetails as CharSequence?
         away_goals.text = dataItem?.strAwayGoalDetails as CharSequence?
 
@@ -83,8 +83,8 @@ class SearchMatchDetailActivity : AppCompatActivity() {
         detailMatchObserver()
     }
 
-    private fun detailMatchObserver(){
-        viewModelDetail.isLoading.observe(this, Observer{showLoadingDetailMatch(it)})
+    private fun detailMatchObserver() {
+        viewModelDetail.isLoading.observe(this, Observer { showLoadingDetailMatch(it) })
         viewModelDetail.apiError.observe(this, Observer { showErrorTeamBadge(it) })
         //viewModelDetail.responseAwayBadge.observe(viewLifecycleOwner, Observer{showBadgeTeam(homeBadge, awayBadge)} )
     }
@@ -93,18 +93,16 @@ class SearchMatchDetailActivity : AppCompatActivity() {
         toast(it?.message ?: "")
     }
 
-    fun getResultBadge(){
-        viewModelDetail.resultHomeBadge().observe(this, Observer {
-                t ->
-            t?.let{
+    fun getResultBadge() {
+        viewModelDetail.resultHomeBadge().observe(this, Observer { t ->
+            t?.let {
                 //Toast.makeText(activity, "aa: $it", Toast.LENGTH_SHORT).show()
                 parseLookupTeamHomeResponse(it)
             }
         })
 
-        viewModelDetail.resultAwayBadge().observe(this, Observer {
-                t ->
-            t?.let{
+        viewModelDetail.resultAwayBadge().observe(this, Observer { t ->
+            t?.let {
                 //Toast.makeText(activity, "aa: $it", Toast.LENGTH_SHORT).show()
                 parseLookupTeamAwayResponse(it)
             }
@@ -113,18 +111,18 @@ class SearchMatchDetailActivity : AppCompatActivity() {
 
 
     private fun showLoadingDetailMatch(it: Boolean?) {
-        if (it?:false){
+        if (it ?: false) {
             progress_detail_circular.show()
-        }else{
+        } else {
             progress_detail_circular.hide()
         }
     }
 
-    fun parseLookupTeamHomeResponse(responseLookUpTeam: ResponseLookUpTeam){
+    fun parseLookupTeamHomeResponse(responseLookUpTeam: ResponseLookUpTeam) {
         val team = responseLookUpTeam.teams
-        for(dataTeam in team!!){
+        for (dataTeam in team!!) {
             val strTeamBadge = dataTeam?.strTeamBadge
-            venueMatch.text= dataTeam?.strStadium
+            venueMatch.text = dataTeam?.strStadium
             //Toast.makeText(activity, "strTeamBadge: $strTeamBadge", Toast.LENGTH_SHORT).show()
             Glide.with(imgTeamHome)
                 .load(strTeamBadge)
@@ -134,9 +132,9 @@ class SearchMatchDetailActivity : AppCompatActivity() {
         }
     }
 
-    fun parseLookupTeamAwayResponse(responseLookUpTeam: ResponseLookUpTeam){
+    fun parseLookupTeamAwayResponse(responseLookUpTeam: ResponseLookUpTeam) {
         val team = responseLookUpTeam.teams
-        for(dataTeam in team!!){
+        for (dataTeam in team!!) {
             val strTeamBadge = dataTeam?.strTeamBadge
             //Toast.makeText(activity, "strTeamBadge: $strTeamBadge", Toast.LENGTH_SHORT).show()
             Glide.with(imgTeamAway)

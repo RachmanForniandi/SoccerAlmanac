@@ -14,16 +14,13 @@ object NetworkConfig {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
 
-        /*val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(logging)
-            .build()*/
         return OkHttpClient.Builder()
             .addInterceptor(logging)
             .build()
     }
 
 
-    private fun useRetrofit():Retrofit{
+    private fun useRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(receivedInterceptor())
@@ -33,5 +30,5 @@ object NetworkConfig {
             .build()
     }
 
-    fun callApiService()= useRetrofit().create(APIService::class.java)
+    fun callApiService() = useRetrofit().create(APIService::class.java)
 }

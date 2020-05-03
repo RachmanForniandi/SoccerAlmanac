@@ -14,23 +14,27 @@ class GlobalRepository {
     private var api = NetworkConfig.callApiService()
     private var compositeDisposable = CompositeDisposable()
 
-    fun leagueSoccerName(s: String, responseHandler:(ResponseAllLeague)->Unit,
-                         errorHandler: (Throwable)->Unit){
+    fun leagueSoccerName(
+        s: String, responseHandler: (ResponseAllLeague) -> Unit,
+        errorHandler: (Throwable) -> Unit
+    ) {
         compositeDisposable.add(
             api.getSoccerLeagueName(s)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     responseHandler(it)
-                },{
+                }, {
                     errorHandler(it)
                 })
 
         )
     }
 
-    fun getDetailInfoLeague(idLeague: HashMap<String, Any>, responseHandler:(RootDetailLeague?)->Unit,
-                              errorHandler: (Throwable)->Unit){
+    fun getDetailInfoLeague(
+        idLeague: HashMap<String, Any>, responseHandler: (RootDetailLeague?) -> Unit,
+        errorHandler: (Throwable) -> Unit
+    ) {
 
         compositeDisposable.add(
             api.getDetailLeague(idLeague)
@@ -38,14 +42,16 @@ class GlobalRepository {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     responseHandler(it)
-                },{
+                }, {
                     errorHandler(it)
                 })
         )
     }
 
-    fun getMatchEventLastName(idLeague: HashMap<String, Any>, responseHandler:(ResponseAllEvents?)->Unit,
-                              errorHandler: (Throwable)->Unit){
+    fun getMatchEventLastName(
+        idLeague: HashMap<String, Any>, responseHandler: (ResponseAllEvents?) -> Unit,
+        errorHandler: (Throwable) -> Unit
+    ) {
 
         compositeDisposable.add(
             api.getPreviousMatch(idLeague)
@@ -53,14 +59,16 @@ class GlobalRepository {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     responseHandler(it)
-                },{
+                }, {
                     errorHandler(it)
                 })
-            )
+        )
     }
 
-    fun getMatchEventNextName(idLeague: HashMap<String, Any>, responseHandler:(ResponseAllEvents?)->Unit,
-                              errorHandler: (Throwable)->Unit){
+    fun getMatchEventNextName(
+        idLeague: HashMap<String, Any>, responseHandler: (ResponseAllEvents?) -> Unit,
+        errorHandler: (Throwable) -> Unit
+    ) {
 
         compositeDisposable.add(
             api.getNextMatch(idLeague)
@@ -68,41 +76,45 @@ class GlobalRepository {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     responseHandler(it)
-                },{
+                }, {
                     errorHandler(it)
                 })
         )
     }
 
-    fun getBadgeLogoTeam(idTeam:HashMap<String, Any>,responseHandler: (ResponseLookUpTeam) -> Unit,
-                         errorHandler: (Throwable)->Unit){
+    fun getBadgeLogoTeam(
+        idTeam: HashMap<String, Any>, responseHandler: (ResponseLookUpTeam) -> Unit,
+        errorHandler: (Throwable) -> Unit
+    ) {
         compositeDisposable.add(
             api.getLogoTeam(idTeam)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     responseHandler(it)
-                },{
+                }, {
                     errorHandler(it)
                 })
         )
     }
 
-    fun getSearchOfTeamMatch(q:HashMap<String, Any>,responseHandler: (ResponseAllEvents) -> Unit,
-                             errorHandler: (Throwable)->Unit){
+    fun getSearchOfTeamMatch(
+        q: HashMap<String, Any>, responseHandler: (ResponseAllEvents) -> Unit,
+        errorHandler: (Throwable) -> Unit
+    ) {
         compositeDisposable.add(
             api.getSearchEvents(q)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     responseHandler(it)
-                },{
+                }, {
                     errorHandler(it)
                 })
         )
     }
 
-    fun onClear(){
+    fun onClear() {
         compositeDisposable.clear()
     }
 
