@@ -14,16 +14,16 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_16"
-            android:layout_marginRight="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_12"
-            android:layout_marginBottom="@dimen/margin_12">
+            android:layout_marginLeft="@dimen/size_16"
+            android:layout_marginRight="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_12"
+            android:layout_marginBottom="@dimen/size_12">
         <TextView
                 android:id="@+id/tv_date_match"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="dd/MM/YYYY"
+                android:text="@string/dd_mm_yyyy"
                 android:textColor="@color/colorTextGrayLight"/>
 
         <TextView
@@ -47,7 +47,7 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/tv_date_match"
-                android:layout_margin="@dimen/margin_16"
+                android:layout_margin="@dimen/size_16"
                 android:orientation="horizontal"
                 android:padding="5dp">
             <TextView
@@ -57,8 +57,8 @@
                     android:textColor="@color/colorTextDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_8"
-                    android:layout_marginRight="@dimen/margin_8"/>
+                    android:layout_marginLeft="@dimen/size_8"
+                    android:layout_marginRight="@dimen/size_8"/>
             <TextView
                     android:textSize="21sp"
                     android:textStyle="bold"
@@ -76,8 +76,8 @@
                     android:textColor="@color/colorTextDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_8"
-                    android:layout_marginRight="@dimen/margin_8"/>
+                    android:layout_marginLeft="@dimen/size_8"
+                    android:layout_marginRight="@dimen/size_8"/>
         </LinearLayout>
 
         <TextView

@@ -1,13 +1,13 @@
 package com.example.socceralmanac.ui.detailMatch
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.socceralmanac.R
 import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
@@ -29,6 +29,7 @@ class MatchDetailFragment : Fragment(){
     private var idTeamHome:String= ""
     private var idTeamAway:String= ""
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +39,7 @@ class MatchDetailFragment : Fragment(){
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModelDetail = ViewModelProviders.of(this).get(MatchDetailViewModel::class.java)
+        viewModelDetail = ViewModelProvider(this).get(MatchDetailViewModel::class.java)
 
         val dataItem = activity?.intent?.getSerializableExtra("detailMatch") as? EventsTime
 
@@ -53,10 +54,10 @@ class MatchDetailFragment : Fragment(){
         val detailTimeEvent:String = dataItem?.strTime?.let { getStringTime(it) } ?: "-:-"
 
 
-        date_match.text = "$detailDateEvent | $detailTimeEvent"
+        date_match.text = String.format("%s | %s", detailDateEvent , detailTimeEvent)
 
-        val homeScore = dataItem?.intHomeScore?.let { it } as CharSequence? ?: "-"
-        val awayScore = dataItem?.intAwayScore?.let { it } as CharSequence? ?: "-"
+        val homeScore = dataItem?.intHomeScore as CharSequence? ?: "-"
+        val awayScore = dataItem?.intAwayScore as CharSequence? ?: "-"
 
         home_yellow_card.text = dataItem?.strHomeYellowCards
         away_yellow_card.text = dataItem?.strAwayYellowCards
@@ -67,7 +68,7 @@ class MatchDetailFragment : Fragment(){
         txtHomeTeam.text = dataItem?.strHomeTeam
         txtAwayTeam.text = dataItem?.strAwayTeam
 
-        txtScore.text = "$homeScore " +"-"+ " $awayScore"
+        txtScore.text = String.format("%s - %s", homeScore , awayScore)
         home_goals.text = dataItem?.strHomeGoalDetails
         away_goals.text = dataItem?.strAwayGoalDetails
 
@@ -133,8 +134,8 @@ class MatchDetailFragment : Fragment(){
         }
     }
 
-    fun parseLookupTeamHomeResponse(responseLookUpTeam: ResponseLookUpTeam){
-        val team = responseLookUpTeam.teams
+    private fun parseLookupTeamHomeResponse(responseLookUpTeam: ResponseLookUpTeam){
+         val team = responseLookUpTeam.teams
         if (team != null) {
             for(dataTeam in team){
                 val strTeamBadge = dataTeam?.strTeamBadge
@@ -149,7 +150,7 @@ class MatchDetailFragment : Fragment(){
         }
     }
 
-    fun parseLookupTeamAwayResponse(responseLookUpTeam: ResponseLookUpTeam){
+    private fun parseLookupTeamAwayResponse(responseLookUpTeam: ResponseLookUpTeam){
         val team = responseLookUpTeam.teams
         if (team != null) {
             for(dataTeam in team){

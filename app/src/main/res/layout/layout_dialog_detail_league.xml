@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:id="@+id/relative_content_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_8"
+            android:background="@drawable/template_background_dialog">
+
+        <ImageView
+                android:id="@+id/close_bottom_sheet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close"
+                android:layout_marginTop="@dimen/size_8"
+                android:layout_marginEnd="@dimen/size_16"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/button_to_close" />
+
+        <ImageView
+                android:id="@+id/detail_badge_league"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/soccer_badge"
+                android:layout_marginTop="40dp"
+                android:contentDescription="@string/logo_league" />
+
+        <TextView
+                android:id="@+id/txt_name_league"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/detail_badge_league"
+                android:layout_centerInParent="true"
+                android:text="@string/app_name"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/size_16" />
+
+        <LinearLayout
+                android:id="@+id/linear_nationality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_name_league"
+                android:layout_margin="@dimen/size_4"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/country"
+                    android:layout_marginStart="@dimen/size_16"
+                    android:layout_weight="0.3"/>
+
+            <TextView
+                    android:id="@+id/tvCountryLeague"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:textAlignment="textStart"/>
+
+        </LinearLayout>
+
+
+        <TextView
+                android:id="@+id/detail_desc_league"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/linear_nationality"
+                android:gravity="start"
+                android:text="@string/app_name"
+                android:layout_margin="@dimen/size_16" />
+
+    </RelativeLayout>
+</ScrollView>

@@ -1,9 +1,8 @@
 package com.example.socceralmanac.ui.nextmatch
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.socceralmanac.R
-import com.example.socceralmanac.ui.nextmatch.NextMatchFragment
 
 class NextMatchActivity : AppCompatActivity() {
 

@@ -1,7 +1,7 @@
 package com.example.socceralmanac.ui.splashscreen
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.socceralmanac.R
 import com.example.socceralmanac.ui.main.MainActivity
 import org.jetbrains.anko.startActivity
@@ -14,7 +14,7 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        Timer("splashGone",true).schedule(3000){
+        Timer("splashGone", true).schedule(3000) {
             startActivity<MainActivity>()
             finish()
         }
