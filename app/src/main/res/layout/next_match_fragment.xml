@@ -39,6 +39,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"/>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -46,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     app:cardCornerRadius="0dp"
-                    android:layout_marginBottom="@dimen/margin_8"
+                    android:layout_marginBottom="@dimen/size_8"
                     android:background="@color/colorGreyBackground">
 
                 <ImageView
@@ -57,6 +58,16 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
                         android:contentDescription="@string/banner_league_2" />
+
+                <ImageView
+                        android:id="@+id/btn_detail_league"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginEnd="@dimen/size_4"
+                        android:layout_marginBottom="@dimen/size_4"
+                        android:src="@drawable/ic_info"
+                        android:contentDescription="@string/info_detail_of_league" />
 
             </androidx.cardview.widget.CardView>
 
@@ -76,5 +87,7 @@
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         </LinearLayout>
+
+
 
 </FrameLayout>

@@ -1,5 +1,6 @@
 package com.example.socceralmanac.ui.nextmatch
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -11,6 +12,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
 import com.example.socceralmanac.models.detail_league.RootDetailLeague
@@ -22,7 +24,7 @@ import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.last_match_fragment.*
+import kotlinx.android.synthetic.main.layout_dialog_detail_league.view.*
 import kotlinx.android.synthetic.main.next_match_fragment.*
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
@@ -38,7 +40,7 @@ class NextMatchFragment : Fragment() {
     private var selectedItem: String = ""
     private var selectedItemId: String = ""
     private var selectedItemId2: String = ""
-    var idLeague = ArrayList<String>()
+    private var idLeague = ArrayList<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +61,7 @@ class NextMatchFragment : Fragment() {
 
         swipeRefreshNextMatch.setOnRefreshListener {
             val handler = Handler()
-            handler.postDelayed(Runnable {
+            handler.postDelayed({
                 swipeRefreshNextMatch.isRefreshing = false
             }, 3000)
         }
@@ -90,6 +92,10 @@ class NextMatchFragment : Fragment() {
             for (detailParam in detail) {
                 val linkBannerLeague = detailParam?.strBanner
                 val leagueBackground = detailParam?.strPoster
+                val leagueName = detailParam?.strLeague
+                val leagueBadge = detailParam?.strBadge
+                val leagueCountry = detailParam?.strCountry
+                val leagueDetailInfo = detailParam?.strDescriptionEN
 
                 Picasso.get()
                     .load(linkBannerLeague)
@@ -106,6 +112,37 @@ class NextMatchFragment : Fragment() {
                     .fit()
                     .into(background2)
                 Log.e("debugPoster", "" + detailParam?.strPoster)
+
+                btn_detail_league.setOnClickListener {
+                    val dialogView = LayoutInflater.from(activity)
+                        .inflate(R.layout.layout_dialog_detail_league, null)
+
+                    val dialogBuilder = AlertDialog.Builder(activity)
+                        .setView(dialogView)
+
+                    val detailDialog = dialogBuilder.show()
+
+                    detailDialog.setCanceledOnTouchOutside(false)
+
+                    Glide.with(dialogView.detail_badge_league)
+                        .load(leagueBadge)
+                        .placeholder(R.drawable.soccer_badge)
+                        .error(R.drawable.soccer_badge)
+                        .into(dialogView.detail_badge_league)
+
+                    dialogView.txt_name_league.text = leagueName
+
+                    dialogView.tvCountryLeague.text = leagueCountry
+
+                    dialogView.detail_desc_league.text = leagueDetailInfo
+
+
+                    dialogView.close_bottom_sheet.setOnClickListener {
+                        detailDialog.dismiss()
+                    }
+                }
+
+
             }
         }
     }

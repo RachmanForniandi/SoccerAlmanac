@@ -38,7 +38,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/imgTeamHome"
-                        android:layout_marginBottom="@dimen/margin_16"
+                        android:layout_marginBottom="@dimen/size_16"
                         android:layout_centerHorizontal="true"
                         android:textSize="15sp" />
 
@@ -49,7 +49,7 @@
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
                         android:layout_toStartOf="@+id/txtScore"
-                        android:layout_marginStart="@dimen/margin_16"
+                        android:layout_marginStart="@dimen/size_16"
                         android:scaleType="fitCenter"
                         android:src="@drawable/soccer_badge"
                         android:contentDescription="@string/imgTeamHome" />
@@ -61,8 +61,8 @@
                         android:layout_alignEnd="@+id/imgTeamHome"
                         android:layout_alignRight="@+id/imgTeamHome"
                         android:layout_below="@+id/imgTeamHome"
-                        android:layout_marginLeft="@dimen/margin_16"
-                        android:layout_marginStart="@dimen/margin_16"
+                        android:layout_marginLeft="@dimen/size_16"
+                        android:layout_marginStart="@dimen/size_16"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
                         android:text="@string/team_home"
@@ -113,8 +113,8 @@
                         android:layout_gravity="center_vertical"
                         android:layout_toEndOf="@+id/txtScore"
                         android:layout_toRightOf="@+id/txtScore"
-                        android:layout_marginRight="@dimen/margin_16"
-                        android:layout_marginEnd="@dimen/margin_16"
+                        android:layout_marginRight="@dimen/size_16"
+                        android:layout_marginEnd="@dimen/size_16"
                         android:scaleType="fitCenter"
                         android:src="@drawable/soccer_badge"
                         android:contentDescription="@string/imgTeamAway" />
@@ -131,8 +131,8 @@
                         android:textStyle="bold"
                         android:gravity="center"
                         android:layout_marginTop="10dp"
-                        android:layout_marginRight="@dimen/margin_16"
-                        android:layout_marginEnd="@dimen/margin_16"
+                        android:layout_marginRight="@dimen/size_16"
+                        android:layout_marginEnd="@dimen/size_16"
                         android:layout_alignLeft="@+id/imgTeamAway" />
 
             </RelativeLayout>
@@ -155,9 +155,9 @@
                 android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
-                    android:layout_marginLeft="@dimen/margin_8"
-                    android:layout_marginRight="@dimen/margin_8"
-                    android:layout_marginTop="@dimen/margin_12"
+                    android:layout_marginLeft="@dimen/size_8"
+                    android:layout_marginRight="@dimen/size_8"
+                    android:layout_marginTop="@dimen/size_12"
                     app:cardElevation="12dp"
                     app:cardCornerRadius="8dp"
                     app:cardBackgroundColor="@color/colorPureWhite"
@@ -168,16 +168,16 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_16"
-                        android:layout_marginTop="@dimen/margin_16">
+                        android:layout_marginBottom="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_16">
 
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_16"
-                            android:layout_marginRight="@dimen/margin_16"
+                            android:layout_marginLeft="@dimen/size_16"
+                            android:layout_marginRight="@dimen/size_16"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/margin_12">
+                            android:layout_marginTop="@dimen/size_12">
 
                         <TextView
                                 android:id="@+id/home_goals"
@@ -212,7 +212,7 @@
                     <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="@dimen/margin_4"
+                            android:layout_margin="@dimen/size_4"
                             android:orientation="horizontal"
                             android:background="@color/cardview_dark_background"/>
 
@@ -257,10 +257,10 @@
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_16"
-                            android:layout_marginRight="@dimen/margin_16"
+                            android:layout_marginLeft="@dimen/size_16"
+                            android:layout_marginRight="@dimen/size_16"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/margin_12">
+                            android:layout_marginTop="@dimen/size_12">
 
                         <TextView
                                 android:id="@+id/home_yellow_card"
@@ -294,17 +294,17 @@
                     <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="@dimen/margin_4"
+                            android:layout_margin="@dimen/size_4"
                             android:orientation="horizontal"
                             android:background="@color/cardview_dark_background"/>
 
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_16"
-                            android:layout_marginRight="@dimen/margin_16"
+                            android:layout_marginLeft="@dimen/size_16"
+                            android:layout_marginRight="@dimen/size_16"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/margin_12">
+                            android:layout_marginTop="@dimen/size_12">
 
                         <TextView
                                 android:id="@+id/home_red_card"
@@ -338,7 +338,7 @@
                     <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="@dimen/margin_4"
+                            android:layout_margin="@dimen/size_4"
                             android:orientation="horizontal"
                             android:background="@color/cardview_dark_background"/>
 
@@ -351,10 +351,10 @@
                     android:background="@drawable/layout_rounded_white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_16"
-                    android:layout_marginRight="@dimen/margin_16"
-                    android:layout_marginBottom="@dimen/margin_16"
-                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginLeft="@dimen/size_16"
+                    android:layout_marginRight="@dimen/size_16"
+                    android:layout_marginBottom="@dimen/size_16"
+                    android:layout_marginTop="@dimen/size_16"
                     android:layout_gravity="center_horizontal"
                     android:padding="5dp">
                 <TextView
@@ -363,15 +363,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/team_lineups"
-                        android:layout_marginLeft="@dimen/margin_16"
-                        android:layout_marginRight="@dimen/margin_16" />
+                        android:layout_marginLeft="@dimen/size_16"
+                        android:layout_marginRight="@dimen/size_16" />
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
-                    android:layout_marginTop="@dimen/margin_16"
-                    android:layout_marginLeft="@dimen/margin_12"
-                    android:layout_marginRight="@dimen/margin_12"
-                    android:layout_marginBottom="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/size_16"
+                    android:layout_marginLeft="@dimen/size_12"
+                    android:layout_marginRight="@dimen/size_12"
+                    android:layout_marginBottom="@dimen/size_16"
                     app:cardElevation="12dp"
                     app:cardCornerRadius="8dp"
                     app:cardBackgroundColor="@color/colorPureWhite"
@@ -382,16 +382,16 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_16"
-                        android:layout_marginTop="@dimen/margin_16">
+                        android:layout_marginBottom="@dimen/size_16"
+                        android:layout_marginTop="@dimen/size_16">
 
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_16"
-                            android:layout_marginRight="@dimen/margin_16"
+                            android:layout_marginLeft="@dimen/size_16"
+                            android:layout_marginRight="@dimen/size_16"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/margin_12">
+                            android:layout_marginTop="@dimen/size_12">
 
                         <TextView
                                 android:id="@+id/player_home_goal_keeper"
@@ -425,17 +425,17 @@
                     <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="@dimen/margin_4"
+                            android:layout_margin="@dimen/size_4"
                             android:orientation="horizontal"
                             android:background="@color/cardview_dark_background"/>
 
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_16"
-                            android:layout_marginRight="@dimen/margin_16"
+                            android:layout_marginLeft="@dimen/size_16"
+                            android:layout_marginRight="@dimen/size_16"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/margin_12">
+                            android:layout_marginTop="@dimen/size_12">
 
                         <TextView
                                 android:id="@+id/player_home_defense"
@@ -469,17 +469,17 @@
                     <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="@dimen/margin_4"
+                            android:layout_margin="@dimen/size_4"
                             android:orientation="horizontal"
                             android:background="@color/cardview_dark_background"/>
 
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_16"
-                            android:layout_marginRight="@dimen/margin_16"
+                            android:layout_marginLeft="@dimen/size_16"
+                            android:layout_marginRight="@dimen/size_16"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/margin_12">
+                            android:layout_marginTop="@dimen/size_12">
 
                         <TextView
                                 android:id="@+id/player_home_midfield"
@@ -513,17 +513,17 @@
                     <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="@dimen/margin_4"
+                            android:layout_margin="@dimen/size_4"
                             android:orientation="horizontal"
                             android:background="@color/cardview_dark_background"/>
 
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_16"
-                            android:layout_marginRight="@dimen/margin_16"
+                            android:layout_marginLeft="@dimen/size_16"
+                            android:layout_marginRight="@dimen/size_16"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/margin_12">
+                            android:layout_marginTop="@dimen/size_12">
 
                         <TextView
                                 android:id="@+id/player_home_forward"
@@ -556,17 +556,17 @@
                     <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="@dimen/margin_4"
+                            android:layout_margin="@dimen/size_4"
                             android:orientation="horizontal"
                             android:background="@color/cardview_dark_background"/>
 
                     <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_16"
-                            android:layout_marginRight="@dimen/margin_16"
+                            android:layout_marginLeft="@dimen/size_16"
+                            android:layout_marginRight="@dimen/size_16"
                             android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/margin_12">
+                            android:layout_marginTop="@dimen/size_12">
 
                         <TextView
                                 android:id="@+id/player_home_substitutes"
@@ -599,7 +599,7 @@
                     <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_margin="@dimen/margin_4"
+                            android:layout_margin="@dimen/size_4"
                             android:orientation="horizontal"
                             android:background="@color/cardview_dark_background"/>
 

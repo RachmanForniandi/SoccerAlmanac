@@ -6,6 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 
 object NetworkConfig {
@@ -15,6 +16,8 @@ object NetworkConfig {
         logging.level = HttpLoggingInterceptor.Level.BODY
 
         return OkHttpClient.Builder()
+            .connectTimeout(10,TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(logging)
             .build()
     }
