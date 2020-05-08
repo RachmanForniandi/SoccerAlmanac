@@ -57,5 +57,6 @@
     <string name="button_to_close">buttonToClose</string>
     <string name="country">Country :</string>
     <string name="logo_league">logoLeague</string>
+    <string name="search_icon">searchIcon</string>
 
 </resources>

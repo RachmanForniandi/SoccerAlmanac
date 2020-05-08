@@ -1,8 +1,9 @@
-package com.example.socceralmanac.ui.detailMatch
+package com.example.socceralmanac.ui.detailmatch
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.socceralmanac.R
+import com.example.socceralmanac.ui.detailMatch.MatchDetailFragment
 
 class MatchDetailActivity : AppCompatActivity() {
 

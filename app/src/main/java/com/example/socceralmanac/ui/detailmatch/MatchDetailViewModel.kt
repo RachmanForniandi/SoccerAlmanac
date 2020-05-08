@@ -6,7 +6,6 @@ import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
 import com.example.socceralmanac.repo.GlobalRepository
 
 class MatchDetailViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
     private var repo = GlobalRepository()
     var apiError = MutableLiveData<Throwable>()
     var isLoading = MutableLiveData<Boolean>()

@@ -118,7 +118,7 @@ class SearchMatchFragment : Fragment() {
             eventSearchNoted.addAll(sportFiltered)
 
             searchListMatchOfTeam.adapter =
-                SearchMatchAdapter(eventSearchNoted, object : SearchMatchAdapter.onClickItem {
+                SearchMatchAdapter(eventSearchNoted, object : SearchMatchAdapter.OnClickItem {
                     override fun searchMatchClick(item: EventItem?) {
                         startActivity<SearchMatchDetailActivity>(
                             "searchMatch" to item

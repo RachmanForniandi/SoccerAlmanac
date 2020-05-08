@@ -12,7 +12,7 @@ import com.example.socceralmanac.utility.getStringTime
 import kotlinx.android.synthetic.main.item_match.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
-class MatchAdapter (private val data: List<EventsTime>?, private val clicked: onClickItem): RecyclerView.Adapter<MatchAdapter.MatchHolder>(){
+class MatchAdapter (private val data: List<EventsTime>?, private val clicked: OnClickItem): RecyclerView.Adapter<MatchAdapter.MatchHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchHolder {
@@ -51,7 +51,7 @@ class MatchAdapter (private val data: List<EventsTime>?, private val clicked: on
         val scoreAwayTeam = itemView.tv_teamAway_score
     }
 
-    interface onClickItem {
+    interface OnClickItem {
         fun matchClick(time:EventsTime?)
     }
 }

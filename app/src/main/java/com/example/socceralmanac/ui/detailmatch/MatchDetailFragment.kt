@@ -19,15 +19,15 @@ import com.example.socceralmanac.utility.show
 import kotlinx.android.synthetic.main.match_detail_fragment.*
 import org.jetbrains.anko.support.v4.toast
 
-class MatchDetailFragment : Fragment(){
+class MatchDetailFragment : Fragment() {
 
     companion object {
         fun newInstance() = MatchDetailFragment()
     }
 
     private lateinit var viewModelDetail: MatchDetailViewModel
-    private var idTeamHome:String= ""
-    private var idTeamAway:String= ""
+    private var idTeamHome: String = ""
+    private var idTeamAway: String = ""
 
 
     override fun onCreateView(
@@ -43,18 +43,18 @@ class MatchDetailFragment : Fragment(){
 
         val dataItem = activity?.intent?.getSerializableExtra("detailMatch") as? EventsTime
 
-        Log.e("debugBundleDetail",""+dataItem);
+        Log.e("debugBundleDetail", "" + dataItem)
 
         idTeamHome = dataItem?.idHomeTeam.toString()
         idTeamAway = dataItem?.idAwayTeam.toString()
 
         //Toast.makeText(context, "id_1: $idTeamHome, id_2: $idTeamAway", Toast.LENGTH_SHORT).show()
 
-        val detailDateEvent: String = dataItem?.dateEvent?.let { getStringDate(it) }?: "-"
-        val detailTimeEvent:String = dataItem?.strTime?.let { getStringTime(it) } ?: "-:-"
+        val detailDateEvent: String = dataItem?.dateEvent?.let { getStringDate(it) } ?: "-"
+        val detailTimeEvent: String = dataItem?.strTime?.let { getStringTime(it) } ?: "-:-"
 
 
-        date_match.text = String.format("%s | %s", detailDateEvent , detailTimeEvent)
+        date_match.text = String.format("%s | %s", detailDateEvent, detailTimeEvent)
 
         val homeScore = dataItem?.intHomeScore as CharSequence? ?: "-"
         val awayScore = dataItem?.intAwayScore as CharSequence? ?: "-"
@@ -62,13 +62,13 @@ class MatchDetailFragment : Fragment(){
         home_yellow_card.text = dataItem?.strHomeYellowCards
         away_yellow_card.text = dataItem?.strAwayYellowCards
 
-        home_red_card.text =dataItem?.strHomeRedCards
-        away_red_card.text =dataItem?.strAwayRedCards
+        home_red_card.text = dataItem?.strHomeRedCards
+        away_red_card.text = dataItem?.strAwayRedCards
 
         txtHomeTeam.text = dataItem?.strHomeTeam
         txtAwayTeam.text = dataItem?.strAwayTeam
 
-        txtScore.text = String.format("%s - %s", homeScore , awayScore)
+        txtScore.text = String.format("%s - %s", homeScore, awayScore)
         home_goals.text = dataItem?.strHomeGoalDetails
         away_goals.text = dataItem?.strAwayGoalDetails
 
@@ -97,8 +97,10 @@ class MatchDetailFragment : Fragment(){
         detailMatchObserver()
     }
 
-    private fun detailMatchObserver(){
-        viewModelDetail.isLoading.observe(viewLifecycleOwner, Observer{showLoadingDetailMatch(it)})
+    private fun detailMatchObserver() {
+        viewModelDetail.isLoading.observe(
+            viewLifecycleOwner,
+            Observer { showLoadingDetailMatch(it) })
         viewModelDetail.apiError.observe(viewLifecycleOwner, Observer { showErrorTeamBadge(it) })
         //viewModelDetail.responseAwayBadge.observe(viewLifecycleOwner, Observer{showBadgeTeam(homeBadge, awayBadge)} )
     }
@@ -107,18 +109,16 @@ class MatchDetailFragment : Fragment(){
         toast(it?.message ?: "")
     }
 
-    fun getResultBadge(){
-        viewModelDetail.resultHomeBadge().observe(viewLifecycleOwner, Observer {
-                t ->
-            t?.let{
+    fun getResultBadge() {
+        viewModelDetail.resultHomeBadge().observe(viewLifecycleOwner, Observer { t ->
+            t?.let {
                 //Toast.makeText(activity, "aa: $it", Toast.LENGTH_SHORT).show()
                 parseLookupTeamHomeResponse(it)
             }
         })
 
-        viewModelDetail.resultAwayBadge().observe(viewLifecycleOwner, Observer {
-                t ->
-            t?.let{
+        viewModelDetail.resultAwayBadge().observe(viewLifecycleOwner, Observer { t ->
+            t?.let {
                 //Toast.makeText(activity, "aa: $it", Toast.LENGTH_SHORT).show()
                 parseLookupTeamAwayResponse(it)
             }
@@ -127,19 +127,19 @@ class MatchDetailFragment : Fragment(){
 
 
     private fun showLoadingDetailMatch(it: Boolean?) {
-        if (it?:false){
+        if (it ?: false) {
             progress_detail_circular.show()
-        }else{
+        } else {
             progress_detail_circular.hide()
         }
     }
 
-    private fun parseLookupTeamHomeResponse(responseLookUpTeam: ResponseLookUpTeam){
-         val team = responseLookUpTeam.teams
+    private fun parseLookupTeamHomeResponse(responseLookUpTeam: ResponseLookUpTeam) {
+        val team = responseLookUpTeam.teams
         if (team != null) {
-            for(dataTeam in team){
+            for (dataTeam in team) {
                 val strTeamBadge = dataTeam?.strTeamBadge
-                venueMatch.text= dataTeam?.strStadium
+                venueMatch.text = dataTeam?.strStadium
                 //Toast.makeText(activity, "strTeamBadge: $strTeamBadge", Toast.LENGTH_SHORT).show()
                 Glide.with(imgTeamHome)
                     .load(strTeamBadge)
@@ -150,10 +150,10 @@ class MatchDetailFragment : Fragment(){
         }
     }
 
-    private fun parseLookupTeamAwayResponse(responseLookUpTeam: ResponseLookUpTeam){
+    private fun parseLookupTeamAwayResponse(responseLookUpTeam: ResponseLookUpTeam) {
         val team = responseLookUpTeam.teams
         if (team != null) {
-            for(dataTeam in team){
+            for (dataTeam in team) {
                 val strTeamBadge = dataTeam?.strTeamBadge
                 //Toast.makeText(activity, "strTeamBadge: $strTeamBadge", Toast.LENGTH_SHORT).show()
                 Glide.with(imgTeamAway)

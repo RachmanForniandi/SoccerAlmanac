@@ -9,11 +9,6 @@
         android:background="@color/colorBackgroundHome"
         tools:context=".ui.main.MainActivity">
 
-        <!--<FrameLayout
-                android:id="@+id/container_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>-->
-
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_match"
                 android:layout_width="match_parent"

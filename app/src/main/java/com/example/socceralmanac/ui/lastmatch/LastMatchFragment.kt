@@ -20,7 +20,7 @@ import com.example.socceralmanac.models.league_soccer.LeaguesItem
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.match_time.ResponseAllEvents
-import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
+import com.example.socceralmanac.ui.detailmatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
 import com.squareup.picasso.Picasso
@@ -96,8 +96,8 @@ class LastMatchFragment : Fragment() {
             val sportFiltered: List<LeaguesItem> =
                 it?.filter { s -> s?.strSport == "Soccer" } as List<LeaguesItem>
             for (i in sportFiltered.indices) {
-                content?.add(sportFiltered.get(i).strLeague.toString())
-                idLeague.add(sportFiltered.get(i).idLeague.toString())
+                content?.add(sportFiltered[i].strLeague.toString())
+                idLeague.add(sportFiltered[i].idLeague.toString())
                 eventLeaguePrevious.addAll(sportFiltered)
             }
         }
@@ -191,7 +191,7 @@ class LastMatchFragment : Fragment() {
     private fun showListOfPreviousMatch(it: ResponseAllEvents?) {
         Log.e("testObserveLastMatch", "" + it)
 
-        listOfLastMatch.adapter = MatchAdapter(it?.events, object : MatchAdapter.onClickItem {
+        listOfLastMatch.adapter = MatchAdapter(it?.events, object : MatchAdapter.OnClickItem {
             override fun matchClick(time: EventsTime?) {
                 startActivity<MatchDetailActivity>(
                     "detailMatch" to time

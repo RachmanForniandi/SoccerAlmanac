@@ -20,7 +20,7 @@ import com.example.socceralmanac.models.league_soccer.LeaguesItem
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.match_time.ResponseAllEvents
-import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
+import com.example.socceralmanac.ui.detailmatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
 import com.squareup.picasso.Picasso
@@ -193,7 +193,7 @@ class NextMatchFragment : Fragment() {
         it?.events.let {
             val filterState: List<EventsTime> = it?.filter { s -> it != null } as List<EventsTime>
             eventList.addAll(filterState)
-            listOfNextMatch.adapter = MatchAdapter(eventList, object : MatchAdapter.onClickItem {
+            listOfNextMatch.adapter = MatchAdapter(eventList, object : MatchAdapter.OnClickItem {
 
                 override fun matchClick(time: EventsTime?) {
                     startActivity<MatchDetailActivity>(
