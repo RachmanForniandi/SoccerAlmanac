@@ -1,4 +1,4 @@
-package com.example.socceralmanac.ui.searchmatch
+package com.example.socceralmanac.ui.searchMatch
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -52,7 +52,7 @@ class SearchMatchDetailActivity : AppCompatActivity() {
         txtHomeTeam.text = dataItem?.strHomeTeam
         txtAwayTeam.text = dataItem?.strAwayTeam
 
-        txtScore.text = "$homeScore " + "-" + " $awayScore"
+        txtScore.text = "$homeScore - $awayScore"
         home_goals.text = dataItem?.strHomeGoalDetails as CharSequence?
         away_goals.text = dataItem?.strAwayGoalDetails as CharSequence?
 
@@ -109,7 +109,7 @@ class SearchMatchDetailActivity : AppCompatActivity() {
 
 
     private fun showLoadingDetailMatch(it: Boolean?) {
-        if (it ?: false) {
+        if (it == true) {
             progress_detail_circular.show()
         } else {
             progress_detail_circular.hide()

@@ -1,4 +1,4 @@
-package com.example.socceralmanac.ui.nextmatch
+package com.example.socceralmanac.ui.nextMatch
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -31,7 +31,7 @@ class NextMatchViewModel : ViewModel() {
 
     fun forNextDetailOfLeague(idLeague: String) {
         isLoading.value = true
-        param.put("id", idLeague)
+        param["id"] = idLeague
         repo.getDetailInfoLeague(param, {
             responseDetailLeagueNext.value = it
             isLoading.value = false
@@ -48,7 +48,7 @@ class NextMatchViewModel : ViewModel() {
 
     fun forNextMatchOfLeague(idLeague: String) {
         isLoading.value = true
-        param.put("id", idLeague)
+        param["id"] = idLeague
         repo.getMatchEventNextName(param, {
             responseNextMatch.value = it
             isLoading.value = false

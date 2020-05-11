@@ -1,4 +1,4 @@
-package com.example.socceralmanac.ui.nextmatch
+package com.example.socceralmanac.ui.lastMatch
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -20,22 +20,22 @@ import com.example.socceralmanac.models.league_soccer.LeaguesItem
 import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.models.match_time.ResponseAllEvents
-import com.example.socceralmanac.ui.detailmatch.MatchDetailActivity
+import com.example.socceralmanac.ui.detailMatch.MatchDetailActivity
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.last_match_fragment.*
 import kotlinx.android.synthetic.main.layout_dialog_detail_league.view.*
-import kotlinx.android.synthetic.main.next_match_fragment.*
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 
-class NextMatchFragment : Fragment() {
+class LastMatchFragment : Fragment() {
 
     companion object {
-        fun newInstance() = NextMatchFragment()
+        fun newInstance() = LastMatchFragment()
     }
 
-    private lateinit var viewModel: NextMatchViewModel
+    private lateinit var viewModel: LastMatchViewModel
     private var content: ArrayList<String>? = null
     private var selectedItem: String = ""
     private var selectedItemId: String = ""
@@ -46,47 +46,87 @@ class NextMatchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.next_match_fragment, container, false)
+        return inflater.inflate(R.layout.last_match_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(NextMatchViewModel::class.java)
-        viewModel.forNameOfLeagueNext("Soccer")
+        viewModel = ViewModelProvider(this).get(LastMatchViewModel::class.java)
+        viewModel.forNameOfLeagueLast("Soccer")
+
         content = ArrayList<String>()
 
-        leagueObserverForNext()
+
+        leagueObserver()
 
         getResultDetailLeague()
 
-        swipeRefreshNextMatch.setOnRefreshListener {
+        swipeRefreshLastMatch.setOnRefreshListener {
             val handler = Handler()
-            handler.postDelayed({
-                swipeRefreshNextMatch.isRefreshing = false
+            handler.postDelayed(Runnable {
+                swipeRefreshLastMatch.isRefreshing = false
             }, 3000)
         }
-
     }
 
-    private fun leagueObserverForNext() {
+
+    private fun leagueObserver() {
         viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
-        viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingNextMatch(it) })
-        viewModel.responseNextMatch.observe(
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingLastMatch(it) })
+        viewModel.responsePreviousMatch.observe(
             viewLifecycleOwner,
-            Observer { showListOfNextMatch(it) })
+            Observer { showListOfPreviousMatch(it) })
         viewModel.apiError.observe(viewLifecycleOwner, Observer { showErrorMatch(it) })
-
     }
+
 
     private fun getResultDetailLeague() {
-        viewModel.resultDetailNext().observe(viewLifecycleOwner, Observer { t ->
+        viewModel.resultDetailLast().observe(viewLifecycleOwner, Observer {
+            //showDetailInfoLeague(it)
+                t ->
             t?.let {
-                parseForNextDetailInfoLeague(it)
+                parseForPreviousDetailInfoLeague(it)
             }
         })
     }
 
-    private fun parseForNextDetailInfoLeague(it: RootDetailLeague) {
+    private fun showNameLeague(it: ResponseAllLeague?) {
+        val eventLeaguePrevious: MutableList<LeaguesItem> = mutableListOf()
+        it?.leagues.let {
+            val sportFiltered: List<LeaguesItem> =
+                it?.filter { s -> s?.strSport == "Soccer" } as List<LeaguesItem>
+            for (i in sportFiltered.indices) {
+                content?.add(sportFiltered[i].strLeague.toString())
+                idLeague.add(sportFiltered[i].idLeague.toString())
+                eventLeaguePrevious.addAll(sportFiltered)
+            }
+        }
+
+        val spinnerLast =
+            ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, content)
+        spinnerLast.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_last.adapter = spinnerLast
+        Log.e("testObserveNameLeague", "" + it)
+        spinner_last.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedItem = parent?.getItemAtPosition(position).toString()
+                selectedItemId = idLeague[position]
+                selectedItemId2 = idLeague[position]
+
+                viewModel.forPreviousMatchOfLeague(selectedItemId)
+                viewModel.forPreviousDetailOfLeague(selectedItemId2)
+            }
+        }
+    }
+
+    private fun parseForPreviousDetailInfoLeague(it: RootDetailLeague) {
         val detail = it.leagues
         if (detail != null) {
             for (detailParam in detail) {
@@ -103,19 +143,19 @@ class NextMatchFragment : Fragment() {
                     .fit()
                     .placeholder(R.drawable.blue_banner)
                     .error(R.drawable.blue_banner)
-                    .into(img_banner_league_2)
+                    .into(img_banner_league)
                 Log.e("debugBanner", "" + detailParam?.strBanner)
 
                 Picasso.get()
                     .load(leagueBackground)
                     .centerCrop()
                     .fit()
-                    .into(background2)
+                    .into(background1)
+
                 Log.e("debugPoster", "" + detailParam?.strPoster)
 
                 btn_detail_league.setOnClickListener {
-                    val dialogView = LayoutInflater.from(activity)
-                        .inflate(R.layout.layout_dialog_detail_league, null)
+                    val dialogView = LayoutInflater.from(activity).inflate(R.layout.layout_dialog_detail_league,null)
 
                     val dialogBuilder = AlertDialog.Builder(activity)
                         .setView(dialogView)
@@ -142,78 +182,35 @@ class NextMatchFragment : Fragment() {
                     }
                 }
 
-
             }
         }
     }
 
-    private fun showNameLeague(it: ResponseAllLeague?) {
-        val eventLeagueNext: MutableList<LeaguesItem> = mutableListOf()
-        it?.leagues.let {
-            val sportFiltered: List<LeaguesItem> =
-                it?.filter { s -> s?.strSport == "Soccer" } as List<LeaguesItem>
-            for (i in sportFiltered.indices) {
-                Log.e("testObserveNameLeague2", "" + it)
-                content?.add(sportFiltered.get(i).strLeague.toString())
-                idLeague.add(sportFiltered.get(i).idLeague.toString())
-                eventLeagueNext.addAll(sportFiltered)
-            }
-        }
 
-        val spinnerNext =
-            ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, content)
-        spinnerNext.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner_next.adapter = spinnerNext
 
-        spinner_next.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+    private fun showListOfPreviousMatch(it: ResponseAllEvents?) {
+        Log.e("testObserveLastMatch", "" + it)
 
+        listOfLastMatch.adapter = MatchAdapter(it?.events, object : MatchAdapter.OnClickItem {
+            override fun matchClick(time: EventsTime?) {
+                startActivity<MatchDetailActivity>(
+                    "detailMatch" to time
+                )
             }
 
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                selectedItem = parent?.getItemAtPosition(position).toString()
-
-                selectedItemId = idLeague[position]
-                selectedItemId2 = idLeague[position]
-
-                viewModel.forNextMatchOfLeague(selectedItemId)
-                viewModel.forNextDetailOfLeague(selectedItemId2)
-            }
-        }
-    }
-
-    private fun showListOfNextMatch(it: ResponseAllEvents?) {
-        Log.e("testObserveNextMatch", "" + it)
-        val eventList: MutableList<EventsTime> = mutableListOf()
-        it?.events.let {
-            val filterState: List<EventsTime> = it?.filter { s -> it != null } as List<EventsTime>
-            eventList.addAll(filterState)
-            listOfNextMatch.adapter = MatchAdapter(eventList, object : MatchAdapter.OnClickItem {
-
-                override fun matchClick(time: EventsTime?) {
-                    startActivity<MatchDetailActivity>(
-                        "detailMatch" to time
-                    )
-                }
-            })
-        }
-
+        })
     }
 
     private fun showErrorMatch(it: Throwable?) {
         toast(it?.message ?: "")
     }
 
-    private fun showLoadingNextMatch(it: Boolean?) {
+    private fun showLoadingLastMatch(it: Boolean?) {
         if (it == true) {
-            pgNext.show()
+            pgLast.show()
         } else {
-            pgNext.hide()
+            pgLast.hide()
         }
     }
+
 }

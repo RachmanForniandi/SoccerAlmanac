@@ -1,17 +1,17 @@
-package com.example.socceralmanac.ui.nextmatch
+package com.example.socceralmanac.ui.lastMatch
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.socceralmanac.R
 
-class NextMatchActivity : AppCompatActivity() {
+class LastMatchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.next_match_activity)
+        setContentView(R.layout.last_match_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, NextMatchFragment.newInstance())
+                .replace(R.id.container, LastMatchFragment.newInstance())
                 .commitNow()
         }
     }

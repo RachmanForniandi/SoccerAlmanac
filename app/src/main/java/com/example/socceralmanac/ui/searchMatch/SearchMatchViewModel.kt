@@ -1,4 +1,4 @@
-package com.example.socceralmanac.ui.searchmatch
+package com.example.socceralmanac.ui.searchMatch
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -16,7 +16,7 @@ class SearchMatchViewModel : ViewModel() {
 
     fun lookForTheMatch(e: String) {
         isLoadingSearch.value = true
-        paramQuery.put("e", e)
+        paramQuery["e"] = e
         repo.getSearchOfTeamMatch(paramQuery, {
             responseSearchOfMatch.value = it
             isLoadingSearch.value = false
@@ -31,6 +31,5 @@ class SearchMatchViewModel : ViewModel() {
         super.onCleared()
         repo.onClear()
     }
-
 
 }
