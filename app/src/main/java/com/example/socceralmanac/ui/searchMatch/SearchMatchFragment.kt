@@ -1,4 +1,4 @@
-package com.example.socceralmanac.ui.searchmatch
+package com.example.socceralmanac.ui.searchMatch
 
 import android.os.Bundle
 import android.util.Log
@@ -74,7 +74,7 @@ class SearchMatchFragment : Fragment() {
     }
 
     private fun showLoadingSearch(it: Boolean?) {
-        if (it ?: false) pbSearch.show()
+        if (it == true) pbSearch.show()
         else pbSearch.hide()
     }
 
@@ -96,7 +96,7 @@ class SearchMatchFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 queryKeywordTeam = newText.toString()
-                if (queryKeywordTeam.length == 0) {
+                if (queryKeywordTeam.isEmpty()) {
                     itemSearchMatches.clear()
                     searchListMatchOfTeam.adapter?.notifyDataSetChanged()
                 } else viewModel.lookForTheMatch(queryKeywordTeam)
@@ -118,7 +118,7 @@ class SearchMatchFragment : Fragment() {
             eventSearchNoted.addAll(sportFiltered)
 
             searchListMatchOfTeam.adapter =
-                SearchMatchAdapter(eventSearchNoted, object : SearchMatchAdapter.onClickItem {
+                SearchMatchAdapter(eventSearchNoted, object : SearchMatchAdapter.OnClickItem {
                     override fun searchMatchClick(item: EventItem?) {
                         startActivity<SearchMatchDetailActivity>(
                             "searchMatch" to item

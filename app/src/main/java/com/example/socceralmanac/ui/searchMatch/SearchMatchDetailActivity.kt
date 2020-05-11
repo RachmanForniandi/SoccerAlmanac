@@ -1,9 +1,9 @@
-package com.example.socceralmanac.ui.searchmatch
+package com.example.socceralmanac.ui.searchMatch
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.socceralmanac.R
 import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
@@ -27,13 +27,12 @@ class SearchMatchDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_match_detail)
 
-        viewModelDetail = ViewModelProviders.of(this).get(MatchDetailViewModel::class.java)
+        viewModelDetail = ViewModelProvider(this).get(MatchDetailViewModel::class.java)
 
         val dataItem = intent?.getSerializableExtra("searchMatch") as? EventItem
         idTeamHome = dataItem?.idHomeTeam.toString()
         idTeamAway = dataItem?.idAwayTeam.toString()
 
-        //Toast.makeText(context, "id_1: $idTeamHome, id_2: $idTeamAway", Toast.LENGTH_SHORT).show()
 
         val detailDateEvent: String = dataItem?.dateEvent?.let { getStringDate(it) } ?: "-"
         val detailTimeEvent: String = dataItem?.strTime?.let { getStringTime(it) } ?: "-:-"
@@ -41,8 +40,8 @@ class SearchMatchDetailActivity : AppCompatActivity() {
 
         date_match.text = "$detailDateEvent | $detailTimeEvent"
 
-        val homeScore = dataItem?.intHomeScore?.let { it } as CharSequence? ?: "-"
-        val awayScore = dataItem?.intAwayScore?.let { it } as CharSequence? ?: "-"
+        val homeScore = dataItem?.intHomeScore as CharSequence? ?: "-"
+        val awayScore = dataItem?.intAwayScore as CharSequence? ?: "-"
 
         home_yellow_card.text = dataItem?.strHomeYellowCards as CharSequence?
         away_yellow_card.text = dataItem?.strAwayYellowCards as CharSequence?
@@ -53,7 +52,7 @@ class SearchMatchDetailActivity : AppCompatActivity() {
         txtHomeTeam.text = dataItem?.strHomeTeam
         txtAwayTeam.text = dataItem?.strAwayTeam
 
-        txtScore.text = "$homeScore " + "-" + " $awayScore"
+        txtScore.text = "$homeScore - $awayScore"
         home_goals.text = dataItem?.strHomeGoalDetails as CharSequence?
         away_goals.text = dataItem?.strAwayGoalDetails as CharSequence?
 
@@ -86,14 +85,13 @@ class SearchMatchDetailActivity : AppCompatActivity() {
     private fun detailMatchObserver() {
         viewModelDetail.isLoading.observe(this, Observer { showLoadingDetailMatch(it) })
         viewModelDetail.apiError.observe(this, Observer { showErrorTeamBadge(it) })
-        //viewModelDetail.responseAwayBadge.observe(viewLifecycleOwner, Observer{showBadgeTeam(homeBadge, awayBadge)} )
     }
 
     private fun showErrorTeamBadge(it: Throwable?) {
         toast(it?.message ?: "")
     }
 
-    fun getResultBadge() {
+    private fun getResultBadge() {
         viewModelDetail.resultHomeBadge().observe(this, Observer { t ->
             t?.let {
                 //Toast.makeText(activity, "aa: $it", Toast.LENGTH_SHORT).show()
@@ -111,14 +109,14 @@ class SearchMatchDetailActivity : AppCompatActivity() {
 
 
     private fun showLoadingDetailMatch(it: Boolean?) {
-        if (it ?: false) {
+        if (it == true) {
             progress_detail_circular.show()
         } else {
             progress_detail_circular.hide()
         }
     }
 
-    fun parseLookupTeamHomeResponse(responseLookUpTeam: ResponseLookUpTeam) {
+    private fun parseLookupTeamHomeResponse(responseLookUpTeam: ResponseLookUpTeam) {
         val team = responseLookUpTeam.teams
         for (dataTeam in team!!) {
             val strTeamBadge = dataTeam?.strTeamBadge
@@ -132,7 +130,7 @@ class SearchMatchDetailActivity : AppCompatActivity() {
         }
     }
 
-    fun parseLookupTeamAwayResponse(responseLookUpTeam: ResponseLookUpTeam) {
+    private fun parseLookupTeamAwayResponse(responseLookUpTeam: ResponseLookUpTeam) {
         val team = responseLookUpTeam.teams
         for (dataTeam in team!!) {
             val strTeamBadge = dataTeam?.strTeamBadge

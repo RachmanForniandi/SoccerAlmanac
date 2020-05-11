@@ -10,7 +10,7 @@ import com.example.socceralmanac.utility.getStringDate
 import kotlinx.android.synthetic.main.item_match.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
-class SearchMatchAdapter(private val data: List<EventItem?>?, private val clicked: onClickItem) :
+class SearchMatchAdapter(private val data: List<EventItem?>?, private val clicked: OnClickItem) :
     RecyclerView.Adapter<SearchMatchAdapter.SearchMatchHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchMatchHolder {
@@ -48,7 +48,7 @@ class SearchMatchAdapter(private val data: List<EventItem?>?, private val clicke
 
     }
 
-    interface onClickItem {
+    interface OnClickItem {
         fun searchMatchClick(item: EventItem?)
     }
 }

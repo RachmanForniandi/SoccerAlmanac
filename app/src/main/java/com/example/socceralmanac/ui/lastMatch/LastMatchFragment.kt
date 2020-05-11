@@ -1,4 +1,4 @@
-package com.example.socceralmanac.ui.lastmatch
+package com.example.socceralmanac.ui.lastMatch
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -96,8 +96,8 @@ class LastMatchFragment : Fragment() {
             val sportFiltered: List<LeaguesItem> =
                 it?.filter { s -> s?.strSport == "Soccer" } as List<LeaguesItem>
             for (i in sportFiltered.indices) {
-                content?.add(sportFiltered.get(i).strLeague.toString())
-                idLeague.add(sportFiltered.get(i).idLeague.toString())
+                content?.add(sportFiltered[i].strLeague.toString())
+                idLeague.add(sportFiltered[i].idLeague.toString())
                 eventLeaguePrevious.addAll(sportFiltered)
             }
         }
@@ -191,7 +191,7 @@ class LastMatchFragment : Fragment() {
     private fun showListOfPreviousMatch(it: ResponseAllEvents?) {
         Log.e("testObserveLastMatch", "" + it)
 
-        listOfLastMatch.adapter = MatchAdapter(it?.events, object : MatchAdapter.onClickItem {
+        listOfLastMatch.adapter = MatchAdapter(it?.events, object : MatchAdapter.OnClickItem {
             override fun matchClick(time: EventsTime?) {
                 startActivity<MatchDetailActivity>(
                     "detailMatch" to time

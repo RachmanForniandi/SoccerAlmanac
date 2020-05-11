@@ -11,7 +11,7 @@
             android:id="@+id/background2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            android:contentDescription="@string/background_league" />
 
     <ProgressBar
             android:id="@+id/pgNext"
@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                tools:context=".ui.nextmatch.NextMatchFragment">
+                tools:context=".ui.nextMatch.NextMatchFragment">
 
             <androidx.cardview.widget.CardView
                     android:id="@+id/spinner_container"

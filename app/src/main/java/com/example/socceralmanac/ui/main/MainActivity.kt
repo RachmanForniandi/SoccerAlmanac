@@ -9,9 +9,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 import com.example.socceralmanac.R
-import com.example.socceralmanac.ui.lastmatch.LastMatchFragment
-import com.example.socceralmanac.ui.nextmatch.NextMatchFragment
-import com.example.socceralmanac.ui.searchmatch.SearchMatchActivity
+import com.example.socceralmanac.ui.lastMatch.LastMatchFragment
+import com.example.socceralmanac.ui.nextMatch.NextMatchFragment
+import com.example.socceralmanac.ui.searchMatch.SearchMatchActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 

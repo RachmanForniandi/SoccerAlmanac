@@ -1,4 +1,4 @@
-package com.example.socceralmanac.ui.nextmatch
+package com.example.socceralmanac.ui.nextMatch
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -154,8 +154,8 @@ class NextMatchFragment : Fragment() {
                 it?.filter { s -> s?.strSport == "Soccer" } as List<LeaguesItem>
             for (i in sportFiltered.indices) {
                 Log.e("testObserveNameLeague2", "" + it)
-                content?.add(sportFiltered.get(i).strLeague.toString())
-                idLeague.add(sportFiltered.get(i).idLeague.toString())
+                content?.add(sportFiltered[i].strLeague.toString())
+                idLeague.add(sportFiltered[i].idLeague.toString())
                 eventLeagueNext.addAll(sportFiltered)
             }
         }
@@ -193,7 +193,7 @@ class NextMatchFragment : Fragment() {
         it?.events.let {
             val filterState: List<EventsTime> = it?.filter { s -> it != null } as List<EventsTime>
             eventList.addAll(filterState)
-            listOfNextMatch.adapter = MatchAdapter(eventList, object : MatchAdapter.onClickItem {
+            listOfNextMatch.adapter = MatchAdapter(eventList, object : MatchAdapter.OnClickItem {
 
                 override fun matchClick(time: EventsTime?) {
                     startActivity<MatchDetailActivity>(

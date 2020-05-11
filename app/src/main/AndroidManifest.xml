@@ -12,7 +12,7 @@
             android:supportsRtl="true"
             android:usesCleartextTraffic="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.splashscreen.SplashScreenActivity"
+        <activity android:name=".ui.splashScreen.SplashScreenActivity"
                 android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,17 +21,17 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".ui.searchmatch.SearchMatchDetailActivity"
-                android:parentActivityName=".ui.searchmatch.SearchMatchActivity"/>
+        <activity android:name=".ui.searchMatch.SearchMatchDetailActivity"
+                android:parentActivityName=".ui.searchMatch.SearchMatchActivity"/>
         <activity
-                android:name=".ui.searchmatch.SearchMatchActivity"
+                android:name=".ui.searchMatch.SearchMatchActivity"
                 android:parentActivityName=".ui.main.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.main.MainActivity">
 
         </activity>
-        <activity android:name=".ui.lastmatch.LastMatchActivity" />
-        <activity android:name=".ui.nextmatch.NextMatchActivity" />
+        <activity android:name=".ui.lastMatch.LastMatchActivity" />
+        <activity android:name=".ui.nextMatch.NextMatchActivity" />
         <activity
                 android:name=".ui.detailMatch.MatchDetailActivity"
                 android:parentActivityName=".ui.main.MainActivity" />

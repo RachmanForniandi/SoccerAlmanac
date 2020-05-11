@@ -1,4 +1,4 @@
-package com.example.socceralmanac.ui.lastmatch
+package com.example.socceralmanac.ui.lastMatch
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
