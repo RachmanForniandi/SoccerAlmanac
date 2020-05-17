@@ -3,6 +3,7 @@ package com.example.socceralmanac.ui.main
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -12,27 +13,53 @@ import com.example.socceralmanac.R
 import com.example.socceralmanac.ui.lastMatch.LastMatchFragment
 import com.example.socceralmanac.ui.nextMatch.NextMatchFragment
 import com.example.socceralmanac.ui.searchMatch.SearchMatchActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
+    private var contentWhole: FrameLayout? = null
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {item ->
+        when(item.itemId){
+            R.id.menu_matches ->{
+                val fragment = MatchSectionFragment()
+                addSectionFragment(fragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.menu_teams ->{
+                val fragment = TeamSectionFragment()
+                addSectionFragment(fragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.menu_favorites ->{
+                val fragment = FavoritedSectionFragment()
+                addSectionFragment(fragment)
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportActionBar?.elevation = 0.0f
+        bottom_nav_options.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        val defaultFragment = MatchSectionFragment()
+        addSectionFragment(defaultFragment)
+        //supportActionBar?.elevation = 0.0f
 
-        val adapter = TabAdapter(
+        /*val adapter = TabAdapter(
             supportFragmentManager,
             BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
         )
         viewPagerMain.adapter = adapter
 
-        tabLayoutMain.setupWithViewPager(viewPagerMain)
+        tabLayoutMain.setupWithViewPager(viewPagerMain)*/
 
     }
 
-    class TabAdapter(sfm: FragmentManager, behavior: Int) :
+    /*class TabAdapter(sfm: FragmentManager, behavior: Int) :
         FragmentStatePagerAdapter(sfm, behavior) {
 
         private val tabName: Array<String> = arrayOf("Last Match", "Next Match")
@@ -63,5 +90,18 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }*/
+
+
+
+    private fun addSectionFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+            .replace(R.id.main_container,fragment,fragment.javaClass.simpleName)
+            .commit()
+
     }
+
+
 }

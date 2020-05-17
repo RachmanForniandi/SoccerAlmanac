@@ -12,10 +12,10 @@
             android:supportsRtl="true"
             android:usesCleartextTraffic="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.splashScreen.SplashScreenActivity"
-                android:theme="@style/AppTheme.NoActionBar" >
+        <activity android:name=".ui.splashScreen.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -27,7 +27,8 @@
                 android:name=".ui.searchMatch.SearchMatchActivity"
                 android:parentActivityName=".ui.main.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.main.MainActivity"
+                android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity android:name=".ui.lastMatch.LastMatchActivity" />

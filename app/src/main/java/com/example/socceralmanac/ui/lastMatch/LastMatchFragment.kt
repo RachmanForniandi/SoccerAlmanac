@@ -36,7 +36,7 @@ class LastMatchFragment : Fragment() {
     }
 
     private lateinit var viewModel: LastMatchViewModel
-    private var content: ArrayList<String>? = null
+    private var content: MutableList<String>? = null
     private var selectedItem: String = ""
     private var selectedItemId: String = ""
     private var selectedItemId2: String = ""
@@ -103,8 +103,12 @@ class LastMatchFragment : Fragment() {
         }
 
         val spinnerLast =
-            ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, content)
-        spinnerLast.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            context?.let { it1 -> content?.let { it2 ->
+                ArrayAdapter(it1, android.R.layout.simple_spinner_dropdown_item,
+                    it2
+                )
+            } }
+        spinnerLast?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_last.adapter = spinnerLast
         Log.e("testObserveNameLeague", "" + it)
         spinner_last.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

@@ -161,8 +161,12 @@ class NextMatchFragment : Fragment() {
         }
 
         val spinnerNext =
-            ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, content)
-        spinnerNext.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            context?.let { it1 -> content?.let { it2 ->
+                ArrayAdapter(it1, android.R.layout.simple_spinner_dropdown_item,
+                    it2
+                )
+            } }
+        spinnerNext?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner_next.adapter = spinnerNext
 
         spinner_next.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
