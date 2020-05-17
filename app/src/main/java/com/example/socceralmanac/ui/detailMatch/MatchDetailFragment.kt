@@ -98,11 +98,8 @@ class MatchDetailFragment : Fragment() {
     }
 
     private fun detailMatchObserver() {
-        viewModelDetail.isLoading.observe(
-            viewLifecycleOwner,
-            Observer { showLoadingDetailMatch(it) })
+        viewModelDetail.isLoading.observe(viewLifecycleOwner, Observer { showLoadingDetailMatch(it) })
         viewModelDetail.apiError.observe(viewLifecycleOwner, Observer { showErrorTeamBadge(it) })
-        //viewModelDetail.responseAwayBadge.observe(viewLifecycleOwner, Observer{showBadgeTeam(homeBadge, awayBadge)} )
     }
 
     private fun showErrorTeamBadge(it: Throwable?) {
