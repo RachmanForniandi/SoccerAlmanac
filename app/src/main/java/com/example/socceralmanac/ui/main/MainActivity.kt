@@ -2,6 +2,7 @@ package com.example.socceralmanac.ui.main
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -20,8 +21,10 @@ import org.jetbrains.anko.startActivity
 class MainActivity : AppCompatActivity() {
 
     private var contentWhole: FrameLayout? = null
+
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {item ->
         when(item.itemId){
+            bottom_nav_options.selectedItemId -> return@OnNavigationItemSelectedListener false
             R.id.menu_matches ->{
                 val fragment = MatchSectionFragment()
                 addSectionFragment(fragment)
@@ -38,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
         }
-        false
+        return@OnNavigationItemSelectedListener false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,6 +85,14 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+
+    }*/
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        menu.findItem(R.id.action_search)?.title = getString(R.string.match_search)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_search -> {
@@ -90,9 +101,7 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }*/
-
-
+    }
 
     private fun addSectionFragment(fragment: Fragment) {
         supportFragmentManager
@@ -102,6 +111,5 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
     }
-
 
 }

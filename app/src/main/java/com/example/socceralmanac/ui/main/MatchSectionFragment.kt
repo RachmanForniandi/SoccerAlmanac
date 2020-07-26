@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 
 import com.example.socceralmanac.R
-import com.example.socceralmanac.adapters.TabAdapter
+import com.example.socceralmanac.adapters.MatchSectionAdapter
 import com.example.socceralmanac.ui.lastMatch.LastMatchFragment
 import com.example.socceralmanac.ui.nextMatch.NextMatchFragment
-import com.example.socceralmanac.ui.searchMatch.SearchMatchActivity
 import kotlinx.android.synthetic.main.fragment_match_section.*
-import org.jetbrains.anko.support.v4.startActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -30,15 +29,14 @@ class MatchSectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
         with(activity as AppCompatActivity){
             setSupportActionBar(toolbar_match)
             setTitle(getString(R.string.soccer_matches))
-            val adapter = TabAdapter(
-                childFragmentManager, mapOf(
-                    getString(R.string.last_match) to LastMatchFragment(),
-                    getString(R.string.next_match) to NextMatchFragment()
-                ))
+            val adapter = MatchSectionAdapter(
+                    supportFragmentManager)
+            adapter.setupFragment(LastMatchFragment(),"Last Match")
+            adapter.setupFragment(NextMatchFragment(),"Next Match")
             viewPagerMain.adapter = adapter
 
             tabLayoutMain.setupWithViewPager(viewPagerMain)
@@ -62,13 +60,13 @@ class MatchSectionFragment : Fragment() {
 
     }*/
 
-    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+    /*override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu, menu)
         menu.findItem(R.id.action_search)?.title = getString(R.string.match_search)
         return super.onCreateOptionsMenu(menu,menuInflater)
-    }
+    }*/
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_search -> {
                 startActivity<SearchMatchActivity>()
@@ -77,5 +75,5 @@ class MatchSectionFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
+*/
 }
