@@ -6,7 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/colorBackgroundHome"
         tools:context=".ui.main.MainActivity">
 
         <androidx.appcompat.widget.Toolbar
@@ -16,7 +15,7 @@
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <com.google.android.material.tabs.TabLayout
+        <!--<com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayoutMain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,13 +27,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/tabLayoutMain"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
 
         <FrameLayout
                 android:id="@+id/main_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@id/bottom_nav_options"/>
+                android:layout_above="@id/bottom_nav_options"
+                android:layout_below="@id/toolbar_match"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_nav_options"

@@ -21,4 +21,14 @@ class FavoritedSectionFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_favorited_section, container, false)
     }
 
+    companion object {
+        fun newInstance(): FavoritedSectionFragment{
+            val fragment = FavoritedSectionFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            return fragment
+        }
+
+    }
+
 }

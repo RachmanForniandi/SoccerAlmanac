@@ -12,7 +12,9 @@ import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchSectionAdapter
 import com.example.socceralmanac.ui.lastMatch.LastMatchFragment
 import com.example.socceralmanac.ui.nextMatch.NextMatchFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_match_section.*
+import kotlinx.android.synthetic.main.fragment_match_section.tabLayoutMain
 
 /**
  * A simple [Fragment] subclass.
@@ -29,10 +31,10 @@ class MatchSectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
         with(activity as AppCompatActivity){
-            setSupportActionBar(toolbar_match)
-            setTitle(getString(R.string.soccer_matches))
+            //setSupportActionBar(toolbar_match)
+            //setTitle(getString(R.string.soccer_matches))
             val adapter = MatchSectionAdapter(
                     supportFragmentManager)
             adapter.setupFragment(LastMatchFragment(),"Last Match")
@@ -40,6 +42,16 @@ class MatchSectionFragment : Fragment() {
             viewPagerMain.adapter = adapter
 
             tabLayoutMain.setupWithViewPager(viewPagerMain)
+        }
+
+    }
+
+    companion object {
+        fun newInstance(): MatchSectionFragment {
+            val fragment = MatchSectionFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            return fragment
         }
 
     }

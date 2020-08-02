@@ -7,12 +7,12 @@
             android:title="@string/matches"
             android:icon="@drawable/ic_matches_selector"
             app:showAsAction="ifRoom"/>
-    <item
+    <!--<item
             android:id="@+id/menu_teams"
             android:enabled="true"
             android:title="@string/teams"
             android:icon="@drawable/ic_teams_selector"
-            app:showAsAction="ifRoom"/>
+            app:showAsAction="ifRoom"/>-->
 
     <item
             android:id="@+id/menu_favorites"
