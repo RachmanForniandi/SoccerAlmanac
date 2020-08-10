@@ -27,8 +27,8 @@
                 android:name=".ui.searchMatch.SearchMatchActivity"
                 android:parentActivityName=".ui.main.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.main.MainActivity"
-                android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".ui.main.MainActivity">
+
 
         </activity>
         <activity android:name=".ui.lastMatch.LastMatchActivity" />

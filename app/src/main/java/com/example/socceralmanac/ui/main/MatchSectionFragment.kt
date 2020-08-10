@@ -31,14 +31,15 @@ class MatchSectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
         with(activity as AppCompatActivity){
             //setSupportActionBar(toolbar_match)
             //setTitle(getString(R.string.soccer_matches))
             val adapter = MatchSectionAdapter(
-                    supportFragmentManager)
-            adapter.setupFragment(LastMatchFragment(),"Last Match")
-            adapter.setupFragment(NextMatchFragment(),"Next Match")
+                    supportFragmentManager,
+                BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
+            /*adapter.setupFragment(LastMatchFragment(),"Last Match")
+            adapter.setupFragment(NextMatchFragment(),"Next Match")*/
             viewPagerMain.adapter = adapter
 
             tabLayoutMain.setupWithViewPager(viewPagerMain)
@@ -46,7 +47,7 @@ class MatchSectionFragment : Fragment() {
 
     }
 
-    companion object {
+    /*companion object {
         fun newInstance(): MatchSectionFragment {
             val fragment = MatchSectionFragment()
             val args = Bundle()
@@ -54,7 +55,7 @@ class MatchSectionFragment : Fragment() {
             return fragment
         }
 
-    }
+    }*/
 
     /*class TabAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
