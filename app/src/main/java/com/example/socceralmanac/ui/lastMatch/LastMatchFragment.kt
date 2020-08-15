@@ -93,8 +93,7 @@ class LastMatchFragment : Fragment() {
     private fun showNameLeague(it: ResponseAllLeague?) {
         val eventLeaguePrevious: MutableList<LeaguesItem> = mutableListOf()
         it?.leagues.let {
-            val sportFiltered: List<LeaguesItem> =
-                it?.filter { s -> s?.strSport == "Soccer" } as List<LeaguesItem>
+            val sportFiltered: List<LeaguesItem> = it?.filter { s -> s?.strSport == "Soccer" } as List<LeaguesItem>
             for (i in sportFiltered.indices) {
                 content?.add(sportFiltered[i].strLeague.toString())
                 idLeague.add(sportFiltered[i].idLeague.toString())

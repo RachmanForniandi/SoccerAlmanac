@@ -39,8 +39,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bottom_nav_options.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-        val defaultFragment = MatchSectionFragment()
-        addSectionFragment(defaultFragment)
+        val mainManager = supportFragmentManager
+        val newFragment1 = MatchSectionFragment()
+        val fragment = mainManager.findFragmentByTag(MatchSectionFragment::class.java.simpleName)
+        if (fragment is MatchSectionFragment){
+            mainManager
+                .beginTransaction()
+                .add(R.id.main_container,newFragment1,MatchSectionFragment::class.java.simpleName)
+                .commit()
+        }
+
+        addSectionFragment(newFragment1)
         supportActionBar?.elevation = 0.0f
 
         /*val adapter = TabAdapter(

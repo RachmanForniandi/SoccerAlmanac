@@ -1,20 +1,17 @@
 package com.example.socceralmanac.ui.main
 
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-
 import com.example.socceralmanac.R
-import com.example.socceralmanac.adapters.MatchSectionAdapter
 import com.example.socceralmanac.ui.lastMatch.LastMatchFragment
 import com.example.socceralmanac.ui.nextMatch.NextMatchFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_match_section.*
-import kotlinx.android.synthetic.main.fragment_match_section.tabLayoutMain
 
 /**
  * A simple [Fragment] subclass.
@@ -31,62 +28,36 @@ class MatchSectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setHasOptionsMenu(true)
         with(activity as AppCompatActivity){
-            //setSupportActionBar(toolbar_match)
-            //setTitle(getString(R.string.soccer_matches))
-            val adapter = MatchSectionAdapter(
-                    supportFragmentManager,
-                BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
-            /*adapter.setupFragment(LastMatchFragment(),"Last Match")
-            adapter.setupFragment(NextMatchFragment(),"Next Match")*/
+            val adapter = TabAdapter(
+                    childFragmentManager)
             viewPagerMain.adapter = adapter
+
 
             tabLayoutMain.setupWithViewPager(viewPagerMain)
         }
 
     }
 
-    /*companion object {
-        fun newInstance(): MatchSectionFragment {
-            val fragment = MatchSectionFragment()
-            val args = Bundle()
-            fragment.arguments = args
-            return fragment
-        }
+    class TabAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    }*/
-
-    /*class TabAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-
+        private val mFragments: List<Fragment> = ArrayList()
         private val tabName: Array<String> = arrayOf("Last Match", "Next Match")
 
         override fun getItem(position: Int): Fragment = when (position) {
             0 -> LastMatchFragment()
             1 -> NextMatchFragment()
             else -> LastMatchFragment()
-
         }
+
+        /*fun addFragment(fragment:Fragment, title:String) {
+            mFragments.add(fragment)
+            mFragmentTitles.add(title)
+        }*/
 
         override fun getCount(): Int = 2
         override fun getPageTitle(position: Int): CharSequence? = tabName[position]
 
-    }*/
-
-    /*override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.menu, menu)
-        menu.findItem(R.id.action_search)?.title = getString(R.string.match_search)
-        return super.onCreateOptionsMenu(menu,menuInflater)
-    }*/
-
-    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_search -> {
-                startActivity<SearchMatchActivity>()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
-*/
+
 }
