@@ -1,10 +1,14 @@
 package com.example.socceralmanac.models.match_time
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+@Entity(tableName="subscriber_data_match")
 data class EventsTime(
+	@PrimaryKey(autoGenerate = true)
 
 	@field:SerializedName("intHomeShots")
 	val intHomeShots: Any? = null,

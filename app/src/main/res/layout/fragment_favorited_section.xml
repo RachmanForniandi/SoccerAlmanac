@@ -7,15 +7,15 @@
         tools:context=".ui.main.FavoritedSectionFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="This is Favorited Fragment" />
-    <!--<androidx.recyclerview.widget.RecyclerView
+            android:text="This is Favorited Fragment" />-->
+    <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_match"/>-->
+            tools:listitem="@layout/item_match"/>
 
 </FrameLayout>
