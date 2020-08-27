@@ -11,6 +11,10 @@ class LocalRepository(private val dao: SubscriberMatchDAO) {
         return dao.insertMatchSubscriber(subscriber)
     }
 
+    suspend fun updateFavMatch(subscriber: EventsTime):Int{
+        return dao.updateMatchSubscriber(subscriber)
+    }
+
     suspend fun deleteFavMatch(subscriber: EventsTime):Int{
         return dao.deleteMatchSubscriber(subscriber)
     }

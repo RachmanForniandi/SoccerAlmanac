@@ -10,8 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.socceralmanac.R
+import com.example.socceralmanac.dbRoom.SubscriberMatchDatabase
 import com.example.socceralmanac.models.lookup_team.ResponseLookUpTeam
 import com.example.socceralmanac.models.match_time.EventsTime
+import com.example.socceralmanac.repo.LocalRepository
 import com.example.socceralmanac.utility.getStringDate
 import com.example.socceralmanac.utility.getStringTime
 import com.example.socceralmanac.utility.hide
@@ -44,6 +46,8 @@ class MatchDetailFragment : Fragment() {
         val dataItem = activity?.intent?.getSerializableExtra("detailMatch") as? EventsTime
 
         Log.e("debugBundleDetail", "" + dataItem)
+        val dao = SubscriberMatchDatabase.getInstance(activity).subscriberMatchDAO
+        val localRepo = LocalRepository(dao)
 
         idTeamHome = dataItem?.idHomeTeam.toString()
         idTeamAway = dataItem?.idAwayTeam.toString()
