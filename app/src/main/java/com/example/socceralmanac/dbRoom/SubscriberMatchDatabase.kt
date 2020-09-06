@@ -1,5 +1,6 @@
 package com.example.socceralmanac.dbRoom
 
+import android.content.Context
 import androidx.fragment.app.FragmentActivity
 import androidx.room.Database
 import androidx.room.Room
@@ -14,7 +15,7 @@ abstract class SubscriberMatchDatabase: RoomDatabase() {
     companion object{
         @Volatile
         private var INSTANCE : SubscriberMatchDatabase? = null
-        fun getInstance(context: FragmentActivity?): SubscriberMatchDatabase? {
+        fun getInstance(context: Context?): SubscriberMatchDatabase? {
             synchronized(this){
                 var instance = INSTANCE
                 if (instance==null){

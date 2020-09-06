@@ -2,9 +2,7 @@ package com.example.socceralmanac.ui.detailMatch
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -32,7 +30,8 @@ class MatchDetailFragment : Fragment() {
     private lateinit var subscriberViewModel: SubscriberViewModel
     private var idTeamHome: String = ""
     private var idTeamAway: String = ""
-
+    private var menuItem: Menu? = null
+    private var isFavorite: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +40,7 @@ class MatchDetailFragment : Fragment() {
         return inflater.inflate(R.layout.match_detail_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+   /* override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModelDetail = ViewModelProvider(this).get(MatchDetailViewModel::class.java)
 
@@ -169,5 +168,11 @@ class MatchDetailFragment : Fragment() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+
+    }
+*/
 
 }

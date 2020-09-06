@@ -13,6 +13,7 @@ import com.example.socceralmanac.utility.getStringDate
 import com.example.socceralmanac.utility.getStringTime
 import com.example.socceralmanac.utility.hide
 import com.example.socceralmanac.utility.show
+import kotlinx.android.synthetic.main.activity_search_match_detail.*
 import kotlinx.android.synthetic.main.match_detail_fragment.*
 import org.jetbrains.anko.toast
 
