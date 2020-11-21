@@ -1,26 +1,41 @@
 package com.example.socceralmanac.dbRoom
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
 import com.example.socceralmanac.models.match_time.EventsTime
 import com.example.socceralmanac.repo.LocalRepository
 import com.example.socceralmanac.utility.EventHandler
 import kotlinx.coroutines.launch
 
 
-class SubscriberViewModel(private val localRepo: LocalRepository) : ViewModel(){
+class SubscriberViewModel(application: Application) : AndroidViewModel(application){
 
-    val localSubscriber = localRepo.favMatchSubscribers
+    private var localRepository = LocalRepository(application)
+    private var matches:LiveData<List<EventsTime>>? = localRepository.getMatchData()
+
+    fun insertData(events: EventsTime){
+        localRepository.insertFavMatch(events)
+    }
+
+    fun getDataMatches():LiveData<List<EventsTime>>?{
+        return matches
+    }
+
+    fun deleteDataMatches(events: EventsTime){
+        localRepository.deleteFavMatch(events)
+    }
+
+
+
+    /*val localSubscriber = localRepo.getMatchData()
     private var isInsertOrDelete = false
     private lateinit var subscriberLocal:EventsTime
 
     private val responseMessage = MutableLiveData<EventHandler<String>>()
     val message : LiveData<EventHandler<String>>
-    get() = responseMessage
+    get() = responseMessage*/
 
-    fun favoriteMatchInserted(events: EventsTime) = viewModelScope.launch{
+    /*fun favoriteMatchInserted(events: EventsTime) = viewModelScope.launch{
         val noOfRows =localRepo.insertFavMatch(events)
         if (noOfRows > -1){
             responseMessage.value=EventHandler("Match Favorited Inserted Successfully $noOfRows")
@@ -65,5 +80,5 @@ class SubscriberViewModel(private val localRepo: LocalRepository) : ViewModel(){
         }
     }
 
-
+*/
 }

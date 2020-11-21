@@ -7,10 +7,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.socceralmanac.models.match_time.EventsTime
 
-@Database(entities = [EventsTime::class],version = 1)
+@Database(entities = [EventsTime::class],exportSchema = false,version = 1)
 abstract class SubscriberMatchDatabase: RoomDatabase() {
 
-    abstract val subscriberMatchDAO:SubscriberMatchDAO
+    abstract fun subscriberMatchDAO():SubscriberMatchDAO
 
     companion object{
         @Volatile
@@ -23,7 +23,7 @@ abstract class SubscriberMatchDatabase: RoomDatabase() {
                         instance = Room.databaseBuilder(
                             context.applicationContext,
                             SubscriberMatchDatabase::class.java,
-                            "subscriber_data_match_database"
+                            "subscriber_data_match"
                         ).build()
                     }
                 }

@@ -1,25 +1,42 @@
 package com.example.socceralmanac.repo
 
+import android.app.Application
+import androidx.lifecycle.LiveData
 import com.example.socceralmanac.dbRoom.SubscriberMatchDAO
+import com.example.socceralmanac.dbRoom.SubscriberMatchDatabase
 import com.example.socceralmanac.models.match_time.EventsTime
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
-class LocalRepository(private val dao: SubscriberMatchDAO) {
+class LocalRepository(application: Application) {
 
-    val favMatchSubscribers = dao.getAllMatchSubscribers()
+    private val matchDao: SubscriberMatchDAO?
 
-    suspend fun insertFavMatch(subscriber: EventsTime):Long{
-        return dao.insertMatchSubscriber(subscriber)
+    private var matches:LiveData<List<EventsTime>>?= null
+
+    init {
+        val dbMatchDAO =  SubscriberMatchDatabase.getInstance(application.applicationContext)
+        matchDao = dbMatchDAO?.subscriberMatchDAO()
+        matches = matchDao?.getMatches()
+
     }
 
-    suspend fun updateFavMatch(subscriber: EventsTime):Int{
-        return dao.updateMatchSubscriber(subscriber)
+    fun getMatchData():LiveData<List<EventsTime>>?{
+        return matches
     }
 
-    suspend fun deleteFavMatch(subscriber: EventsTime):Int{
-        return dao.deleteMatchSubscriber(subscriber)
+    fun insertFavMatch(events: EventsTime)= runBlocking {
+        this.launch (Dispatchers.IO){
+            matchDao?.insertMatchSubscriber(events)
+        }
     }
 
-    suspend fun deleteAllFavMatch():Int{
-        return dao.deleteAllMatch()
+    fun deleteFavMatch(events: EventsTime)= runBlocking {
+        this.launch(Dispatchers.IO) {
+            matchDao?.deleteMatchSubscriber(events)
+        }
     }
+
+
 }

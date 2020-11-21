@@ -7,18 +7,12 @@ import com.example.socceralmanac.models.match_time.EventsTime
 @Dao
 interface SubscriberMatchDAO {
 
-    @Insert
-    suspend fun insertMatchSubscriber(subscriber: EventsTime): Long
-
-    @Update
-    suspend fun updateMatchSubscriber(subscriber: EventsTime):Int
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMatchSubscriber(subscriber: EventsTime)
 
     @Delete
-    suspend fun deleteMatchSubscriber(subscriber: EventsTime): Int
-
-    @Query("DELETE FROM subscriber_data_match")
-    suspend fun deleteAllMatch():Int
+    suspend fun deleteMatchSubscriber(subscriber: EventsTime)
 
     @Query("SELECT * FROM subscriber_data_match")
-    fun getAllMatchSubscribers(): LiveData<List<EventsTime>>
+    fun getMatches(): LiveData<List<EventsTime>>
 }
