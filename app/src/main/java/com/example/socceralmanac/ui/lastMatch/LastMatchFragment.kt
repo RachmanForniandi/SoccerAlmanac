@@ -53,9 +53,7 @@ class LastMatchFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(LastMatchViewModel::class.java)
         viewModel.forNameOfLeagueLast("Soccer")
-
         content = ArrayList<String>()
-
 
         leagueObserver()
 
@@ -71,12 +69,10 @@ class LastMatchFragment : Fragment() {
 
 
     private fun leagueObserver() {
-        viewModel.responseNameLeague.observe(viewLifecycleOwner, Observer { showNameLeague(it) })
-        viewModel.isLoading.observe(viewLifecycleOwner, Observer { showLoadingLastMatch(it) })
-        viewModel.responsePreviousMatch.observe(
-            viewLifecycleOwner,
-            Observer { showListOfPreviousMatch(it) })
-        viewModel.apiError.observe(viewLifecycleOwner, Observer { showErrorMatch(it) })
+        viewModel.responseNameLeague.observe(viewLifecycleOwner, { showNameLeague(it) })
+        viewModel.isLoading.observe(viewLifecycleOwner, { showLoadingLastMatch(it) })
+        viewModel.responsePreviousMatch.observe(viewLifecycleOwner, { showListOfPreviousMatch(it) })
+        viewModel.apiError.observe(viewLifecycleOwner,  { showErrorMatch(it) })
     }
 
 

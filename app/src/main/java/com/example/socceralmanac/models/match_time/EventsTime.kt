@@ -4,13 +4,15 @@ package com.example.socceralmanac.models.match_time
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 @Entity(tableName="subscriber_data_match")
 data class EventsTime(
-	@PrimaryKey(autoGenerate = true)
+	@PrimaryKey
+	@ColumnInfo(name ="idEvent")
+	@field:SerializedName("idEvent")
+	val idEvent: String? = null,
 
 	@field:SerializedName("intHomeShots")
 	val intHomeShots: Any? = null,
@@ -58,9 +60,7 @@ data class EventsTime(
 	@field:SerializedName("strAwayLineupMidfield")
 	val strAwayLineupMidfield: String? = null,
 
-	@ColumnInfo(name ="idEvent")
-	@field:SerializedName("idEvent")
-	val idEvent: String? = null,
+
 
 	@field:SerializedName("intRound")
 	val intRound: String? = null,
