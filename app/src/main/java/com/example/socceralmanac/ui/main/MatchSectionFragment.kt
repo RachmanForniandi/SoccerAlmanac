@@ -50,11 +50,6 @@ class MatchSectionFragment : Fragment() {
             else -> LastMatchFragment()
         }
 
-        /*fun addFragment(fragment:Fragment, title:String) {
-            mFragments.add(fragment)
-            mFragmentTitles.add(title)
-        }*/
-
         override fun getCount(): Int = 2
         override fun getPageTitle(position: Int): CharSequence? = tabName[position]
 

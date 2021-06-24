@@ -1,6 +1,7 @@
 package com.example.socceralmanac.models.match_time
 
 
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -9,10 +10,9 @@ import java.io.Serializable
 
 @Entity(tableName="subscriber_data_match")
 data class EventsTime(
-	@PrimaryKey
 	@ColumnInfo(name ="idEvent")
 	@field:SerializedName("idEvent")
-	val idEvent: String? = null,
+	val idEvent: String,
 
 	@field:SerializedName("intHomeShots")
 	val intHomeShots: Any? = null,

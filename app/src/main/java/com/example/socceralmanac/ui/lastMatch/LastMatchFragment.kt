@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.bumptech.glide.Glide
 import com.example.socceralmanac.R
 import com.example.socceralmanac.adapters.MatchAdapter
@@ -61,7 +62,7 @@ class LastMatchFragment : Fragment() {
 
         swipeRefreshLastMatch.setOnRefreshListener {
             val handler = Handler()
-            handler.postDelayed(Runnable {
+            handler.postDelayed({
                 swipeRefreshLastMatch.isRefreshing = false
             }, 3000)
         }
