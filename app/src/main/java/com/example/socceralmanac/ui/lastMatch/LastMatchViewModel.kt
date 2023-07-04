@@ -8,7 +8,9 @@ import com.example.socceralmanac.models.league_soccer.ResponseAllLeague
 import com.example.socceralmanac.models.match_time.ResponseAllEvents
 import com.example.socceralmanac.repo.GlobalRepository
 
-class LastMatchViewModel : ViewModel() {
+class
+
+LastMatchViewModel : ViewModel() {
     private var repo = GlobalRepository()
     var apiError = MutableLiveData<Throwable>()
     var isLoading = MutableLiveData<Boolean>()
